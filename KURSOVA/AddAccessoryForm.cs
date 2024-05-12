@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Kursova
 {
@@ -36,6 +38,31 @@ namespace Kursova
                 return;
             }
 
+            NpgsqlConnection conn = new NpgsqlConnection(connString);
+            NpgsqlCommand cmd = new($"INSERT INTO \r\n\taccessory(type, brand, name, price, quantity)\r\nVALUES\r\n\t('{type}', '{brand}', '{name}', '{double.Parse(price)}', '{int.Parse(quantity)}');", conn);
+            try
+            {
+                conn.Open();
+                cmd.CommandType = System.Data.CommandType.Text;
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    DataTable dataTable = new DataTable();
+                    dataTable.Load(reader);
+                    MainForm.dataGridView1.DataSource = dataTable;
+                }
+                MessageBox.Show("Аксесуар був додано до системи");
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                cmd.Dispose();
+                conn.Close();
+            }
         }
     }
 }

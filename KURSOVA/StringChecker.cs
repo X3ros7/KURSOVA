@@ -14,10 +14,10 @@ namespace Kursova
             {
                 if (string.IsNullOrEmpty(str))
                 {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
     }
 }

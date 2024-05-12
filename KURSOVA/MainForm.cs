@@ -160,7 +160,9 @@ namespace Kursova
 
         private void àêñåñóàðToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            AddAccessoryForm addAccessoryForm = new(connString, this);
+            addAccessoryForm.ShowDialog();
+            UpdateTableView("accessory");
         }
     }
 }
