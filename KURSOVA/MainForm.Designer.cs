@@ -38,10 +38,7 @@
             vehiclefeeTable = new ToolStripMenuItem();
             accessoryfeeTable = new ToolStripMenuItem();
             leasingrecordTable = new ToolStripMenuItem();
-            додатиToolStripMenuItem = new ToolStripMenuItem();
-            клієнтаToolStripMenuItem = new ToolStripMenuItem();
-            автомобільToolStripMenuItem = new ToolStripMenuItem();
-            аксесуарToolStripMenuItem = new ToolStripMenuItem();
+            addToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -49,14 +46,14 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 38);
+            dataGridView1.Location = new Point(12, 27);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(776, 400);
+            dataGridView1.Size = new Size(776, 411);
             dataGridView1.TabIndex = 0;
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { таблицяToolStripMenuItem, додатиToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { таблицяToolStripMenuItem, addToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
@@ -121,33 +118,12 @@
             leasingrecordTable.Text = "Запис лізингу";
             leasingrecordTable.Click += записЛізингуToolStripMenuItem_Click;
             // 
-            // додатиToolStripMenuItem
+            // addToolStripMenuItem
             // 
-            додатиToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { клієнтаToolStripMenuItem, автомобільToolStripMenuItem, аксесуарToolStripMenuItem });
-            додатиToolStripMenuItem.Name = "додатиToolStripMenuItem";
-            додатиToolStripMenuItem.Size = new Size(67, 20);
-            додатиToolStripMenuItem.Text = "Додати...";
-            // 
-            // клієнтаToolStripMenuItem
-            // 
-            клієнтаToolStripMenuItem.Name = "клієнтаToolStripMenuItem";
-            клієнтаToolStripMenuItem.Size = new Size(180, 22);
-            клієнтаToolStripMenuItem.Text = "Клієнта";
-            клієнтаToolStripMenuItem.Click += клієнтаToolStripMenuItem_Click;
-            // 
-            // автомобільToolStripMenuItem
-            // 
-            автомобільToolStripMenuItem.Name = "автомобільToolStripMenuItem";
-            автомобільToolStripMenuItem.Size = new Size(180, 22);
-            автомобільToolStripMenuItem.Text = "Автомобіль";
-            автомобільToolStripMenuItem.Click += автомобільToolStripMenuItem_Click;
-            // 
-            // аксесуарToolStripMenuItem
-            // 
-            аксесуарToolStripMenuItem.Name = "аксесуарToolStripMenuItem";
-            аксесуарToolStripMenuItem.Size = new Size(180, 22);
-            аксесуарToolStripMenuItem.Text = "Аксесуар";
-            аксесуарToolStripMenuItem.Click += аксесуарToolStripMenuItem_Click;
+            addToolStripMenuItem.Name = "addToolStripMenuItem";
+            addToolStripMenuItem.Size = new Size(92, 20);
+            addToolStripMenuItem.Text = "Додати запис";
+            addToolStripMenuItem.Click += додатиToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -174,10 +150,7 @@
         private ToolStripMenuItem clientTable;
         private ToolStripMenuItem vehicleTable;
         private ToolStripMenuItem accessoryTable;
-        private ToolStripMenuItem додатиToolStripMenuItem;
-        private ToolStripMenuItem клієнтаToolStripMenuItem;
-        private ToolStripMenuItem автомобільToolStripMenuItem;
-        private ToolStripMenuItem аксесуарToolStripMenuItem;
+        private ToolStripMenuItem addToolStripMenuItem;
         private ToolStripMenuItem testdriverrecordTable;
         private ToolStripMenuItem vehiclefeeTable;
         private ToolStripMenuItem accessoryfeeTable;

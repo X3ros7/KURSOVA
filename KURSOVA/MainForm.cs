@@ -144,25 +144,26 @@ namespace Kursova
             UpdateTableView("leasing_record");
         }
 
-        private void ÍÎ≥∫ÌÚ‡ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ‰Ó‰‡ÚËToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddClientForm addForm = new(connString, this);
-            addForm.ShowDialog();
-            UpdateTableView("client");
-        }
-
-        private void ‡‚ÚÓÏÓ·≥Î¸ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddVehicleForm addVehicleForm = new(connString, this);
-            addVehicleForm.ShowDialog();
-            UpdateTableView("vehicle");
-        }
-
-        private void ‡ÍÒÂÒÛ‡ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddAccessoryForm addAccessoryForm = new(connString, this);
-            addAccessoryForm.ShowDialog();
-            UpdateTableView("accessory");
+            if (clientTable.Checked)
+            {
+                AddClientForm addForm = new(connString, this);
+                addForm.ShowDialog();
+                UpdateTableView("client");
+            }
+            else if (vehicleTable.Checked)
+            {
+                AddVehicleForm addForm = new(connString, this);
+                addForm.ShowDialog();
+                UpdateTableView("vehicle");
+            }
+            else if (accessoryTable.Checked)
+            {
+                AddAccessoryForm addForm = new(connString, this);
+                addForm.ShowDialog();
+                UpdateTableView("accessory");
+            }
         }
     }
 }
