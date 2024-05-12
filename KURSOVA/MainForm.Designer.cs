@@ -116,14 +116,14 @@
             leasingrecordTable.Name = "leasingrecordTable";
             leasingrecordTable.Size = new Size(187, 22);
             leasingrecordTable.Text = "Запис лізингу";
-            leasingrecordTable.Click += записЛізингуToolStripMenuItem_Click;
+            leasingrecordTable.Click += leasingRecordToolStripMenuItem_Click;
             // 
             // addToolStripMenuItem
             // 
             addToolStripMenuItem.Name = "addToolStripMenuItem";
             addToolStripMenuItem.Size = new Size(92, 20);
             addToolStripMenuItem.Text = "Додати запис";
-            addToolStripMenuItem.Click += додатиToolStripMenuItem_Click;
+            addToolStripMenuItem.Click += addToolStripMenuItem_Click;
             // 
             // MainForm
             // 

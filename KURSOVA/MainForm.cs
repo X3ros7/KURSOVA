@@ -132,7 +132,7 @@ namespace Kursova
             UpdateTableView("accessory_fee");
         }
 
-        private void Á‡ÔËÒÀ≥ÁËÌ„ÛToolStripMenuItem_Click(object sender, EventArgs e)
+        private void leasingRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             clientTable.Checked = false;
             vehicleTable.Checked = false;
@@ -144,7 +144,7 @@ namespace Kursova
             UpdateTableView("leasing_record");
         }
 
-        private void ‰Ó‰‡ÚËToolStripMenuItem_Click(object sender, EventArgs e)
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (clientTable.Checked)
             {
@@ -163,6 +163,12 @@ namespace Kursova
                 AddAccessoryForm addForm = new(connString, this);
                 addForm.ShowDialog();
                 UpdateTableView("accessory");
+            }
+            else if (testdriverrecordTable.Checked)
+            {
+                AddTestDriveForm addForm = new(connString, this);
+                addForm.ShowDialog();
+                UpdateTableView("test_drive_record");
             }
         }
     }
