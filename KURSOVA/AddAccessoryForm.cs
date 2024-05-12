@@ -30,20 +30,12 @@ namespace Kursova
             string price = priceBox.Text;
             string quantity = quantityBox.Text;
 
-            if (string.IsNullOrEmpty(type)) 
+            if (StringChecker.isNullOrEmpty(type, brand, name, price, quantity)) 
             {
-                MessageBox.Show("Enter a type");
+                MessageBox.Show("Not all values was entered.");
                 return;
             }
-            if (string.IsNullOrEmpty(brand))
-            {
-                MessageBox.Show("Enter a brand");
-                return;
-            }
-            if (string.IsNullOrEmpty(name))
-            {
 
-            }
         }
     }
 }

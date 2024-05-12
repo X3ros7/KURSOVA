@@ -29,7 +29,7 @@ namespace Kursova
             string email = emailBox.Text;
             string phone = phoneBox.Text;
 
-            if (name == null)
+            /*if (name == null)
             {
                 MessageBox.Show("Введіть ім'я");
                 return;
@@ -42,6 +42,11 @@ namespace Kursova
             if (phone == null)
             {
                 MessageBox.Show("Введіть номер телефону");
+                return;
+            }*/
+            if (StringChecker.isNullOrEmpty(name, email, phone)) 
+            {
+                MessageBox.Show("Not all values was entered.");
                 return;
             }
 
@@ -58,15 +63,18 @@ namespace Kursova
                     dataTable.Load(reader);
                     mainForm.dataGridView1.DataSource = dataTable;
                 }
+                MessageBox.Show("Клієнта був додано до системи");
+                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            MessageBox.Show("Клієнта був додано до системи");
-            cmd.Dispose();
-            conn.Close();
-            this.Close();
+            finally 
+            { 
+                cmd.Dispose();
+                conn.Close();
+            }
         }
     }
 }
