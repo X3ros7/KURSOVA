@@ -7,6 +7,8 @@ namespace Kursova
     {
         private string connString;
         private NpgsqlConnection conn;
+        
+        #region поля таблиць
         private string[] clientFields = ["id", "name", "email", "phone_number"];
         private string[] vehicleFields = ["id", "brand", "name", "body_type", "body_color", "transmission", "fuel_type", "hp", "product_year", "product_country", "price"];
         private string[] accessoryFields = ["id", "type", "brand", "name", "price", "quantity"];
@@ -14,6 +16,7 @@ namespace Kursova
         private string[] vehicleFeeFields = ["id", "client_id", "vehicle_id", "payment_date", "price"];
         private string[] accessoryFeeFields = ["id", "client_id", "accessory_id", "payment_date", "quantity"];
         private string[] leasingRecordFields = ["id", "client_id", "vehicle_id", "record_date", "end_date"];
+        #endregion
 
         public MainForm(NpgsqlConnection conn, string connString)
         {
