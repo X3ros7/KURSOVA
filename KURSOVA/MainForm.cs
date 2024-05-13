@@ -146,48 +146,49 @@ namespace Kursova
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Form addForm;
             if (clientTable.Checked)
             {
-                AddClientForm addForm = new(connString, this);
+                addForm = new AddClientForm(connString, this);
                 addForm.ShowDialog();
                 UpdateTableView("client");
             }
             else if (vehicleTable.Checked)
             {
-                AddVehicleForm addForm = new(connString, this);
+                addForm = new AddVehicleForm(connString, this);
                 addForm.ShowDialog();
                 UpdateTableView("vehicle");
             }
             else if (accessoryTable.Checked)
             {
-                AddAccessoryForm addForm = new(connString, this);
+                addForm = new AddAccessoryForm(connString, this);
                 addForm.ShowDialog();
                 UpdateTableView("accessory");
             }
             else if (testdriverrecordTable.Checked)
             {
-                AddTestDriveForm addForm = new(connString, this);
+                addForm = new AddTestDriveForm(connString, this);
                 addForm.ShowDialog();
                 UpdateTableView("test_drive_record");
             }
             else if (vehiclefeeTable.Checked)
             {
-                AddVehicleFeeForm addForm = new(connString, this);
+                addForm = new AddVehicleFeeForm(connString, this);
                 addForm.ShowDialog();
                 UpdateTableView("vehicle_fee");
             }
             else if (accessoryfeeTable.Checked)
             {
-                AddAccessoryFeeForm addForm = new(connString, this);
+                addForm = new AddAccessoryFeeForm(connString, this);
                 addForm.ShowDialog();
                 UpdateTableView("accessory_fee");
             }
-            /*else if (leasingrecordTable.Checked)
+            else if (leasingrecordTable.Checked)
             {
-                AddLeasingRecordForm addForm = new(connString, this);
+                addForm = new AddLeasingForm(connString, this);
                 addForm.ShowDialog();
                 UpdateTableView("leasing_record");
-            }*/
+            }
         }
     }
 }
