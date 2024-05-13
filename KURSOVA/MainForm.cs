@@ -170,6 +170,24 @@ namespace Kursova
                 addForm.ShowDialog();
                 UpdateTableView("test_drive_record");
             }
+            else if (vehiclefeeTable.Checked)
+            {
+                AddVehicleFeeForm addForm = new(connString, this);
+                addForm.ShowDialog();
+                UpdateTableView("vehicle_fee");
+            }
+            /*else if (accessoryfeeTable.Checked)
+            {
+                AddAccessoryFeeForm addForm = new(connString, this);
+                addForm.ShowDialog();
+                UpdateTableView("accessory_fee");
+            }
+            else if (leasingrecordTable.Checked)
+            {
+                AddLeasingRecordForm addForm = new(connString, this);
+                addForm.ShowDialog();
+                UpdateTableView("leasing_record");
+            }*/
         }
     }
 }
