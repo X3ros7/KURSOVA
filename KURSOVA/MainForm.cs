@@ -196,7 +196,6 @@ namespace Kursova
         {
             if (dataGridView1.SelectedCells.Count > 0)
             {
-                ArrayList values = new ArrayList();
                 DataGridViewCell selectedCell = dataGridView1.SelectedCells[0];
                 int rowIndex = selectedCell.RowIndex;
                 DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
@@ -208,22 +207,17 @@ namespace Kursova
                     if (item.Checked)
                     {
                         table = item.Text?.ToLower();
+                        break;
                     }
                 }
+                var id = selectedRow.Cells[0].Value;
 
-                foreach (DataGridViewCell cell in selectedRow.Cells)
-                {
-                    if (cell.Value != null)
-                    {
-                        values.Add(cell.Value);
-                    }
-                }
                 conn.Open();
                 cmd = new($"DELETE FROM {table} WHERE id = $1", conn) 
                 {
                     Parameters = 
                     {
-                        new() { Value = values[0]}
+                        new() { Value = id}
                     }
                 };
                 ExecuteCommand(cmd);
