@@ -8,7 +8,7 @@ namespace Kursova
         private string connString;
         private NpgsqlConnection conn;
         
-        #region ÔÓÎˇ Ú‡·ÎËˆ¸
+        #region Table's columns region
         private string[] clientFields = ["id", "name", "email", "phone_number"];
         private string[] vehicleFields = ["id", "brand", "name", "body_type", "body_color", "transmission", "fuel_type", "hp", "product_year", "product_country", "price"];
         private string[] accessoryFields = ["id", "type", "brand", "name", "price", "quantity"];
@@ -78,95 +78,50 @@ namespace Kursova
             conn.Close();
         }
 
-        private void ÍÎ≥∫ÌÚËToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem_Click(object sender, EventArgs e, ToolStripMenuItem checkedTable, string tableName, string[] fields)
         {
-            clientTable.Checked = true;
-            vehicleTable.Checked = false;
-            accessoryTable.Checked = false;
-            testdriverrecordTable.Checked = false;
-            vehiclefeeTable.Checked = false;
-            accessoryfeeTable.Checked = false;
-            leasingrecordTable.Checked = false;
-            UpdateTableView("client");
-            UpdateComboBox(clientFields);
+            foreach (ToolStripMenuItem checkbox in tableToolStripMenuItem.DropDownItems)
+            {
+                checkbox.Checked = false;
+            }
+            checkedTable.Checked = true;
+            UpdateTableView(tableName);
+            UpdateComboBox(fields);
         }
 
-        private void ‡‚ÚÓÏÓ·≥Î≥ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void clientToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            clientTable.Checked = false;
-            vehicleTable.Checked = true;
-            accessoryTable.Checked = false;
-            testdriverrecordTable.Checked = false;
-            vehiclefeeTable.Checked = false;
-            accessoryfeeTable.Checked = false;
-            leasingrecordTable.Checked = false;
-            UpdateTableView("vehicle");
-            UpdateComboBox(vehicleFields);
+            ToolStripMenuItem_Click(sender, e, clientTable, "client", clientFields);
         }
 
-        private void Á‡ÔËÒÕ‡“ÂÒÚ‰‡È‚ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void vehicleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            clientTable.Checked = false;
-            vehicleTable.Checked = false;
-            accessoryTable.Checked = false;
-            testdriverrecordTable.Checked = true;
-            vehiclefeeTable.Checked = false;
-            accessoryfeeTable.Checked = false;
-            leasingrecordTable.Checked = false;
-            UpdateTableView("test_drive_record");
-            UpdateComboBox(testDriveRecordFields);
+            ToolStripMenuItem_Click(sender, e, vehicleTable, "vehicle", vehicleFields);
         }
 
-        private void ‡ÍÒÂÒÛ‡ËToolStripMenuItem_Click(object sender, EventArgs e)
+        private void testdriverecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            clientTable.Checked = false;
-            vehicleTable.Checked = false;
-            accessoryTable.Checked = true;
-            testdriverrecordTable.Checked = false;
-            vehiclefeeTable.Checked = false;
-            accessoryfeeTable.Checked = false;
-            leasingrecordTable.Checked = false;
-            UpdateTableView("accessory");
-            UpdateComboBox(accessoryFields);
+            ToolStripMenuItem_Click(sender, e, testdriverrecordTable, "test_drive_record", testDriveRecordFields);
+        }
+
+        private void accessoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem_Click(sender, e, accessoryTable, "accessory", accessoryFields);
         }
 
         private void vehiclefeeTable_Click(object sender, EventArgs e)
         {
-            clientTable.Checked = false;
-            vehicleTable.Checked = false;
-            accessoryTable.Checked = false;
-            testdriverrecordTable.Checked = false;
-            vehiclefeeTable.Checked = true;
-            accessoryfeeTable.Checked = false;
-            leasingrecordTable.Checked = false;
-            UpdateTableView("vehicle_fee");
-            UpdateComboBox(vehicleFeeFields);
+            ToolStripMenuItem_Click(sender, e, vehiclefeeTable, "vehicle_fee", vehicleFeeFields);
         }
 
         private void accessoryfeeTable_Click(object sender, EventArgs e)
         {
-            clientTable.Checked = false;
-            vehicleTable.Checked = false;
-            accessoryTable.Checked = false;
-            testdriverrecordTable.Checked = false;
-            vehiclefeeTable.Checked = false;
-            accessoryfeeTable.Checked = true;
-            leasingrecordTable.Checked = false;
-            UpdateTableView("accessory_fee");
-            UpdateComboBox(accessoryFeeFields);
+            ToolStripMenuItem_Click(sender, e, accessoryfeeTable, "accessory_fee", accessoryFeeFields);
         }
 
         private void leasingRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            clientTable.Checked = false;
-            vehicleTable.Checked = false;
-            accessoryTable.Checked = false;
-            testdriverrecordTable.Checked = false;
-            vehiclefeeTable.Checked = false;
-            accessoryfeeTable.Checked = false;
-            leasingrecordTable.Checked = true;
-            UpdateTableView("leasing_record");
-            UpdateComboBox(leasingRecordFields);
+            ToolStripMenuItem_Click(sender, e, leasingrecordTable, "leasing_record", leasingRecordFields);
         }
 
         private void UpdateComboBox(string[] fields)

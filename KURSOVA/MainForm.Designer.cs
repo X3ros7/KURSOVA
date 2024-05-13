@@ -80,28 +80,28 @@
             clientTable.Name = "clientTable";
             clientTable.Size = new Size(180, 22);
             clientTable.Text = "Client";
-            clientTable.Click += клієнтиToolStripMenuItem_Click;
+            clientTable.Click += clientToolStripMenuItem_Click;
             // 
             // vehicleTable
             // 
             vehicleTable.Name = "vehicleTable";
             vehicleTable.Size = new Size(180, 22);
             vehicleTable.Text = "Vehicle";
-            vehicleTable.Click += автомобіліToolStripMenuItem_Click;
+            vehicleTable.Click += vehicleToolStripMenuItem_Click;
             // 
             // accessoryTable
             // 
             accessoryTable.Name = "accessoryTable";
             accessoryTable.Size = new Size(180, 22);
             accessoryTable.Text = "Accessory";
-            accessoryTable.Click += аксесуариToolStripMenuItem_Click;
+            accessoryTable.Click += accessoryToolStripMenuItem_Click;
             // 
             // testdriverrecordTable
             // 
             testdriverrecordTable.Name = "testdriverrecordTable";
             testdriverrecordTable.Size = new Size(180, 22);
             testdriverrecordTable.Text = "Test_drive_record";
-            testdriverrecordTable.Click += записНаТестдрайвToolStripMenuItem_Click;
+            testdriverrecordTable.Click += testdriverecordToolStripMenuItem_Click;
             // 
             // vehiclefeeTable
             // 
