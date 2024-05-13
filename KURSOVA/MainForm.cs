@@ -10,7 +10,7 @@ namespace Kursova
         private string[] clientFields = ["id", "name", "email", "phone_number"];
         private string[] vehicleFields = ["id", "brand", "name", "body_type", "body_color", "transmission", "fuel_type", "hp", "product_year", "product_country", "price"];
         private string[] accessoryFields = ["id", "type", "brand", "name", "price", "quantity"];
-        private string[] testDriveRecordFields = ["id", "client_id", "vehicle_id", "testdrive_record", "duration"];
+        private string[] testDriveRecordFields = ["id", "client_id", "vehicle_id", "testdrive_date", "duration"];
         private string[] vehicleFeeFields = ["id", "client_id", "vehicle_id", "payment_date", "price"];
         private string[] accessoryFeeFields = ["id", "client_id", "accessory_id", "payment_date", "quantity"];
         private string[] leasingRecordFields = ["id", "client_id", "vehicle_id", "record_date", "end_date"];
@@ -40,6 +40,11 @@ namespace Kursova
         {
             if (conn.State != ConnectionState.Open) conn.Open();
             NpgsqlCommand command = new($"SELECT * FROM {table}", conn);
+            ExecuteCommand(command);
+        }
+
+        private void ExecuteCommand(NpgsqlCommand command)
+        {
             try
             {
                 command.CommandType = System.Data.CommandType.Text;
@@ -79,7 +84,6 @@ namespace Kursova
             vehiclefeeTable.Checked = false;
             accessoryfeeTable.Checked = false;
             leasingrecordTable.Checked = false;
-
             UpdateTableView("client");
             UpdateComboBox(clientFields);
         }
@@ -93,9 +97,7 @@ namespace Kursova
             vehiclefeeTable.Checked = false;
             accessoryfeeTable.Checked = false;
             leasingrecordTable.Checked = false;
-
             UpdateTableView("vehicle");
-
             UpdateComboBox(vehicleFields);
         }
 
@@ -109,7 +111,6 @@ namespace Kursova
             accessoryfeeTable.Checked = false;
             leasingrecordTable.Checked = false;
             UpdateTableView("test_drive_record");
-
             UpdateComboBox(testDriveRecordFields);
         }
 
@@ -123,7 +124,6 @@ namespace Kursova
             accessoryfeeTable.Checked = false;
             leasingrecordTable.Checked = false;
             UpdateTableView("accessory");
-
             UpdateComboBox(accessoryFields);
         }
 
@@ -233,6 +233,7 @@ namespace Kursova
                 if (item.Checked)
                 {
                     table = item.Text?.ToLower();
+                    break;
                 }
             }
 
@@ -243,33 +244,15 @@ namespace Kursova
             }
 
             if (conn.State != ConnectionState.Open) conn.Open();
-            if (!int.TryParse(value, out _) || !double.TryParse(value, out _) || !DateTime.TryParse(value, out _))
+            if (!int.TryParse(value, out _) 
+                || !double.TryParse(value, out _) 
+                || !DateTime.TryParse(value, out _))
             {
                 command = new($"SELECT * FROM {table} WHERE {field} = '{value}';", conn);
             }
             else command = new($"SELECT * FROM {table} WHERE {field} = {value};", conn);
 
-            try
-            {
-                command.CommandType = System.Data.CommandType.Text;
-                NpgsqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    DataTable dataTable = new DataTable();
-
-                    dataTable.Load(reader);
-                    dataGridView1.DataSource = dataTable;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                command.Dispose();
-                conn.Close();
-            }
+            ExecuteCommand(command);
         }
     }
 }
