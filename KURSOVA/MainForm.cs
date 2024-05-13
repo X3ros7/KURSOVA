@@ -145,7 +145,6 @@ namespace Kursova
             };
 
             Form addForm;
-            // Find the checked ToolStripMenuItem and get the associated form type, table name, and combo box
             ToolStripMenuItem checkedMenuItem = checkedMenuForms.FirstOrDefault(kv => kv.Key.Checked).Key;
             if (checkedMenuItem != null)
             {
@@ -158,48 +157,6 @@ namespace Kursova
                     UpdateComboBox(fields);
                 }
             }
-           /* if (clientTable.Checked)
-            {
-                addForm = new AddClientForm(connString, this);
-                addForm.ShowDialog();
-                UpdateTableView("client");
-            }
-            else if (vehicleTable.Checked)
-            {
-                addForm = new AddVehicleForm(connString, this);
-                addForm.ShowDialog();
-                UpdateTableView("vehicle");
-            }
-            else if (accessoryTable.Checked)
-            {
-                addForm = new AddAccessoryForm(connString, this);
-                addForm.ShowDialog();
-                UpdateTableView("accessory");
-            }
-            else if (testdriverrecordTable.Checked)
-            {
-                addForm = new AddTestDriveForm(connString, this);
-                addForm.ShowDialog();
-                UpdateTableView("test_drive_record");
-            }
-            else if (vehiclefeeTable.Checked)
-            {
-                addForm = new AddVehicleFeeForm(connString, this);
-                addForm.ShowDialog();
-                UpdateTableView("vehicle_fee");
-            }
-            else if (accessoryfeeTable.Checked)
-            {
-                addForm = new AddAccessoryFeeForm(connString, this);
-                addForm.ShowDialog();
-                UpdateTableView("accessory_fee");
-            }
-            else if (leasingrecordTable.Checked)
-            {
-                addForm = new AddLeasingForm(connString, this);
-                addForm.ShowDialog();
-                UpdateTableView("leasing_record");
-            }*/
         }
 
         private void searchBox_Click(object sender, EventArgs e)
