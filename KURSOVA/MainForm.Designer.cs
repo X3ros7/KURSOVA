@@ -44,8 +44,8 @@
             searchBox = new Button();
             comboBox = new ComboBox();
             panel2 = new Panel();
-            button2 = new Button();
-            button5 = new Button();
+            updateRecordButton = new Button();
+            deleteRecordButton = new Button();
             addRecordButton = new Button();
             label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -181,31 +181,32 @@
             // panel2
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
-            panel2.Controls.Add(button2);
-            panel2.Controls.Add(button5);
+            panel2.Controls.Add(updateRecordButton);
+            panel2.Controls.Add(deleteRecordButton);
             panel2.Controls.Add(addRecordButton);
             panel2.Location = new Point(565, 348);
             panel2.Name = "panel2";
             panel2.Size = new Size(223, 160);
             panel2.TabIndex = 4;
             // 
-            // button2
+            // updateRecordButton
             // 
-            button2.Location = new Point(56, 107);
-            button2.Name = "button2";
-            button2.Size = new Size(111, 39);
-            button2.TabIndex = 4;
-            button2.Text = "Оновити запис";
-            button2.UseVisualStyleBackColor = true;
+            updateRecordButton.Location = new Point(56, 107);
+            updateRecordButton.Name = "updateRecordButton";
+            updateRecordButton.Size = new Size(111, 39);
+            updateRecordButton.TabIndex = 4;
+            updateRecordButton.Text = "Оновити запис";
+            updateRecordButton.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // deleteRecordButton
             // 
-            button5.Location = new Point(56, 62);
-            button5.Name = "button5";
-            button5.Size = new Size(111, 39);
-            button5.TabIndex = 3;
-            button5.Text = "Видалити запис";
-            button5.UseVisualStyleBackColor = true;
+            deleteRecordButton.Location = new Point(56, 62);
+            deleteRecordButton.Name = "deleteRecordButton";
+            deleteRecordButton.Size = new Size(111, 39);
+            deleteRecordButton.TabIndex = 3;
+            deleteRecordButton.Text = "Видалити запис";
+            deleteRecordButton.UseVisualStyleBackColor = true;
+            deleteRecordButton.Click += deleteRecordButton_Click;
             // 
             // addRecordButton
             // 
@@ -270,7 +271,7 @@
         private Panel panel2;
         private Button addRecordButton;
         private Label label2;
-        private Button button2;
-        private Button button5;
+        private Button updateRecordButton;
+        private Button deleteRecordButton;
     }
 }

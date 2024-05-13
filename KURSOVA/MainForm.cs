@@ -191,5 +191,10 @@ namespace Kursova
                 }
             }
         }
+
+        private void deleteRecordButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
