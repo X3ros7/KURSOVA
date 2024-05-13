@@ -9,6 +9,11 @@ namespace Kursova
         private NpgsqlConnection conn;
         private string[] clientFields = ["id", "name", "email", "phone_number"];
         private string[] vehicleFields = ["id", "brand", "name", "body_type", "body_color", "transmission", "fuel_type", "hp", "product_year", "product_country", "price"];
+        private string[] accessoryFields = ["id", "type", "brand", "name", "price", "quantity"];
+        private string[] testDriveRecordFields = ["id", "client_id", "vehicle_id", "testdrive_record", "duration"];
+        private string[] vehicleFeeFields = ["id", "client_id", "vehicle_id", "payment_date", "price"];
+        private string[] accessoryFeeFields = ["id", "client_id", "accessory_id", "payment_date", "quantity"];
+        private string[] leasingRecordFields = ["id", "client_id", "vehicle_id", "record_date", "end_date"];
 
         public MainForm(NpgsqlConnection conn, string connString)
         {
@@ -76,10 +81,7 @@ namespace Kursova
             leasingrecordTable.Checked = false;
 
             UpdateTableView("client");
-
-            comboBox.Items.Clear();
-            comboBox.Items.AddRange(clientFields);
-            comboBox.SelectedIndex = 0;
+            UpdateComboBox(clientFields);
         }
 
         private void ‡‚ÚÓÏÓ·≥Î≥ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -94,9 +96,7 @@ namespace Kursova
 
             UpdateTableView("vehicle");
 
-            comboBox.Items.Clear();
-            comboBox.Items.AddRange(vehicleFields);
-            comboBox.SelectedIndex = 0;
+            UpdateComboBox(vehicleFields);
         }
 
         private void Á‡ÔËÒÕ‡“ÂÒÚ‰‡È‚ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -109,6 +109,8 @@ namespace Kursova
             accessoryfeeTable.Checked = false;
             leasingrecordTable.Checked = false;
             UpdateTableView("test_drive_record");
+
+            UpdateComboBox(testDriveRecordFields);
         }
 
         private void ‡ÍÒÂÒÛ‡ËToolStripMenuItem_Click(object sender, EventArgs e)
@@ -121,6 +123,8 @@ namespace Kursova
             accessoryfeeTable.Checked = false;
             leasingrecordTable.Checked = false;
             UpdateTableView("accessory");
+
+            UpdateComboBox(accessoryFields);
         }
 
         private void vehiclefeeTable_Click(object sender, EventArgs e)
@@ -133,6 +137,7 @@ namespace Kursova
             accessoryfeeTable.Checked = false;
             leasingrecordTable.Checked = false;
             UpdateTableView("vehicle_fee");
+            UpdateComboBox(vehicleFeeFields);
         }
 
         private void accessoryfeeTable_Click(object sender, EventArgs e)
@@ -145,6 +150,7 @@ namespace Kursova
             accessoryfeeTable.Checked = true;
             leasingrecordTable.Checked = false;
             UpdateTableView("accessory_fee");
+            UpdateComboBox(accessoryFeeFields);
         }
 
         private void leasingRecordToolStripMenuItem_Click(object sender, EventArgs e)
@@ -157,6 +163,14 @@ namespace Kursova
             accessoryfeeTable.Checked = false;
             leasingrecordTable.Checked = true;
             UpdateTableView("leasing_record");
+            UpdateComboBox(leasingRecordFields);
+        }
+
+        private void UpdateComboBox(string[] fields)
+        {
+            comboBox.Items.Clear();
+            comboBox.Items.AddRange(fields);
+            comboBox.SelectedIndex = 0;
         }
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
@@ -229,7 +243,7 @@ namespace Kursova
             }
 
             if (conn.State != ConnectionState.Open) conn.Open();
-            if (!int.TryParse(value, out _) || !double.TryParse(value, out _))
+            if (!int.TryParse(value, out _) || !double.TryParse(value, out _) || !DateTime.TryParse(value, out _))
             {
                 command = new($"SELECT * FROM {table} WHERE {field} = '{value}';", conn);
             }
