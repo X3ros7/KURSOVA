@@ -1,4 +1,5 @@
 using Npgsql;
+using System.Collections;
 using System.Data;
 
 namespace Kursova
@@ -59,7 +60,6 @@ namespace Kursova
                     dataTable.Load(reader);
                     dataGridView1.DataSource = dataTable;
                 }
-
             }
             catch (Exception ex)
             {
@@ -194,7 +194,45 @@ namespace Kursova
 
         private void deleteRecordButton_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.SelectedCells.Count > 0)
+            {
+                ArrayList values = new ArrayList();
+                DataGridViewCell selectedCell = dataGridView1.SelectedCells[0];
+                int rowIndex = selectedCell.RowIndex;
+                DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
+                string? table = "";
+                NpgsqlCommand cmd;
 
+                foreach (ToolStripMenuItem item in tableToolStripMenuItem.DropDownItems)
+                {
+                    if (item.Checked)
+                    {
+                        table = item.Text?.ToLower();
+                    }
+                }
+
+                foreach (DataGridViewCell cell in selectedRow.Cells)
+                {
+                    if (cell.Value != null)
+                    {
+                        values.Add(cell.Value);
+                    }
+                }
+                conn.Open();
+                cmd = new($"DELETE FROM {table} WHERE id = $1", conn) 
+                {
+                    Parameters = 
+                    {
+                        new() { Value = values[0]}
+                    }
+                };
+                ExecuteCommand(cmd);
+                UpdateTableView(table);
+            }
+            else
+            {
+                MessageBox.Show("No cell is selected.");
+            }
         }
     }
 }
