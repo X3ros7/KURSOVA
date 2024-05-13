@@ -7,6 +7,8 @@ namespace Kursova
     {
         private string connString;
         private NpgsqlConnection conn;
+        private string[] clientFields = ["id", "name", "email", "phone_number"];
+        private string[] vehicleFields = ["id", "brand", "name", "body_type", "body_color", "transmission", "fuel_type", "hp", "product_year", "product_country", "price"];
 
         public MainForm(NpgsqlConnection conn, string connString)
         {
@@ -18,12 +20,15 @@ namespace Kursova
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            comboBox.Items.Add("hello");
+            comboBox.SelectedValue = "hello";
         }
 
         private void SqlConnectionReader()
         {
             UpdateTableView("client");
+            comboBox.Items.AddRange(clientFields);
+            comboBox.SelectedIndex = 0;
         }
 
         private void UpdateTableView(string table)
@@ -69,7 +74,12 @@ namespace Kursova
             vehiclefeeTable.Checked = false;
             accessoryfeeTable.Checked = false;
             leasingrecordTable.Checked = false;
+
             UpdateTableView("client");
+
+            comboBox.Items.Clear();
+            comboBox.Items.AddRange(clientFields);
+            comboBox.SelectedIndex = 0;
         }
 
         private void ‡‚ÚÓÏÓ·≥Î≥ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -81,7 +91,12 @@ namespace Kursova
             vehiclefeeTable.Checked = false;
             accessoryfeeTable.Checked = false;
             leasingrecordTable.Checked = false;
+
             UpdateTableView("vehicle");
+
+            comboBox.Items.Clear();
+            comboBox.Items.AddRange(vehicleFields);
+            comboBox.SelectedIndex = 0;
         }
 
         private void Á‡ÔËÒÕ‡“ÂÒÚ‰‡È‚ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -188,6 +203,58 @@ namespace Kursova
                 addForm = new AddLeasingForm(connString, this);
                 addForm.ShowDialog();
                 UpdateTableView("leasing_record");
+            }
+        }
+
+        private void searchBox_Click(object sender, EventArgs e)
+        {
+            var field = comboBox.SelectedItem.ToString();
+            var value = valueBox.Text;
+            var tables = tableToolStripMenuItem.DropDownItems;
+            string? table = "";
+            NpgsqlCommand command;
+
+            foreach (ToolStripMenuItem item in tables)
+            {
+                if (item.Checked)
+                {
+                    table = item.Text?.ToLower();
+                }
+            }
+
+            if (string.IsNullOrEmpty(value))
+            {
+                UpdateTableView(table);
+                return;
+            }
+
+            if (conn.State != ConnectionState.Open) conn.Open();
+            if (!int.TryParse(value, out _) || !double.TryParse(value, out _))
+            {
+                command = new($"SELECT * FROM {table} WHERE {field} = '{value}';", conn);
+            }
+            else command = new($"SELECT * FROM {table} WHERE {field} = {value};", conn);
+
+            try
+            {
+                command.CommandType = System.Data.CommandType.Text;
+                NpgsqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    DataTable dataTable = new DataTable();
+
+                    dataTable.Load(reader);
+                    dataGridView1.DataSource = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                command.Dispose();
+                conn.Close();
             }
         }
     }
