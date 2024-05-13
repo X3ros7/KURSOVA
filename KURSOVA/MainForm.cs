@@ -7,7 +7,7 @@ namespace Kursova
     {
         private string connString;
         private NpgsqlConnection conn;
-        
+
         #region Table's columns region
         private string[] clientFields = ["id", "name", "email", "phone_number"];
         private string[] vehicleFields = ["id", "brand", "name", "body_type", "body_color", "transmission", "fuel_type", "hp", "product_year", "product_country", "price"];
@@ -131,34 +131,6 @@ namespace Kursova
             comboBox.SelectedIndex = 0;
         }
 
-        private void addToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Dictionary<ToolStripMenuItem, (Type FormType, string TableName, string[] fields)> checkedMenuForms = new()
-            {
-                { clientTable, (typeof(AddClientForm), "client", clientFields) },
-                { vehicleTable, (typeof(AddVehicleForm), "vehicle", vehicleFields) },
-                { testdriverrecordTable, (typeof(AddTestDriveForm), "test_drive_record", testDriveRecordFields) },
-                { accessoryTable, (typeof(AddAccessoryForm), "accessory", accessoryFields) },             
-                { vehiclefeeTable, (typeof(AddVehicleFeeForm), "vehicle_fee", vehicleFeeFields) },
-                { accessoryfeeTable, (typeof(AddAccessoryFeeForm), "accessory_fee", accessoryFeeFields) },
-                { leasingrecordTable, (typeof(AddLeasingForm), "leasing_record", leasingRecordFields) }
-            };
-
-            Form addForm;
-            ToolStripMenuItem checkedMenuItem = checkedMenuForms.FirstOrDefault(kv => kv.Key.Checked).Key;
-            if (checkedMenuItem != null)
-            {
-                (Type formType, string tableName, string[] fields) = checkedMenuForms[checkedMenuItem];
-                addForm = (Form)Activator.CreateInstance(formType, connString, this);
-                addForm.ShowDialog();
-                UpdateTableView(tableName);
-                if (comboBox != null)
-                {
-                    UpdateComboBox(fields);
-                }
-            }
-        }
-
         private void searchBox_Click(object sender, EventArgs e)
         {
             var field = comboBox.SelectedItem.ToString();
@@ -190,6 +162,34 @@ namespace Kursova
                 command = new($"SELECT * FROM {table} WHERE {field} = {value};", conn);
             }
             ExecuteCommand(command);
+        }
+
+        private void addRecordButton_Click(object sender, EventArgs e)
+        {
+            Dictionary<ToolStripMenuItem, (Type FormType, string TableName, string[] fields)> checkedMenuForms = new()
+            {
+                { clientTable, (typeof(AddClientForm), "client", clientFields) },
+                { vehicleTable, (typeof(AddVehicleForm), "vehicle", vehicleFields) },
+                { testdriverrecordTable, (typeof(AddTestDriveForm), "test_drive_record", testDriveRecordFields) },
+                { accessoryTable, (typeof(AddAccessoryForm), "accessory", accessoryFields) },
+                { vehiclefeeTable, (typeof(AddVehicleFeeForm), "vehicle_fee", vehicleFeeFields) },
+                { accessoryfeeTable, (typeof(AddAccessoryFeeForm), "accessory_fee", accessoryFeeFields) },
+                { leasingrecordTable, (typeof(AddLeasingForm), "leasing_record", leasingRecordFields) }
+            };
+
+            Form addForm;
+            ToolStripMenuItem checkedMenuItem = checkedMenuForms.FirstOrDefault(kv => kv.Key.Checked).Key;
+            if (checkedMenuItem != null)
+            {
+                (Type formType, string tableName, string[] fields) = checkedMenuForms[checkedMenuItem];
+                addForm = (Form)Activator.CreateInstance(formType, connString, this);
+                addForm.ShowDialog();
+                UpdateTableView(tableName);
+                if (comboBox != null)
+                {
+                    UpdateComboBox(fields);
+                }
+            }
         }
     }
 }

@@ -30,12 +30,7 @@
         {
             dataGridView1 = new DataGridView();
             menuStrip1 = new MenuStrip();
-            addToolStripMenuItem = new ToolStripMenuItem();
-            label1 = new Label();
-            panel1 = new Panel();
-            valueBox = new TextBox();
-            searchBox = new Button();
-            comboBox = new ComboBox();
+            tableToolStripMenuItem = new ToolStripMenuItem();
             clientTable = new ToolStripMenuItem();
             vehicleTable = new ToolStripMenuItem();
             accessoryTable = new ToolStripMenuItem();
@@ -43,10 +38,20 @@
             vehiclefeeTable = new ToolStripMenuItem();
             accessoryfeeTable = new ToolStripMenuItem();
             leasingrecordTable = new ToolStripMenuItem();
-            tableToolStripMenuItem = new ToolStripMenuItem();
+            label1 = new Label();
+            panel1 = new Panel();
+            valueBox = new TextBox();
+            searchBox = new Button();
+            comboBox = new ComboBox();
+            panel2 = new Panel();
+            button2 = new Button();
+            button5 = new Button();
+            addRecordButton = new Button();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView1
@@ -54,72 +59,24 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(12, 27);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(534, 411);
+            dataGridView1.Size = new Size(534, 481);
             dataGridView1.TabIndex = 0;
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { tableToolStripMenuItem, addToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { tableToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
-            // addToolStripMenuItem
+            // tableToolStripMenuItem
             // 
-            addToolStripMenuItem.Name = "addToolStripMenuItem";
-            addToolStripMenuItem.Size = new Size(92, 23);
-            addToolStripMenuItem.Text = "Додати запис";
-            addToolStripMenuItem.Click += addToolStripMenuItem_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = SystemColors.ControlLight;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            label1.Location = new Point(42, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(142, 21);
-            label1.TabIndex = 2;
-            label1.Text = "Пошук інформації";
-            // 
-            // panel1
-            // 
-            panel1.BackColor = SystemColors.ActiveCaption;
-            panel1.Controls.Add(valueBox);
-            panel1.Controls.Add(searchBox);
-            panel1.Controls.Add(comboBox);
-            panel1.Controls.Add(label1);
-            panel1.Location = new Point(562, 27);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(226, 411);
-            panel1.TabIndex = 3;
-            // 
-            // valueBox
-            // 
-            valueBox.Location = new Point(3, 99);
-            valueBox.Name = "valueBox";
-            valueBox.Size = new Size(206, 23);
-            valueBox.TabIndex = 5;
-            // 
-            // searchBox
-            // 
-            searchBox.Location = new Point(3, 160);
-            searchBox.Name = "searchBox";
-            searchBox.Size = new Size(206, 23);
-            searchBox.TabIndex = 4;
-            searchBox.Text = "Знайти";
-            searchBox.UseVisualStyleBackColor = true;
-            searchBox.Click += searchBox_Click;
-            // 
-            // comboBox
-            // 
-            comboBox.FormattingEnabled = true;
-            comboBox.Location = new Point(3, 45);
-            comboBox.Name = "comboBox";
-            comboBox.Size = new Size(206, 23);
-            comboBox.TabIndex = 3;
+            tableToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clientTable, vehicleTable, accessoryTable, testdriverrecordTable, vehiclefeeTable, accessoryfeeTable, leasingrecordTable });
+            tableToolStripMenuItem.Name = "tableToolStripMenuItem";
+            tableToolStripMenuItem.Size = new Size(65, 20);
+            tableToolStripMenuItem.Text = "Таблиця";
             // 
             // clientTable
             // 
@@ -172,18 +129,111 @@
             leasingrecordTable.Text = "Leasing_record";
             leasingrecordTable.Click += leasingRecordToolStripMenuItem_Click;
             // 
-            // tableToolStripMenuItem
+            // label1
             // 
-            tableToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clientTable, vehicleTable, accessoryTable, testdriverrecordTable, vehiclefeeTable, accessoryfeeTable, leasingrecordTable });
-            tableToolStripMenuItem.Name = "tableToolStripMenuItem";
-            tableToolStripMenuItem.Size = new Size(65, 20);
-            tableToolStripMenuItem.Text = "Таблиця";
+            label1.AutoSize = true;
+            label1.BackColor = SystemColors.ControlLight;
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label1.Location = new Point(42, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(148, 21);
+            label1.TabIndex = 2;
+            label1.Text = "Пошук інформації";
+            // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(valueBox);
+            panel1.Controls.Add(searchBox);
+            panel1.Controls.Add(comboBox);
+            panel1.Controls.Add(label1);
+            panel1.Location = new Point(562, 27);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(226, 273);
+            panel1.TabIndex = 3;
+            // 
+            // valueBox
+            // 
+            valueBox.Location = new Point(3, 99);
+            valueBox.Name = "valueBox";
+            valueBox.Size = new Size(206, 23);
+            valueBox.TabIndex = 5;
+            // 
+            // searchBox
+            // 
+            searchBox.Location = new Point(3, 160);
+            searchBox.Name = "searchBox";
+            searchBox.Size = new Size(206, 23);
+            searchBox.TabIndex = 4;
+            searchBox.Text = "Знайти";
+            searchBox.UseVisualStyleBackColor = true;
+            searchBox.Click += searchBox_Click;
+            // 
+            // comboBox
+            // 
+            comboBox.FormattingEnabled = true;
+            comboBox.Location = new Point(3, 45);
+            comboBox.Name = "comboBox";
+            comboBox.Size = new Size(206, 23);
+            comboBox.TabIndex = 3;
+            // 
+            // panel2
+            // 
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(button2);
+            panel2.Controls.Add(button5);
+            panel2.Controls.Add(addRecordButton);
+            panel2.Location = new Point(565, 348);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(223, 160);
+            panel2.TabIndex = 4;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(56, 107);
+            button2.Name = "button2";
+            button2.Size = new Size(111, 39);
+            button2.TabIndex = 4;
+            button2.Text = "Оновити запис";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(56, 62);
+            button5.Name = "button5";
+            button5.Size = new Size(111, 39);
+            button5.TabIndex = 3;
+            button5.Text = "Видалити запис";
+            button5.UseVisualStyleBackColor = true;
+            // 
+            // addRecordButton
+            // 
+            addRecordButton.Location = new Point(56, 17);
+            addRecordButton.Name = "addRecordButton";
+            addRecordButton.Size = new Size(111, 39);
+            addRecordButton.TabIndex = 0;
+            addRecordButton.Text = "Додати запис";
+            addRecordButton.UseVisualStyleBackColor = true;
+            addRecordButton.Click += addRecordButton_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label2.Location = new Point(595, 325);
+            label2.Name = "label2";
+            label2.Size = new Size(161, 20);
+            label2.TabIndex = 5;
+            label2.Text = "Керування записами";
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 539);
+            Controls.Add(label2);
+            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(dataGridView1);
             Controls.Add(menuStrip1);
@@ -195,6 +245,7 @@
             menuStrip1.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -203,7 +254,6 @@
 
         public DataGridView dataGridView1;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem addToolStripMenuItem;
         private Label label1;
         private Panel panel1;
         private TextBox valueBox;
@@ -217,5 +267,10 @@
         private ToolStripMenuItem vehiclefeeTable;
         private ToolStripMenuItem accessoryfeeTable;
         private ToolStripMenuItem leasingrecordTable;
+        private Panel panel2;
+        private Button addRecordButton;
+        private Label label2;
+        private Button button2;
+        private Button button5;
     }
 }
