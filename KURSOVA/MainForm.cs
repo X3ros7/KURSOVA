@@ -29,21 +29,36 @@ namespace Kursova
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            comboBox.Items.Add("hello");
-            comboBox.SelectedValue = "hello";
+
         }
+
+        private void PopulateColumnsComboBox(string tableName)
+        {
+            columnsComboBox.Items.Clear();
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+                var columns = conn.GetSchema("Columns", new[] { null, null, tableName });
+                foreach (DataRow row in columns.Rows)
+                {
+                    columnsComboBox.Items.Add(row["column_name"]);
+                }
+            }
+        }
+
 
         private void SqlConnectionReader()
         {
             UpdateTableView("client");
             comboBox.Items.AddRange(clientFields);
             comboBox.SelectedIndex = 0;
+            PopulateColumnsComboBox("client");
         }
 
         private void UpdateTableView(string table)
         {
             if (conn.State != ConnectionState.Open) conn.Open();
-            NpgsqlCommand command = new($"SELECT * FROM {table}", conn);
+            NpgsqlCommand command = new($"SELECT * FROM {table} ORDER BY 1", conn);
             ExecuteCommand(command);
         }
 
@@ -92,36 +107,43 @@ namespace Kursova
         private void clientToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem_Click(clientTable, "client", clientFields);
+            PopulateColumnsComboBox("client");
         }
 
         private void vehicleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem_Click(vehicleTable, "vehicle", vehicleFields);
+            PopulateColumnsComboBox("vehicle");
         }
 
         private void testdriverecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem_Click(testdriverrecordTable, "test_drive_record", testDriveRecordFields);
+            PopulateColumnsComboBox("test_drive_record");
         }
 
         private void accessoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem_Click(accessoryTable, "accessory", accessoryFields);
+            PopulateColumnsComboBox("accessory");
         }
 
         private void vehiclefeeTable_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem_Click(vehiclefeeTable, "vehicle_fee", vehicleFeeFields);
+            PopulateColumnsComboBox("vehicle_fee");
         }
 
         private void accessoryfeeTable_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem_Click(accessoryfeeTable, "accessory_fee", accessoryFeeFields);
+            PopulateColumnsComboBox("accessory_fee");
         }
 
         private void leasingRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem_Click(leasingrecordTable, "leasing_record", leasingRecordFields);
+            PopulateColumnsComboBox("leasing_record");
         }
 
         private void UpdateComboBox(string[] fields)
@@ -153,13 +175,15 @@ namespace Kursova
             }
 
             if (conn.State != ConnectionState.Open) conn.Open();
-            if (!int.TryParse(value, out _) || !double.TryParse(value, out _) || !DateTime.TryParse(value, out _))
+            if (!int.TryParse(value, out _) 
+                || !double.TryParse(value, out _) 
+                || !DateTime.TryParse(value, out _))
             {
-                command = new($"SELECT * FROM {table} WHERE {field} = '{value}';", conn);
+                command = new($"SELECT * FROM {table} WHERE {field} = '{value}' ORDER BY 1;", conn);
             }
             else
             {
-                command = new($"SELECT * FROM {table} WHERE {field} = {value};", conn);
+                command = new($"SELECT * FROM {table} WHERE {field} = {value} ORDER BY 1;", conn);
             }
             ExecuteCommand(command);
         }
@@ -197,11 +221,11 @@ namespace Kursova
             if (dataGridView1.SelectedCells.Count > 0)
             {
                 var messageBox = MessageBox.Show("Are you sure you want to delete this record?", "Delete record?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (messageBox == DialogResult.No) 
-                { 
-                    return; 
+                if (messageBox == DialogResult.No)
+                {
+                    return;
                 }
-                
+
                 DataGridViewCell selectedCell = dataGridView1.SelectedCells[0];
                 int rowIndex = selectedCell.RowIndex;
                 DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
@@ -223,7 +247,7 @@ namespace Kursova
                 {
                     Parameters =
                     {
-                        new() { Value = id}
+                        new() { Value = id }
                     }
                 };
                 ExecuteCommand(cmd);
@@ -237,7 +261,43 @@ namespace Kursova
 
         private void updateRecordButton_Click(object sender, EventArgs e)
         {
+            string tableName = "";
+            string columnName = columnsComboBox.SelectedItem?.ToString();
+            string id = idTextBox.Text;
+            string newValue = newValueTextBox.Text;
 
+            foreach (ToolStripMenuItem item in tableToolStripMenuItem.DropDownItems)
+            {
+                if (item.Checked)
+                {
+                    tableName = item.Text?.ToLower();
+                    break;
+                }
+            }
+
+            if (string.IsNullOrEmpty(tableName) || string.IsNullOrEmpty(columnName) ||
+                string.IsNullOrEmpty(id) || string.IsNullOrEmpty(newValue))
+            {
+                MessageBox.Show("Please select table, column and enter ID and new value.");
+                return;
+            }
+
+            int.TryParse(newValue, out _);
+            double.TryParse(newValue, out _);
+            DateTime.TryParse(newValue, out _);
+
+            conn.Open();
+            NpgsqlCommand cmd = new($"UPDATE {tableName} SET {columnName} = @newValue WHERE id = @id", conn)
+            {
+                Parameters =
+                {
+                    new("newValue", newValue),
+                    new("id", int.Parse(id))
+                }
+            };
+
+            ExecuteCommand(cmd);
+            UpdateTableView(tableName);
         }
     }
 }

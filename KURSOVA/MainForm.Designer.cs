@@ -48,10 +48,19 @@
             deleteRecordButton = new Button();
             addRecordButton = new Button();
             label2 = new Label();
+            panel3 = new Panel();
+            label3 = new Label();
+            columnsComboBox = new ComboBox();
+            idTextBox = new TextBox();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            newValueTextBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView1
@@ -59,7 +68,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(12, 27);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(534, 481);
+            dataGridView1.Size = new Size(534, 330);
             dataGridView1.TabIndex = 0;
             // 
             // menuStrip1
@@ -150,21 +159,21 @@
             panel1.Controls.Add(label1);
             panel1.Location = new Point(562, 27);
             panel1.Name = "panel1";
-            panel1.Size = new Size(226, 273);
+            panel1.Size = new Size(226, 212);
             panel1.TabIndex = 3;
             // 
             // valueBox
             // 
             valueBox.Location = new Point(3, 99);
             valueBox.Name = "valueBox";
-            valueBox.Size = new Size(206, 23);
+            valueBox.Size = new Size(218, 23);
             valueBox.TabIndex = 5;
             // 
             // searchBox
             // 
             searchBox.Location = new Point(3, 160);
             searchBox.Name = "searchBox";
-            searchBox.Size = new Size(206, 23);
+            searchBox.Size = new Size(218, 23);
             searchBox.TabIndex = 4;
             searchBox.Text = "Знайти";
             searchBox.UseVisualStyleBackColor = true;
@@ -175,7 +184,7 @@
             comboBox.FormattingEnabled = true;
             comboBox.Location = new Point(3, 45);
             comboBox.Name = "comboBox";
-            comboBox.Size = new Size(206, 23);
+            comboBox.Size = new Size(218, 23);
             comboBox.TabIndex = 3;
             // 
             // panel2
@@ -184,16 +193,16 @@
             panel2.Controls.Add(updateRecordButton);
             panel2.Controls.Add(deleteRecordButton);
             panel2.Controls.Add(addRecordButton);
-            panel2.Location = new Point(565, 348);
+            panel2.Location = new Point(562, 306);
             panel2.Name = "panel2";
-            panel2.Size = new Size(223, 160);
+            panel2.Size = new Size(226, 221);
             panel2.TabIndex = 4;
             // 
             // updateRecordButton
             // 
-            updateRecordButton.Location = new Point(56, 107);
+            updateRecordButton.Location = new Point(56, 147);
             updateRecordButton.Name = "updateRecordButton";
-            updateRecordButton.Size = new Size(111, 39);
+            updateRecordButton.Size = new Size(125, 47);
             updateRecordButton.TabIndex = 4;
             updateRecordButton.Text = "Оновити запис";
             updateRecordButton.UseVisualStyleBackColor = true;
@@ -201,9 +210,9 @@
             // 
             // deleteRecordButton
             // 
-            deleteRecordButton.Location = new Point(56, 62);
+            deleteRecordButton.Location = new Point(56, 86);
             deleteRecordButton.Name = "deleteRecordButton";
-            deleteRecordButton.Size = new Size(111, 39);
+            deleteRecordButton.Size = new Size(125, 43);
             deleteRecordButton.TabIndex = 3;
             deleteRecordButton.Text = "Видалити запис";
             deleteRecordButton.UseVisualStyleBackColor = true;
@@ -211,9 +220,9 @@
             // 
             // addRecordButton
             // 
-            addRecordButton.Location = new Point(56, 17);
+            addRecordButton.Location = new Point(56, 24);
             addRecordButton.Name = "addRecordButton";
-            addRecordButton.Size = new Size(111, 39);
+            addRecordButton.Size = new Size(125, 45);
             addRecordButton.TabIndex = 0;
             addRecordButton.Text = "Додати запис";
             addRecordButton.UseVisualStyleBackColor = true;
@@ -223,17 +232,94 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label2.Location = new Point(595, 325);
+            label2.Location = new Point(592, 283);
             label2.Name = "label2";
             label2.Size = new Size(161, 20);
             label2.TabIndex = 5;
             label2.Text = "Керування записами";
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(newValueTextBox);
+            panel3.Controls.Add(label6);
+            panel3.Controls.Add(label5);
+            panel3.Controls.Add(label4);
+            panel3.Controls.Add(idTextBox);
+            panel3.Controls.Add(columnsComboBox);
+            panel3.Controls.Add(label3);
+            panel3.Location = new Point(12, 363);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(534, 164);
+            panel3.TabIndex = 6;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
+            label3.Location = new Point(3, 9);
+            label3.Name = "label3";
+            label3.Size = new Size(141, 20);
+            label3.TabIndex = 6;
+            label3.Text = "Оновлення запису";
+            // 
+            // columnsComboBox
+            // 
+            columnsComboBox.FormattingEnabled = true;
+            columnsComboBox.Location = new Point(136, 76);
+            columnsComboBox.Name = "columnsComboBox";
+            columnsComboBox.Size = new Size(218, 23);
+            columnsComboBox.TabIndex = 7;
+            // 
+            // idTextBox
+            // 
+            idTextBox.Location = new Point(136, 41);
+            idTextBox.Name = "idTextBox";
+            idTextBox.Size = new Size(218, 23);
+            idTextBox.TabIndex = 8;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label4.Location = new Point(95, 39);
+            label4.Name = "label4";
+            label4.Size = new Size(28, 21);
+            label4.TabIndex = 9;
+            label4.Text = "ID";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Light", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label5.Location = new Point(10, 76);
+            label5.Name = "label5";
+            label5.Size = new Size(120, 15);
+            label5.TabIndex = 10;
+            label5.Text = "Поле для оновлення ";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI Light", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label6.Location = new Point(10, 123);
+            label6.Name = "label6";
+            label6.Size = new Size(90, 15);
+            label6.TabIndex = 11;
+            label6.Text = "Нове значення ";
+            // 
+            // newValueTextBox
+            // 
+            newValueTextBox.Location = new Point(136, 115);
+            newValueTextBox.Name = "newValueTextBox";
+            newValueTextBox.Size = new Size(218, 23);
+            newValueTextBox.TabIndex = 12;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 539);
+            Controls.Add(panel3);
             Controls.Add(label2);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -248,6 +334,8 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -274,5 +362,13 @@
         private Label label2;
         private Button updateRecordButton;
         private Button deleteRecordButton;
+        private Panel panel3;
+        private Label label3;
+        private ComboBox columnsComboBox;
+        private TextBox idTextBox;
+        private Label label5;
+        private Label label4;
+        private TextBox newValueTextBox;
+        private Label label6;
     }
 }
