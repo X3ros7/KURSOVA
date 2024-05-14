@@ -196,6 +196,12 @@ namespace Kursova
         {
             if (dataGridView1.SelectedCells.Count > 0)
             {
+                var messageBox = MessageBox.Show("Are you sure you want to delete this record?", "Delete record?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (messageBox == DialogResult.No) 
+                { 
+                    return; 
+                }
+                
                 DataGridViewCell selectedCell = dataGridView1.SelectedCells[0];
                 int rowIndex = selectedCell.RowIndex;
                 DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
@@ -213,9 +219,9 @@ namespace Kursova
                 var id = selectedRow.Cells[0].Value;
 
                 conn.Open();
-                cmd = new($"DELETE FROM {table} WHERE id = $1", conn) 
+                cmd = new($"DELETE FROM {table} WHERE id = $1", conn)
                 {
-                    Parameters = 
+                    Parameters =
                     {
                         new() { Value = id}
                     }
@@ -227,6 +233,11 @@ namespace Kursova
             {
                 MessageBox.Show("No cell is selected.");
             }
+        }
+
+        private void updateRecordButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

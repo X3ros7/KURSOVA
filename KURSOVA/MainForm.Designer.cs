@@ -83,49 +83,49 @@
             clientTable.Checked = true;
             clientTable.CheckState = CheckState.Checked;
             clientTable.Name = "clientTable";
-            clientTable.Size = new Size(180, 22);
+            clientTable.Size = new Size(164, 22);
             clientTable.Text = "Client";
             clientTable.Click += clientToolStripMenuItem_Click;
             // 
             // vehicleTable
             // 
             vehicleTable.Name = "vehicleTable";
-            vehicleTable.Size = new Size(180, 22);
+            vehicleTable.Size = new Size(164, 22);
             vehicleTable.Text = "Vehicle";
             vehicleTable.Click += vehicleToolStripMenuItem_Click;
             // 
             // accessoryTable
             // 
             accessoryTable.Name = "accessoryTable";
-            accessoryTable.Size = new Size(180, 22);
+            accessoryTable.Size = new Size(164, 22);
             accessoryTable.Text = "Accessory";
             accessoryTable.Click += accessoryToolStripMenuItem_Click;
             // 
             // testdriverrecordTable
             // 
             testdriverrecordTable.Name = "testdriverrecordTable";
-            testdriverrecordTable.Size = new Size(180, 22);
+            testdriverrecordTable.Size = new Size(164, 22);
             testdriverrecordTable.Text = "Test_drive_record";
             testdriverrecordTable.Click += testdriverecordToolStripMenuItem_Click;
             // 
             // vehiclefeeTable
             // 
             vehiclefeeTable.Name = "vehiclefeeTable";
-            vehiclefeeTable.Size = new Size(180, 22);
+            vehiclefeeTable.Size = new Size(164, 22);
             vehiclefeeTable.Text = "Vehicle_fee";
             vehiclefeeTable.Click += vehiclefeeTable_Click;
             // 
             // accessoryfeeTable
             // 
             accessoryfeeTable.Name = "accessoryfeeTable";
-            accessoryfeeTable.Size = new Size(180, 22);
+            accessoryfeeTable.Size = new Size(164, 22);
             accessoryfeeTable.Text = "Accessory_fee";
             accessoryfeeTable.Click += accessoryfeeTable_Click;
             // 
             // leasingrecordTable
             // 
             leasingrecordTable.Name = "leasingrecordTable";
-            leasingrecordTable.Size = new Size(180, 22);
+            leasingrecordTable.Size = new Size(164, 22);
             leasingrecordTable.Text = "Leasing_record";
             leasingrecordTable.Click += leasingRecordToolStripMenuItem_Click;
             // 
@@ -197,6 +197,7 @@
             updateRecordButton.TabIndex = 4;
             updateRecordButton.Text = "Оновити запис";
             updateRecordButton.UseVisualStyleBackColor = true;
+            updateRecordButton.Click += updateRecordButton_Click;
             // 
             // deleteRecordButton
             // 
