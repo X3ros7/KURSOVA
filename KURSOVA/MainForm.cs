@@ -279,16 +279,14 @@ namespace Kursova
                 }
             }
 
-            if (string.IsNullOrEmpty(table) || string.IsNullOrEmpty(column) ||
-                string.IsNullOrEmpty(id) || string.IsNullOrEmpty(newValue))
+            if (StringChecker.isNullOrEmpty(table, column, id, newValue))
             {
                 MessageBox.Show("Please select table, column and enter ID and new value.");
                 return;
             }
-
             conn.Open();
+            
             NpgsqlCommand cmd;   
-
             if (!int.TryParse(newValue, out _)
                 || !double.TryParse(newValue, out _)
                 || !DateTime.TryParse(newValue, out _))

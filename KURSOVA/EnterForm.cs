@@ -27,12 +27,16 @@ namespace Kursova
             {
                 conn.Open();
                 MainForm mainForm = new MainForm(conn, connectionString);
+                this.Hide();
                 mainForm.ShowDialog();
-                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
             }
         }
     }
