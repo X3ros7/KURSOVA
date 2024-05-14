@@ -40,7 +40,7 @@
             leasingrecordTable = new ToolStripMenuItem();
             label1 = new Label();
             panel1 = new Panel();
-            valueBox = new TextBox();
+            valueTextBox = new TextBox();
             searchBox = new Button();
             comboBox = new ComboBox();
             panel2 = new Panel();
@@ -49,13 +49,13 @@
             addRecordButton = new Button();
             label2 = new Label();
             panel3 = new Panel();
-            label3 = new Label();
-            columnsComboBox = new ComboBox();
-            idTextBox = new TextBox();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
             newValueTextBox = new TextBox();
+            label6 = new Label();
+            label5 = new Label();
+            label4 = new Label();
+            idTextBox = new TextBox();
+            columnsComboBox = new ComboBox();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -92,49 +92,49 @@
             clientTable.Checked = true;
             clientTable.CheckState = CheckState.Checked;
             clientTable.Name = "clientTable";
-            clientTable.Size = new Size(164, 22);
+            clientTable.Size = new Size(180, 22);
             clientTable.Text = "Client";
             clientTable.Click += clientToolStripMenuItem_Click;
             // 
             // vehicleTable
             // 
             vehicleTable.Name = "vehicleTable";
-            vehicleTable.Size = new Size(164, 22);
+            vehicleTable.Size = new Size(180, 22);
             vehicleTable.Text = "Vehicle";
             vehicleTable.Click += vehicleToolStripMenuItem_Click;
             // 
             // accessoryTable
             // 
             accessoryTable.Name = "accessoryTable";
-            accessoryTable.Size = new Size(164, 22);
+            accessoryTable.Size = new Size(180, 22);
             accessoryTable.Text = "Accessory";
             accessoryTable.Click += accessoryToolStripMenuItem_Click;
             // 
             // testdriverrecordTable
             // 
             testdriverrecordTable.Name = "testdriverrecordTable";
-            testdriverrecordTable.Size = new Size(164, 22);
+            testdriverrecordTable.Size = new Size(180, 22);
             testdriverrecordTable.Text = "Test_drive_record";
             testdriverrecordTable.Click += testdriverecordToolStripMenuItem_Click;
             // 
             // vehiclefeeTable
             // 
             vehiclefeeTable.Name = "vehiclefeeTable";
-            vehiclefeeTable.Size = new Size(164, 22);
+            vehiclefeeTable.Size = new Size(180, 22);
             vehiclefeeTable.Text = "Vehicle_fee";
             vehiclefeeTable.Click += vehiclefeeTable_Click;
             // 
             // accessoryfeeTable
             // 
             accessoryfeeTable.Name = "accessoryfeeTable";
-            accessoryfeeTable.Size = new Size(164, 22);
+            accessoryfeeTable.Size = new Size(180, 22);
             accessoryfeeTable.Text = "Accessory_fee";
             accessoryfeeTable.Click += accessoryfeeTable_Click;
             // 
             // leasingrecordTable
             // 
             leasingrecordTable.Name = "leasingrecordTable";
-            leasingrecordTable.Size = new Size(164, 22);
+            leasingrecordTable.Size = new Size(180, 22);
             leasingrecordTable.Text = "Leasing_record";
             leasingrecordTable.Click += leasingRecordToolStripMenuItem_Click;
             // 
@@ -153,7 +153,7 @@
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(valueBox);
+            panel1.Controls.Add(valueTextBox);
             panel1.Controls.Add(searchBox);
             panel1.Controls.Add(comboBox);
             panel1.Controls.Add(label1);
@@ -162,12 +162,12 @@
             panel1.Size = new Size(226, 212);
             panel1.TabIndex = 3;
             // 
-            // valueBox
+            // valueTextBox
             // 
-            valueBox.Location = new Point(3, 99);
-            valueBox.Name = "valueBox";
-            valueBox.Size = new Size(218, 23);
-            valueBox.TabIndex = 5;
+            valueTextBox.Location = new Point(3, 99);
+            valueTextBox.Name = "valueTextBox";
+            valueTextBox.Size = new Size(218, 23);
+            valueTextBox.TabIndex = 5;
             // 
             // searchBox
             // 
@@ -252,50 +252,12 @@
             panel3.Size = new Size(534, 164);
             panel3.TabIndex = 6;
             // 
-            // label3
+            // newValueTextBox
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
-            label3.Location = new Point(3, 9);
-            label3.Name = "label3";
-            label3.Size = new Size(141, 20);
-            label3.TabIndex = 6;
-            label3.Text = "Оновлення запису";
-            // 
-            // columnsComboBox
-            // 
-            columnsComboBox.FormattingEnabled = true;
-            columnsComboBox.Location = new Point(136, 76);
-            columnsComboBox.Name = "columnsComboBox";
-            columnsComboBox.Size = new Size(218, 23);
-            columnsComboBox.TabIndex = 7;
-            // 
-            // idTextBox
-            // 
-            idTextBox.Location = new Point(136, 41);
-            idTextBox.Name = "idTextBox";
-            idTextBox.Size = new Size(218, 23);
-            idTextBox.TabIndex = 8;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label4.Location = new Point(95, 39);
-            label4.Name = "label4";
-            label4.Size = new Size(28, 21);
-            label4.TabIndex = 9;
-            label4.Text = "ID";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Light", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            label5.Location = new Point(10, 76);
-            label5.Name = "label5";
-            label5.Size = new Size(120, 15);
-            label5.TabIndex = 10;
-            label5.Text = "Поле для оновлення ";
+            newValueTextBox.Location = new Point(136, 115);
+            newValueTextBox.Name = "newValueTextBox";
+            newValueTextBox.Size = new Size(218, 23);
+            newValueTextBox.TabIndex = 12;
             // 
             // label6
             // 
@@ -307,12 +269,50 @@
             label6.TabIndex = 11;
             label6.Text = "Нове значення ";
             // 
-            // newValueTextBox
+            // label5
             // 
-            newValueTextBox.Location = new Point(136, 115);
-            newValueTextBox.Name = "newValueTextBox";
-            newValueTextBox.Size = new Size(218, 23);
-            newValueTextBox.TabIndex = 12;
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Light", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label5.Location = new Point(10, 76);
+            label5.Name = "label5";
+            label5.Size = new Size(120, 15);
+            label5.TabIndex = 10;
+            label5.Text = "Поле для оновлення ";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label4.Location = new Point(95, 39);
+            label4.Name = "label4";
+            label4.Size = new Size(28, 21);
+            label4.TabIndex = 9;
+            label4.Text = "ID";
+            // 
+            // idTextBox
+            // 
+            idTextBox.Location = new Point(136, 41);
+            idTextBox.Name = "idTextBox";
+            idTextBox.Size = new Size(218, 23);
+            idTextBox.TabIndex = 8;
+            // 
+            // columnsComboBox
+            // 
+            columnsComboBox.FormattingEnabled = true;
+            columnsComboBox.Location = new Point(136, 76);
+            columnsComboBox.Name = "columnsComboBox";
+            columnsComboBox.Size = new Size(218, 23);
+            columnsComboBox.TabIndex = 7;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
+            label3.Location = new Point(3, 9);
+            label3.Name = "label3";
+            label3.Size = new Size(141, 20);
+            label3.TabIndex = 6;
+            label3.Text = "Оновлення запису";
             // 
             // MainForm
             // 
@@ -346,7 +346,7 @@
         private MenuStrip menuStrip1;
         private Label label1;
         private Panel panel1;
-        private TextBox valueBox;
+        private TextBox valueTextBox;
         private Button searchBox;
         private ComboBox comboBox;
         private ToolStripMenuItem tableToolStripMenuItem;

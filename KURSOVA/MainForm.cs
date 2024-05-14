@@ -44,6 +44,9 @@ namespace Kursova
                     columnsComboBox.Items.Add(row["column_name"]);
                 }
             }
+            columnsComboBox.SelectedIndex = 0;
+            newValueTextBox.Text = "";
+            idTextBox.Text = "";
         }
 
 
@@ -151,12 +154,13 @@ namespace Kursova
             comboBox.Items.Clear();
             comboBox.Items.AddRange(fields);
             comboBox.SelectedIndex = 0;
+            valueTextBox.Text = "";
         }
 
         private void searchBox_Click(object sender, EventArgs e)
         {
             var field = comboBox.SelectedItem.ToString();
-            var value = valueBox.Text;
+            var value = valueTextBox.Text;
             string? table = "";
             NpgsqlCommand command;
 
@@ -261,8 +265,8 @@ namespace Kursova
 
         private void updateRecordButton_Click(object sender, EventArgs e)
         {
-            string tableName = "";
-            string columnName = columnsComboBox.SelectedItem?.ToString();
+            string table = "";
+            string column = columnsComboBox.SelectedItem?.ToString();
             string id = idTextBox.Text;
             string newValue = newValueTextBox.Text;
 
@@ -270,34 +274,35 @@ namespace Kursova
             {
                 if (item.Checked)
                 {
-                    tableName = item.Text?.ToLower();
+                    table = item.Text?.ToLower();
                     break;
                 }
             }
 
-            if (string.IsNullOrEmpty(tableName) || string.IsNullOrEmpty(columnName) ||
+            if (string.IsNullOrEmpty(table) || string.IsNullOrEmpty(column) ||
                 string.IsNullOrEmpty(id) || string.IsNullOrEmpty(newValue))
             {
                 MessageBox.Show("Please select table, column and enter ID and new value.");
                 return;
             }
 
-            int.TryParse(newValue, out _);
-            double.TryParse(newValue, out _);
-            DateTime.TryParse(newValue, out _);
-
             conn.Open();
-            NpgsqlCommand cmd = new($"UPDATE {tableName} SET {columnName} = @newValue WHERE id = @id", conn)
+            NpgsqlCommand cmd;   
+
+            if (!int.TryParse(newValue, out _)
+                || !double.TryParse(newValue, out _)
+                || !DateTime.TryParse(newValue, out _))
             {
-                Parameters =
-                {
-                    new("newValue", newValue),
-                    new("id", int.Parse(id))
-                }
-            };
+                cmd = new($"UPDATE {table} SET {column} = '{newValue}' WHERE id = @id", conn);
+            }
+            else
+            {
+                cmd = new($"UPDATE {table} SET {column} = {newValue} WHERE id = @id", conn);
+            }
+            cmd.Parameters.AddWithValue("id", int.Parse(id));
 
             ExecuteCommand(cmd);
-            UpdateTableView(tableName);
+            UpdateTableView(table);
         }
     }
 }
