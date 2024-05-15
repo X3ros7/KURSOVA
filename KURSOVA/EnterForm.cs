@@ -37,6 +37,7 @@ namespace Kursova
             finally
             {
                 conn.Close();
+                this.Close();
             }
         }
     }
