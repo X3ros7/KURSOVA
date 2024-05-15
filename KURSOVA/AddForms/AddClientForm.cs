@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Kursova.utils;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,13 +15,13 @@ namespace Kursova
     public partial class AddClientForm : Form
     {
         private string connString;
-        private MainForm mainForm;
+        private MainForm MainForm;
 
         public AddClientForm(string connString, MainForm mainForm)
         {
             InitializeComponent();
             this.connString = connString;
-            this.mainForm = mainForm;
+            this.MainForm = mainForm;
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -37,29 +38,12 @@ namespace Kursova
 
             NpgsqlConnection conn = new NpgsqlConnection(connString);
             NpgsqlCommand cmd = new($"INSERT INTO client (name, email, phone_number) VALUES ('{name}', '{email}', '{phone}')", conn);
-            try
-            {
-                conn.Open();
-                cmd.CommandType = System.Data.CommandType.Text;
-                NpgsqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    DataTable dataTable = new DataTable();
-                    dataTable.Load(reader);
-                    mainForm.dataGridView1.DataSource = dataTable;
-                }
-                MessageBox.Show("Клієнта був додано до системи");
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally 
-            { 
-                cmd.Dispose();
-                conn.Close();
-            }
+            
+            conn.Open();
+            var executor = new CommandExecutor(conn);
+            executor.ExecuteCommand(cmd, MainForm.dataGridView1);
+            MessageBox.Show("Запис про нового клієнта було додано до системи");
+            this.Close();
         }
     }
 }
