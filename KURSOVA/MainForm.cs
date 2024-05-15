@@ -30,7 +30,7 @@ namespace Kursova
             InitializeComponent();
             this.connString = connString;
             this.conn = conn;
-            _dataTableHandler = new DataTableHandler(this.conn, dataGridView1);
+            _dataTableHandler = new DataTableHandler(this.conn);
             _comboBoxHandler = new ComboBoxHandler(columnsComboBox, comboBox);
             _commandExecutor = new CommandExecutor(this.conn);
 

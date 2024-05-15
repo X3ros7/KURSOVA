@@ -1,7 +1,7 @@
 ﻿using Npgsql;
 using Kursova.Models;
 
-namespace Kursova
+namespace Kursova.crud
 {
     internal class CreateRecord
     {
