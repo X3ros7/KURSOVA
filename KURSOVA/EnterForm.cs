@@ -1,13 +1,4 @@
-﻿using Npgsql;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Kursova.utils;
 
 namespace Kursova
 {
@@ -18,25 +9,30 @@ namespace Kursova
             InitializeComponent();
         }
 
-        public void EnterButton_Click(object sender, EventArgs e)
+        private async void EnterButton_Click(object sender, EventArgs e)
         {
-            string connectionString = $"Server=localhost;Port=5432;Database=carshop; User Id = {textBox1.Text}; Password = {textBox2.Text}";
-            NpgsqlConnection conn = new NpgsqlConnection(connectionString);
+            string connectionString = $"Server=localhost;Port=5432;Database=carshop;User Id={textBox1.Text};Password={textBox2.Text}";
 
             try
             {
-                conn.Open();
-                MainForm mainForm = new MainForm(conn, connectionString);
-                this.Hide();
-                mainForm.ShowDialog();
+                var conn = await DatabaseConnector.OpenConnectionAsync(connectionString);
+                if (conn != null)
+                {
+                    MainForm mainForm = new MainForm(conn, connectionString);
+                    this.Hide();
+                    mainForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Не вдалося підключитися до бази даних.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Помилка при вході у систему.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Помилка при вході у систему: {ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                conn.Close();
                 this.Close();
             }
         }
