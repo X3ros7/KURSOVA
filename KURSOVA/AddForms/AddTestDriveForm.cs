@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Kursova.utils;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -49,28 +50,13 @@ namespace Kursova
 
             NpgsqlConnection conn = new NpgsqlConnection(connString);
             NpgsqlCommand cmd = new NpgsqlCommand($"INSERT INTO \r\n\ttest_drive_record (client_id, vehicle_id, testdrive_date, duration)\r\nVALUES\r\n\t({int.Parse(clientId)}, {int.Parse(vehicleId)}, '{DateTime.Parse(testdriveDate)}', '{parsedDuration}');", conn);
-            try
+            
+            conn.Open();
+            var executor = new CommandExecutor(conn);
+            if (executor.ExecuteCommand(cmd, mainForm.dataGridView1))
             {
-                conn.Open();
-                cmd.CommandType = System.Data.CommandType.Text;
-                NpgsqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    DataTable dataTable = new DataTable();
-                    dataTable.Load(reader);
-                    mainForm.dataGridView1.DataSource = dataTable;
-                }
-                MessageBox.Show("Запис на тест-драйв було додано до системи");
+                MessageBox.Show("Запис на тест-драйв був доданий до системи");
                 this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                cmd.Dispose();
-                conn.Close();
             }
         }
 

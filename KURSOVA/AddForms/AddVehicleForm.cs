@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Kursova.utils;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Kursova
 {
@@ -36,83 +38,22 @@ namespace Kursova
             string productCountry = prodcountryBox.Text;
             string price = priceBox.Text;
 
-            if (brand == null)
-            {
-                MessageBox.Show("Enter the brand");
+            if (StringChecker.isNullOrEmpty(brand, name, bodyType, bodyColor, transmission, fuelType, hp, productYear, productCountry, price))
+            { 
+                MessageBox.Show("Not all values was entered.");   
                 return;
-            }
-            if (name == null)
-            {
-                MessageBox.Show("Enter a name");
-                return;
-            }
-            if (bodyType == null)
-            {
-                MessageBox.Show("Enter a body type");
-                return; 
-            }
-            if (bodyColor == null)
-            {
-                MessageBox.Show("Enter a body color");
-                return;
-            }
-            if (transmission == null)
-            {
-                MessageBox.Show("Enter a transmission");
-                return;
-            }
-            if (fuelType == null)
-            {
-                MessageBox.Show("Enter a fuel type");
-                return;
-            }
-            if (hp == null) 
-            {
-                MessageBox.Show("Enter a HP");
-                return;
-            }
-            if (productYear == null)
-            {
-                MessageBox.Show("Enter a product year");
-                return;
-            }
-            if (productCountry == null)
-            {
-                MessageBox.Show("Enter a product country");
-                return;
-            }
-            if (price == null)
-            {
-                MessageBox.Show("Enter a price");
-                return;
-            }
+             }
 
             NpgsqlConnection conn = new(connString);
             NpgsqlCommand cmd = new($"INSERT INTO vehicle (brand, name, body_type, body_color, transmission, fuel_type, hp, product_year, product_country, price)\n" +
                 $"VALUES ('{brand}', '{name}', '{bodyType}', '{bodyColor}', '{transmission}', '{fuelType}', '{int.Parse(hp)}', '{int.Parse(productYear)}', '{productCountry}', '{double.Parse(price)}')", conn);
 
-            try
+            conn.Open();
+            var executor = new CommandExecutor(conn);
+            if (executor.ExecuteCommand(cmd, mainForm.dataGridView1))
             {
-                conn.Open();
-                cmd.CommandType = System.Data.CommandType.Text;
-                NpgsqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    DataTable dataTable = new DataTable();
-                    dataTable.Load(reader);
-                    mainForm.dataGridView1.DataSource = dataTable;
-                }
-                MessageBox.Show("Автомобіль було додано до системи");
+                MessageBox.Show("Запис про авто був доданий до системи");
                 this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                cmd.Dispose();
-                conn.Close();
             }
         }
     }

@@ -41,9 +41,11 @@ namespace Kursova
             
             conn.Open();
             var executor = new CommandExecutor(conn);
-            executor.ExecuteCommand(cmd, MainForm.dataGridView1);
-            MessageBox.Show("Запис про нового клієнта було додано до системи");
-            this.Close();
+            if (executor.ExecuteCommand(cmd, MainForm.dataGridView1))
+            {
+                MessageBox.Show("Запис про нового клієнта було додано до системи");
+                this.Close();
+            }
         }
     }
 }
