@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Kursova.utils;
+using Npgsql;
 using System.Data;
 
 namespace Kursova
@@ -39,29 +40,9 @@ namespace Kursova
                     new() { Value = int.Parse(quantity) }
                 }
             };
-            try
-            {
-                conn.Open();
-                cmd.CommandType = System.Data.CommandType.Text;
-                NpgsqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    DataTable dataTable = new DataTable();
-                    dataTable.Load(reader);
-                    mainForm.dataGridView1.DataSource = dataTable;
-                }
-                MessageBox.Show("Запис про придбання аксесуару було додано до системи");
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                cmd.Dispose();
-                conn.Close();
-            }
+
+            var executor = new CommandExecutor(conn);
+            executor.ExecuteCommand(cmd, mainForm.dataGridView1);
         }
     }
 }

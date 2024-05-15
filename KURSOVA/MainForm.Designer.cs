@@ -41,7 +41,7 @@
             label1 = new Label();
             panel1 = new Panel();
             valueTextBox = new TextBox();
-            searchBox = new Button();
+            searchButton = new Button();
             comboBox = new ComboBox();
             panel2 = new Panel();
             updateRecordButton = new Button();
@@ -92,49 +92,49 @@
             clientTable.Checked = true;
             clientTable.CheckState = CheckState.Checked;
             clientTable.Name = "clientTable";
-            clientTable.Size = new Size(180, 22);
+            clientTable.Size = new Size(164, 22);
             clientTable.Text = "Client";
             clientTable.Click += clientToolStripMenuItem_Click;
             // 
             // vehicleTable
             // 
             vehicleTable.Name = "vehicleTable";
-            vehicleTable.Size = new Size(180, 22);
+            vehicleTable.Size = new Size(164, 22);
             vehicleTable.Text = "Vehicle";
             vehicleTable.Click += vehicleToolStripMenuItem_Click;
             // 
             // accessoryTable
             // 
             accessoryTable.Name = "accessoryTable";
-            accessoryTable.Size = new Size(180, 22);
+            accessoryTable.Size = new Size(164, 22);
             accessoryTable.Text = "Accessory";
             accessoryTable.Click += accessoryToolStripMenuItem_Click;
             // 
             // testdriverrecordTable
             // 
             testdriverrecordTable.Name = "testdriverrecordTable";
-            testdriverrecordTable.Size = new Size(180, 22);
+            testdriverrecordTable.Size = new Size(164, 22);
             testdriverrecordTable.Text = "Test_drive_record";
             testdriverrecordTable.Click += testdriverecordToolStripMenuItem_Click;
             // 
             // vehiclefeeTable
             // 
             vehiclefeeTable.Name = "vehiclefeeTable";
-            vehiclefeeTable.Size = new Size(180, 22);
+            vehiclefeeTable.Size = new Size(164, 22);
             vehiclefeeTable.Text = "Vehicle_fee";
             vehiclefeeTable.Click += vehiclefeeTable_Click;
             // 
             // accessoryfeeTable
             // 
             accessoryfeeTable.Name = "accessoryfeeTable";
-            accessoryfeeTable.Size = new Size(180, 22);
+            accessoryfeeTable.Size = new Size(164, 22);
             accessoryfeeTable.Text = "Accessory_fee";
             accessoryfeeTable.Click += accessoryfeeTable_Click;
             // 
             // leasingrecordTable
             // 
             leasingrecordTable.Name = "leasingrecordTable";
-            leasingrecordTable.Size = new Size(180, 22);
+            leasingrecordTable.Size = new Size(164, 22);
             leasingrecordTable.Text = "Leasing_record";
             leasingrecordTable.Click += leasingRecordToolStripMenuItem_Click;
             // 
@@ -154,7 +154,7 @@
             panel1.BackColor = SystemColors.ActiveCaption;
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(valueTextBox);
-            panel1.Controls.Add(searchBox);
+            panel1.Controls.Add(searchButton);
             panel1.Controls.Add(comboBox);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(562, 27);
@@ -169,15 +169,15 @@
             valueTextBox.Size = new Size(218, 23);
             valueTextBox.TabIndex = 5;
             // 
-            // searchBox
+            // searchButton
             // 
-            searchBox.Location = new Point(3, 160);
-            searchBox.Name = "searchBox";
-            searchBox.Size = new Size(218, 23);
-            searchBox.TabIndex = 4;
-            searchBox.Text = "Знайти";
-            searchBox.UseVisualStyleBackColor = true;
-            searchBox.Click += searchBox_Click;
+            searchButton.Location = new Point(3, 160);
+            searchButton.Name = "searchButton";
+            searchButton.Size = new Size(218, 23);
+            searchButton.TabIndex = 4;
+            searchButton.Text = "Знайти";
+            searchButton.UseVisualStyleBackColor = true;
+            searchButton.Click += searchBox_Click;
             // 
             // comboBox
             // 
@@ -348,7 +348,7 @@
         private Label label1;
         private Panel panel1;
         private TextBox valueTextBox;
-        private Button searchBox;
+        private Button searchButton;
         private ComboBox comboBox;
         private ToolStripMenuItem tableToolStripMenuItem;
         private ToolStripMenuItem clientTable;
