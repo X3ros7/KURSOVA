@@ -52,7 +52,7 @@ namespace Kursova
             var testDriveRecord = new TestDriveRecord(0, int.Parse(clientId), int.Parse(vehicleId), DateTime.Parse(testdriveDate), parsedDuration);
 
             NpgsqlConnection conn = new NpgsqlConnection(connString);
-            NpgsqlCommand cmd = InsertData.GenerateCommand(testDriveRecord);
+            NpgsqlCommand cmd = CreateRecord.GenerateCommand(testDriveRecord);
             
             conn.Open();
             cmd.Connection = conn;

@@ -43,7 +43,7 @@ namespace Kursova
             var leasingRecord = new LeasingRecord(0, int.Parse(clientId), int.Parse(vehicleId), DateTime.Parse(date), DateTime.Parse(endDate));
 
             NpgsqlConnection conn = new NpgsqlConnection(connString);
-            NpgsqlCommand cmd = InsertData.GenerateCommand(leasingRecord);
+            NpgsqlCommand cmd = CreateRecord.GenerateCommand(leasingRecord);
 
             conn.Open();
             cmd.Connection = conn;

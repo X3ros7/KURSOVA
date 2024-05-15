@@ -33,7 +33,7 @@ namespace Kursova
             var accessoryFee = new AccessoryFee(0, int.Parse(clientId), int.Parse(accessoryId), DateTime.Parse(date), int.Parse(quantity));
 
             var conn = new NpgsqlConnection(connString);
-            var cmd = InsertData.GenerateCommand(accessoryFee); 
+            var cmd = CreateRecord.GenerateCommand(accessoryFee); 
 
             conn.Open();
             cmd.Connection = conn;

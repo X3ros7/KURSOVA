@@ -47,7 +47,7 @@ namespace Kursova
             var vehicle = new Vehicle(0, name, brand, bodyType, bodyColor, transmission, fuelType, int.Parse(hp), int.Parse(productYear), productCountry, double.Parse(price));
 
             NpgsqlConnection conn = new(connString);
-            NpgsqlCommand cmd = InsertData.GenerateCommand(vehicle);
+            NpgsqlCommand cmd = CreateRecord.GenerateCommand(vehicle);
 
             conn.Open();
             cmd.Connection = conn;

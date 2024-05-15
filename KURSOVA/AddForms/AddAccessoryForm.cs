@@ -43,7 +43,7 @@ namespace Kursova
             var accessory = new Accessory(0, name, type, brand, int.Parse(price), double.Parse(price));
 
             NpgsqlConnection conn = new NpgsqlConnection(connString);
-            NpgsqlCommand cmd = InsertData.GenerateCommand(accessory);
+            NpgsqlCommand cmd = CreateRecord.GenerateCommand(accessory);
             
             conn.Open();
             cmd.Connection = conn;

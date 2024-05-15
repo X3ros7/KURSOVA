@@ -39,7 +39,7 @@ namespace Kursova
 
             Client client = new Client(0, name, email, phone);
             NpgsqlConnection conn = new NpgsqlConnection(connString);
-            NpgsqlCommand cmd = InsertData.GenerateCommand(client);
+            NpgsqlCommand cmd = CreateRecord.GenerateCommand(client);
             
             conn.Open();
             cmd.Connection = conn;

@@ -43,7 +43,7 @@ namespace Kursova
             var vehicleFee = new VehicleFee(0, int.Parse(clientId), int.Parse(vehicleId), DateTime.Parse(date), double.Parse(price));
 
             NpgsqlConnection conn = new NpgsqlConnection(connString);
-            NpgsqlCommand cmd = InsertData.GenerateCommand(vehicleFee);
+            NpgsqlCommand cmd = CreateRecord.GenerateCommand(vehicleFee);
             
             conn.Open();
             cmd.Connection = conn;
