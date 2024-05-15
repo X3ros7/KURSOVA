@@ -30,9 +30,9 @@ namespace Kursova
                 this.Hide();
                 mainForm.ShowDialog();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Помилка при вході у систему.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

@@ -240,6 +240,7 @@
             // 
             // panel3
             // 
+            panel3.BorderStyle = BorderStyle.FixedSingle;
             panel3.Controls.Add(newValueTextBox);
             panel3.Controls.Add(label6);
             panel3.Controls.Add(label5);
