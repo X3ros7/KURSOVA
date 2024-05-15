@@ -1,4 +1,5 @@
-﻿using Kursova.utils;
+﻿using Kursova.Models;
+using Kursova.utils;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -43,16 +44,19 @@ namespace Kursova
                 MessageBox.Show("Not all values was entered.");   
                 return;
              }
+            var vehicle = new Vehicle(0, name, brand, bodyType, bodyColor, transmission, fuelType, int.Parse(hp), int.Parse(productYear), productCountry, double.Parse(price));
 
             NpgsqlConnection conn = new(connString);
-            NpgsqlCommand cmd = new($"INSERT INTO vehicle (brand, name, body_type, body_color, transmission, fuel_type, hp, product_year, product_country, price)\n" +
-                $"VALUES ('{brand}', '{name}', '{bodyType}', '{bodyColor}', '{transmission}', '{fuelType}', '{int.Parse(hp)}', '{int.Parse(productYear)}', '{productCountry}', '{double.Parse(price)}')", conn);
+            NpgsqlCommand cmd = InsertData.GenerateCommand(vehicle);
 
             conn.Open();
+            cmd.Connection = conn;
             var executor = new CommandExecutor(conn);
-            if (executor.ExecuteCommand(cmd, mainForm.dataGridView1))
+            var dataTable = new DataTable();
+            if (executor.ExecuteCommand(cmd, out dataTable))
             {
                 MessageBox.Show("Запис про авто був доданий до системи");
+                mainForm.dataGridView1.DataSource = dataTable;
                 this.Close();
             }
         }

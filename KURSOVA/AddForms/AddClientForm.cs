@@ -1,4 +1,5 @@
 ﻿using Kursova.utils;
+using Kursova.Models;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -36,14 +37,18 @@ namespace Kursova
                 return;
             }
 
+            Client client = new Client(0, name, email, phone);
             NpgsqlConnection conn = new NpgsqlConnection(connString);
-            NpgsqlCommand cmd = new($"INSERT INTO client (name, email, phone_number) VALUES ('{name}', '{email}', '{phone}')", conn);
+            NpgsqlCommand cmd = InsertData.GenerateCommand(client);
             
             conn.Open();
+            cmd.Connection = conn;
             var executor = new CommandExecutor(conn);
-            if (executor.ExecuteCommand(cmd, MainForm.dataGridView1))
+            var dataTable = new DataTable();
+            if (executor.ExecuteCommand(cmd, out dataTable))
             {
                 MessageBox.Show("Запис про нового клієнта було додано до системи");
+                MainForm.dataGridView1.DataSource = dataTable;
                 this.Close();
             }
         }

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Xml.Linq;
 using Kursova.utils;
+using Kursova.Models;
 
 namespace Kursova
 {
@@ -39,24 +40,19 @@ namespace Kursova
                 return;
             }
 
+            var leasingRecord = new LeasingRecord(0, int.Parse(clientId), int.Parse(vehicleId), DateTime.Parse(date), DateTime.Parse(endDate));
+
             NpgsqlConnection conn = new NpgsqlConnection(connString);
-            NpgsqlCommand cmd = new($"INSERT INTO leasing_record (client_id, vehicle_id, record_date, end_date) VALUES ($1, $2, $3, $4)", conn) 
-            {
-                Parameters =
-                {
-                    new() { Value = int.Parse(clientId) },
-                    new() { Value = int.Parse(vehicleId) },
-                    new() { Value = DateTime.Parse(date) },
-                    new() { Value = DateTime.Parse(endDate) }
-                }
-            };
+            NpgsqlCommand cmd = InsertData.GenerateCommand(leasingRecord);
 
             conn.Open();
+            cmd.Connection = conn;
             var executor = new CommandExecutor(conn);
-
-            if (executor.ExecuteCommand(cmd, mainForm.dataGridView1))
+            var dataTable = new DataTable();
+            if (executor.ExecuteCommand(cmd, out dataTable))
             {
                 MessageBox.Show("Запис про аксесуар було додано до системи");
+                mainForm.dataGridView1.DataSource = dataTable;
                 this.Close();
             }
         }

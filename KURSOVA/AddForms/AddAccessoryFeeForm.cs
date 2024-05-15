@@ -1,4 +1,5 @@
-﻿using Kursova.utils;
+﻿using Kursova.Models;
+using Kursova.utils;
 using Npgsql;
 using System.Data;
 
@@ -29,23 +30,19 @@ namespace Kursova
                 return;
             }
 
+            var accessoryFee = new AccessoryFee(0, int.Parse(clientId), int.Parse(accessoryId), DateTime.Parse(date), int.Parse(quantity));
+
             var conn = new NpgsqlConnection(connString);
-            var cmd = new NpgsqlCommand("INSERT INTO accessory_fee (client_id, accessory_id, payment_date, quantity) VALUES ($1, $2, $3, $4)", conn)
-            {
-                Parameters =
-                {
-                    new() { Value = int.Parse(clientId) },
-                    new() { Value = int.Parse(accessoryId) },
-                    new() { Value = DateTime.Parse(date) },
-                    new() { Value = int.Parse(quantity) }
-                }
-            };
+            var cmd = InsertData.GenerateCommand(accessoryFee); 
 
             conn.Open();
+            cmd.Connection = conn;
             var executor = new CommandExecutor(conn);
-            if (executor.ExecuteCommand(cmd, mainForm.dataGridView1))
+            var dataTable = new DataTable();
+            if (executor.ExecuteCommand(cmd, out dataTable))
             {
                 MessageBox.Show("Запис про аксесуар було додано до системи");
+                mainForm.dataGridView1.DataSource = dataTable;
                 this.Close();
             }
         }

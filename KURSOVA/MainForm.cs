@@ -39,7 +39,7 @@ namespace Kursova
 
         private void SqlConnectionReader()
         {
-            _dataTableHandler.UpdateTableView("client");
+            _dataTableHandler.UpdateTableView("client", this);
             _comboBoxHandler.UpdateComboBox(clientFields);
             _comboBoxHandler.PopulateColumnsComboBox("client", connString);
         }
@@ -51,7 +51,7 @@ namespace Kursova
                 checkbox.Checked = false;
             }
             checkedTable.Checked = true;
-            _dataTableHandler.UpdateTableView(tableName);
+            _dataTableHandler.UpdateTableView(tableName, this);
             _comboBoxHandler.UpdateComboBox(fields);
             _comboBoxHandler.PopulateColumnsComboBox(tableName, connString);
         }
@@ -69,15 +69,17 @@ namespace Kursova
             var field = comboBox.SelectedItem.ToString();
             var value = valueTextBox.Text;
             var table = GetSelectedTableName();
+            var dataTable = new DataTable();
 
             if (string.IsNullOrEmpty(value))
             {
-                _dataTableHandler.UpdateTableView(table);
+                _dataTableHandler.UpdateTableView(table, this);
                 return;
             }
 
             var command = _commandExecutor.CreateSearchCommand(table, field, value);
-            _commandExecutor.ExecuteCommand(command, dataGridView1);
+            _commandExecutor.ExecuteCommand(command, out dataTable);
+            this.dataGridView1.DataSource = dataTable;
         }
 
         private void addRecordButton_Click(object sender, EventArgs e)
@@ -87,7 +89,7 @@ namespace Kursova
 
             var addForm = FormFactory.CreateForm(checkedMenuItem, connString, this);
             addForm?.ShowDialog();
-            _dataTableHandler.UpdateTableView(checkedMenuItem.Text.ToLower());
+            _dataTableHandler.UpdateTableView(checkedMenuItem.Text.ToLower(), this);
             _comboBoxHandler.UpdateComboBox(GetFieldsForTable(checkedMenuItem));
         }
 
@@ -103,7 +105,7 @@ namespace Kursova
                 var table = GetSelectedTableName();
 
                 _commandExecutor.DeleteRecord(table, id);
-                _dataTableHandler.UpdateTableView(table);
+                _dataTableHandler.UpdateTableView(table, this);
             }
             else
             {
@@ -125,7 +127,7 @@ namespace Kursova
             }
 
             _commandExecutor.UpdateRecord(table, column, id, newValue);
-            _dataTableHandler.UpdateTableView(table);
+            _dataTableHandler.UpdateTableView(table, this);
         }
 
         private ToolStripMenuItem GetCheckedMenuItem()

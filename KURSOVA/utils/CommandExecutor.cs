@@ -13,16 +13,15 @@ namespace Kursova.utils
             _conn = conn;
         }
 
-        public bool ExecuteCommand(NpgsqlCommand command, DataGridView dataGridView)
+        public bool ExecuteCommand(NpgsqlCommand command, out DataTable dataTable)
         {
+            dataTable = new DataTable();
             try
             {
                 var reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    var dataTable = new DataTable();
                     dataTable.Load(reader);
-                    dataGridView.DataSource = dataTable;
                 }
                 return true;
             }
@@ -51,7 +50,7 @@ namespace Kursova.utils
             _conn.Open();
             var command = new NpgsqlCommand($"DELETE FROM {table} WHERE id = @id", _conn);
             command.Parameters.AddWithValue("id", id);
-            ExecuteCommand(command, null);
+            ExecuteCommand(command, out _);
         }
 
         public void UpdateRecord(string table, string column, string id, string newValue)
@@ -61,7 +60,7 @@ namespace Kursova.utils
                 ? new NpgsqlCommand($"UPDATE {table} SET {column} = '{newValue}' WHERE id = @id", _conn)
                 : new NpgsqlCommand($"UPDATE {table} SET {column} = {newValue} WHERE id = @id", _conn);
             command.Parameters.AddWithValue("id", int.Parse(id));
-            ExecuteCommand(command, null);
+            ExecuteCommand(command, out _);
         }
     }
 }

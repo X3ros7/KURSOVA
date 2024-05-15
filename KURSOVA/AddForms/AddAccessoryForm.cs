@@ -1,4 +1,5 @@
 ﻿using Kursova.utils;
+using Kursova.Models;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -39,14 +40,19 @@ namespace Kursova
                 return;
             }
 
+            var accessory = new Accessory(0, name, type, brand, int.Parse(price), double.Parse(price));
+
             NpgsqlConnection conn = new NpgsqlConnection(connString);
-            NpgsqlCommand cmd = new($"INSERT INTO \r\n\taccessory(type, brand, name, price, quantity)\r\nVALUES\r\n\t('{type}', '{brand}', '{name}', '{double.Parse(price)}', '{int.Parse(quantity)}');", conn);
+            NpgsqlCommand cmd = InsertData.GenerateCommand(accessory);
             
             conn.Open();
+            cmd.Connection = conn;
             var executor = new CommandExecutor(conn);
-            if (executor.ExecuteCommand(cmd, MainForm.dataGridView1))
+            var dataTable = new DataTable();
+            if (executor.ExecuteCommand(cmd, out dataTable))
             {
                 MessageBox.Show("Запис про придбання аксесуару було додано до системи");
+                MainForm.dataGridView1.DataSource = dataTable;
                 this.Close();
             }
         }

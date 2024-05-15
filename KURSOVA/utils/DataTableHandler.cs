@@ -17,11 +17,13 @@ namespace Kursova.utils
             _executor = new CommandExecutor(conn);
         }
 
-        public void UpdateTableView(string table)
+        public void UpdateTableView(string table, MainForm mainForm)
         {
             if (_conn.State != ConnectionState.Open) _conn.Open();
             var command = new NpgsqlCommand($"SELECT * FROM {table} ORDER BY 1", _conn);
-            _executor.ExecuteCommand(command, _dataGridView);
+            var dataTable = new DataTable();
+            _executor.ExecuteCommand(command, out dataTable);
+            mainForm.dataGridView1.DataSource = dataTable;
         }
     }
 }

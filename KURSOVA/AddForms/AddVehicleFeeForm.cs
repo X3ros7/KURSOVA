@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Xml.Linq;
 using Kursova.utils;
+using Kursova.Models;
 
 namespace Kursova
 {
@@ -39,14 +40,19 @@ namespace Kursova
                 return;
             }
 
+            var vehicleFee = new VehicleFee(0, int.Parse(clientId), int.Parse(vehicleId), DateTime.Parse(date), double.Parse(price));
+
             NpgsqlConnection conn = new NpgsqlConnection(connString);
-            NpgsqlCommand cmd = new($"INSERT INTO\r\n\tvehicle_fee(client_id, vehicle_id, payment_date, price)\r\nVALUES\r\n\t({int.Parse(clientId)}, {int.Parse(vehicleId)}, '{DateTime.Parse(date)}', {double.Parse(price)});", conn);
+            NpgsqlCommand cmd = InsertData.GenerateCommand(vehicleFee);
             
             conn.Open();
+            cmd.Connection = conn;
             var executor = new CommandExecutor(conn);
-            if (executor.ExecuteCommand(cmd, mainForm.dataGridView1))
+            var dataTable = new DataTable();
+            if (executor.ExecuteCommand(cmd, out dataTable))
             {
                 MessageBox.Show("Договір про придбання авто був доданий до системи");
+                mainForm.dataGridView1.DataSource = dataTable;
                 this.Close();
             }
         }
