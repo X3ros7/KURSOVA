@@ -41,8 +41,11 @@ namespace Kursova
                 }
             };
 
+            conn.Open();
             var executor = new CommandExecutor(conn);
             executor.ExecuteCommand(cmd, mainForm.dataGridView1);
+            MessageBox.Show("Запис про аксесуар було додано до системи");
+            this.Close();
         }
     }
 }
