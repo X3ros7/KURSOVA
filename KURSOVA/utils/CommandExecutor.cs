@@ -41,7 +41,7 @@ namespace Kursova.utils
         public NpgsqlCommand CreateSearchCommand(string table, string field, string value)
         {
             _conn.Open();
-            return !int.TryParse(value, out _) && !double.TryParse(value, out _) && !DateTime.TryParse(value, out _)
+            return !int.TryParse(value, out _) || !double.TryParse(value, out _) || !DateTime.TryParse(value, out _)
                 ? new NpgsqlCommand($"SELECT * FROM {table} WHERE {field} = '{value}' ORDER BY 1;", _conn)
                 : new NpgsqlCommand($"SELECT * FROM {table} WHERE {field} = {value} ORDER BY 1;", _conn);
         }
@@ -57,7 +57,7 @@ namespace Kursova.utils
         public void UpdateRecord(string table, string column, string id, string newValue)
         {
             _conn.Open();
-            var command = !int.TryParse(newValue, out _) && !double.TryParse(newValue, out _) && !DateTime.TryParse(newValue, out _)
+            var command = !int.TryParse(newValue, out _) || !double.TryParse(newValue, out _) || !DateTime.TryParse(newValue, out _)
                 ? new NpgsqlCommand($"UPDATE {table} SET {column} = '{newValue}' WHERE id = @id", _conn)
                 : new NpgsqlCommand($"UPDATE {table} SET {column} = {newValue} WHERE id = @id", _conn);
             command.Parameters.AddWithValue("id", int.Parse(id));
