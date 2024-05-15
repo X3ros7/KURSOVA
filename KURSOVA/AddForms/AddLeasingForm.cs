@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Xml.Linq;
+using Kursova.utils;
 
 namespace Kursova
 {
@@ -49,29 +50,14 @@ namespace Kursova
                     new() { Value = DateTime.Parse(endDate) }
                 }
             };
-            
-            try
+
+            conn.Open();
+            var executor = new CommandExecutor(conn);
+
+            if (executor.ExecuteCommand(cmd, mainForm.dataGridView1))
             {
-                conn.Open();
-                cmd.CommandType = System.Data.CommandType.Text;
-                NpgsqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    DataTable dataTable = new DataTable();
-                    dataTable.Load(reader);
-                    mainForm.dataGridView1.DataSource = dataTable;
-                }
-                MessageBox.Show("Запис про лізинг авто було додано до системи");
+                MessageBox.Show("Запис про аксесуар було додано до системи");
                 this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                cmd.Dispose();
-                conn.Close();
             }
         }
     }

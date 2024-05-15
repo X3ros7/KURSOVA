@@ -13,7 +13,7 @@ namespace Kursova.utils
             _conn = conn;
         }
 
-        public void ExecuteCommand(NpgsqlCommand command, DataGridView dataGridView)
+        public bool ExecuteCommand(NpgsqlCommand command, DataGridView dataGridView)
         {
             try
             {
@@ -24,10 +24,12 @@ namespace Kursova.utils
                     dataTable.Load(reader);
                     dataGridView.DataSource = dataTable;
                 }
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return false;
             }
             finally
             {
