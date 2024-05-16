@@ -14,7 +14,6 @@ namespace Kursova
         private readonly DataTableHandler _dataTableHandler;
         private readonly ComboBoxHandler _comboBoxHandler;
         private readonly CommandExecutor _commandExecutor;
-        private string SelectedTable = "";
 
         #region Table's columns region
         private readonly string[] clientFields = { "id", "name", "email", "phone_number" };
@@ -69,9 +68,9 @@ namespace Kursova
 
         private void addRecordButton_Click(object sender, EventArgs e)
         {
-            var addForm = FormFactory.CreateForm(SelectedTable, _connString, this);
+            var addForm = FormFactory.CreateForm(GetSelectedTableName(), _connString, this);
             addForm?.ShowDialog();
-            UpdateUI(SelectedTable, GetFieldsForTable());
+            UpdateUI(GetSelectedTableName(), GetFieldsForTable());
         }
 
         private void deleteRecordButton_Click(object sender, EventArgs e)
@@ -109,14 +108,32 @@ namespace Kursova
             _commandExecutor.UpdateRecord(table, column, id, newValue);
         }
 
+        private ToolStripMenuItem GetCheckedMenuItem()
+        {
+            foreach (ToolStripMenuItem item in menuStrip1.Items)
+            {
+                if (item.Checked) return item;
+            }
+            return null;
+        }
+
         private string GetSelectedTableName()
         {
-            return SelectedTable.ToLower();
+            var checkedMenuItem = GetCheckedMenuItem();
+            return checkedMenuItem?.Text.ToLower() switch
+            {
+                "êë³ºíòè" => "client",
+                "àâòîìîá³ë³" => "vehicle",
+                "àêñåñóàğè" => "accessory",
+                "òåñò-äğàéâ" => "detailed_test_drive_record",
+                "äîãîâ³ğ" => "detailed_vehicle_fee",
+                _ => null
+            };
         }
 
         private string[] GetFieldsForTable()
         {
-            return SelectedTable switch
+            return GetSelectedTableName() switch
             {
                 "êë³ºíòè" => clientFields,
                 "àâòîìîá³ë³" => vehicleFields,
@@ -129,52 +146,72 @@ namespace Kursova
             };
         }
 
+        private void UncheckMenus()
+        {
+            foreach (ToolStripMenuItem item in menuStrip1.Items)
+            {
+                item.Checked = false;
+            }
+        }
+
         private void êë³ºíòèToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SelectedTable = "client";
             UpdateUI("client", clientFields);
+            UncheckMenus();
+            clientToolStripMenu.Checked = true;
         }
 
         private void àâòîìîá³ë³ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SelectedTable = "vehicle";
             UpdateUI("vehicle", vehicleFields);
+            UncheckMenus();
+            vehicleToolStripMenu.Checked = true;
         }
 
         private void àêñåñóàğèToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SelectedTable = "accessory";
             UpdateUI("accessory", accessoryFields);
+            UncheckMenus();
+            accessoryToolStripMenuItem.Checked = true;
         }
 
         private void ïğèäáàííÿÀâòîToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SelectedTable = "vehicle_fee";
-            UpdateUI("vehicle_fee", vehicleFeeFields);
+            UpdateUI("detailed_vehicle_fee", vehicleFeeFields);
+            UncheckMenus();
+            vehicleFeeToolStripMenuItem.Checked = true;
         }
 
         private void ïğèäáàííÿÀêñåñóàğóToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SelectedTable = "accessory_fee";
-            UpdateUI("accessory_fee", accessoryFeeFields);
+            UpdateUI("detailed_accessory_fee", accessoryFeeFields);
+            UncheckMenus();
+            accessoryToolStripMenuItem.Checked= true;
         }
 
         private void ë³çèíãÀâòîìîá³ëÿToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SelectedTable = "leasing_record";
-            UpdateUI("leasing_record", leasingRecordFields);
+            UpdateUI("detailed_leasing_record", leasingRecordFields);
+            UncheckMenus();
+            leasingRecordToolStripMenuItem.Checked = true;
         }
 
         private void òåñòäğàéâToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SelectedTable = "test_drive_record";
-            UpdateUI("test_drive_record", testDriveRecordFields);
+            UpdateUI("detailed_test_drive_record", testDriveRecordFields);
+            UncheckMenus();
+            òåñòäğàéâToolStripMenuItem.Checked = true;
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             base.OnFormClosed(e);
             _conn.Close();
+        }
+
+        private void ïîøóêToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

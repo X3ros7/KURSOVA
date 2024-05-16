@@ -31,7 +31,7 @@
             dataGridView1 = new DataGridView();
             menuStrip1 = new MenuStrip();
             clientToolStripMenu = new ToolStripMenuItem();
-            vehicleToolStripMenuItem = new ToolStripMenuItem();
+            vehicleToolStripMenu = new ToolStripMenuItem();
             accessoryToolStripMenuItem = new ToolStripMenuItem();
             recordsToolStripMenuItem = new ToolStripMenuItem();
             vehicleFeeToolStripMenuItem = new ToolStripMenuItem();
@@ -56,25 +56,28 @@
             idTextBox = new TextBox();
             columnsComboBox = new ComboBox();
             label3 = new Label();
+            menuStrip2 = new MenuStrip();
+            пошукToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            menuStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 27);
+            dataGridView1.Location = new Point(12, 51);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(534, 330);
+            dataGridView1.Size = new Size(534, 306);
             dataGridView1.TabIndex = 0;
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { clientToolStripMenu, vehicleToolStripMenuItem, accessoryToolStripMenuItem, recordsToolStripMenuItem, тестдрайвToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { clientToolStripMenu, vehicleToolStripMenu, accessoryToolStripMenuItem, recordsToolStripMenuItem, тестдрайвToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 24);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
             menuStrip1.TabIndex = 1;
@@ -89,14 +92,14 @@
             clientToolStripMenu.Text = "Клієнти";
             clientToolStripMenu.Click += клієнтиToolStripMenuItem_Click;
             // 
-            // vehicleToolStripMenuItem
+            // vehicleToolStripMenu
             // 
-            vehicleToolStripMenuItem.Checked = true;
-            vehicleToolStripMenuItem.CheckState = CheckState.Checked;
-            vehicleToolStripMenuItem.Name = "vehicleToolStripMenuItem";
-            vehicleToolStripMenuItem.Size = new Size(81, 20);
-            vehicleToolStripMenuItem.Text = "Автомобілі";
-            vehicleToolStripMenuItem.Click += автомобіліToolStripMenuItem_Click;
+            vehicleToolStripMenu.Checked = true;
+            vehicleToolStripMenu.CheckState = CheckState.Checked;
+            vehicleToolStripMenu.Name = "vehicleToolStripMenu";
+            vehicleToolStripMenu.Size = new Size(81, 20);
+            vehicleToolStripMenu.Text = "Автомобілі";
+            vehicleToolStripMenu.Click += автомобіліToolStripMenuItem_Click;
             // 
             // accessoryToolStripMenuItem
             // 
@@ -317,6 +320,22 @@
             label3.TabIndex = 6;
             label3.Text = "Оновлення запису";
             // 
+            // menuStrip2
+            // 
+            menuStrip2.Items.AddRange(new ToolStripItem[] { пошукToolStripMenuItem });
+            menuStrip2.Location = new Point(0, 0);
+            menuStrip2.Name = "menuStrip2";
+            menuStrip2.Size = new Size(800, 24);
+            menuStrip2.TabIndex = 7;
+            menuStrip2.Text = "menuStrip2";
+            // 
+            // пошукToolStripMenuItem
+            // 
+            пошукToolStripMenuItem.Name = "пошукToolStripMenuItem";
+            пошукToolStripMenuItem.Size = new Size(58, 20);
+            пошукToolStripMenuItem.Text = "Пошук";
+            пошукToolStripMenuItem.Click += пошукToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -328,6 +347,7 @@
             Controls.Add(panel1);
             Controls.Add(dataGridView1);
             Controls.Add(menuStrip1);
+            Controls.Add(menuStrip2);
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
             Text = "Carshop control system";
@@ -339,6 +359,8 @@
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            menuStrip2.ResumeLayout(false);
+            menuStrip2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -366,12 +388,14 @@
         private Label label4;
         private TextBox newValueTextBox;
         private Label label6;
-        private ToolStripMenuItem vehicleToolStripMenuItem;
+        private ToolStripMenuItem vehicleToolStripMenu;
         private ToolStripMenuItem accessoryToolStripMenuItem;
         private ToolStripMenuItem recordsToolStripMenuItem;
         private ToolStripMenuItem vehicleFeeToolStripMenuItem;
         private ToolStripMenuItem accessoryFeeToolStripMenuItem;
         private ToolStripMenuItem leasingRecordToolStripMenuItem;
         private ToolStripMenuItem тестдрайвToolStripMenuItem;
+        private MenuStrip menuStrip2;
+        private ToolStripMenuItem пошукToolStripMenuItem;
     }
 }
