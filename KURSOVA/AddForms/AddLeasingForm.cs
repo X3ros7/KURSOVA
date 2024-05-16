@@ -39,12 +39,11 @@ namespace Kursova
             conn.Open();
             cmd.Connection = conn;
             var executor = new CommandExecutor(conn);
-            if (executor.ExecuteCommand(cmd, out DataTable dataTable))
-            {
+            executor.ExecuteCommand(cmd, out DataTable dataTable);
+
                 MessageBox.Show("Запис про аксесуар було додано до системи");
                 mainForm.dataGridView1.DataSource = dataTable;
                 this.Close();
-            }
         }
     }
 }

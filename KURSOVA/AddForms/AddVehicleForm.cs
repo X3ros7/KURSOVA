@@ -54,7 +54,7 @@ namespace Kursova
             cmd.Connection = conn;
             var executor = new CommandExecutor(conn);
             var dataTable = new DataTable();
-            if (executor.ExecuteCommand(cmd, out dataTable))
+            executor.ExecuteCommand(cmd, out dataTable);
             {
                 MessageBox.Show("Запис про авто був доданий до системи");
                 mainForm.dataGridView1.DataSource = dataTable;

@@ -1,38 +1,41 @@
 ﻿using Npgsql;
-using System.Data;
 using System.Windows.Forms;
 
 namespace Kursova.utils
 {
-    public class ComboBoxHandler
+    internal class ComboBoxHandler
     {
         private readonly ComboBox _columnsComboBox;
-        private readonly ComboBox _fieldsComboBox;
+        private readonly ComboBox _comboBox;
 
-        public ComboBoxHandler(ComboBox columnsComboBox, ComboBox fieldsComboBox)
+        public ComboBoxHandler(ComboBox columnsComboBox, ComboBox comboBox)
         {
             _columnsComboBox = columnsComboBox;
-            _fieldsComboBox = fieldsComboBox;
-        }
-
-        public void PopulateColumnsComboBox(string tableName, string connString)
-        {
-            _columnsComboBox.Items.Clear();
-            using var conn = new NpgsqlConnection(connString);
-            conn.Open();
-            var columns = conn.GetSchema("Columns", new[] { null, null, tableName });
-            foreach (DataRow row in columns.Rows)
-            {
-                _columnsComboBox.Items.Add(row["column_name"]);
-            }
-            _columnsComboBox.SelectedIndex = 0;
+            _comboBox = comboBox;
         }
 
         public void UpdateComboBox(string[] fields)
         {
-            _fieldsComboBox.Items.Clear();
-            _fieldsComboBox.Items.AddRange(fields);
-            _fieldsComboBox.SelectedIndex = 0;
+            _comboBox.Items.Clear();
+            _comboBox.Items.AddRange(fields);
+        }
+
+        public void PopulateColumnsComboBox(string tableName, string connectionString)
+        {
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = $"SELECT column_name FROM information_schema.columns WHERE table_name = '{tableName}'";
+                using (var cmd = new NpgsqlCommand(query, conn))
+                using (var reader = cmd.ExecuteReader())
+                {
+                    _columnsComboBox.Items.Clear();
+                    while (reader.Read())
+                    {
+                        _columnsComboBox.Items.Add(reader.GetString(0));
+                    }
+                }
+            }
         }
     }
 }

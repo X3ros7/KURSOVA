@@ -50,12 +50,10 @@ namespace Kursova
             cmd.Connection = conn;
             var executor = new CommandExecutor(conn);
             var dataTable = new DataTable();
-            if (executor.ExecuteCommand(cmd, out dataTable))
-            {
-                MessageBox.Show("Запис про придбання аксесуару було додано до системи");
-                MainForm.dataGridView1.DataSource = dataTable;
-                this.Close();
-            }
+            executor.ExecuteCommand(cmd, out dataTable);
+            MessageBox.Show("Запис про придбання аксесуару було додано до системи");
+            MainForm.dataGridView1.DataSource = dataTable;
+            this.Close();
         }
     }
 }

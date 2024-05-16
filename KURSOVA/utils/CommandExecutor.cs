@@ -1,66 +1,50 @@
 ﻿using Npgsql;
+using System;
 using System.Data;
-using System.Windows.Forms;
 
 namespace Kursova.utils
 {
-    public class CommandExecutor
+    internal class CommandExecutor
     {
-        private readonly NpgsqlConnection _conn;
+        private readonly NpgsqlConnection _connection;
 
-        public CommandExecutor(NpgsqlConnection conn)
+        public CommandExecutor(NpgsqlConnection connection)
         {
-            _conn = conn;
+            _connection = connection;
         }
 
-        public bool ExecuteCommand(NpgsqlCommand command, out DataTable dataTable)
+        public void ExecuteCommand(NpgsqlCommand command, out DataTable dataTable)
         {
-            dataTable = new DataTable();
-            try
+            using (var adapter = new NpgsqlDataAdapter(command))
             {
-                var reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    dataTable.Load(reader);
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
-            finally
-            {
-                command.Dispose();
-                _conn.Close();
+                dataTable = new DataTable();
+                adapter.Fill(dataTable);
             }
         }
 
         public NpgsqlCommand CreateSearchCommand(string table, string field, string value)
         {
-            _conn.Open();
-            return !int.TryParse(value, out _) || !double.TryParse(value, out _) || !DateTime.TryParse(value, out _)
-                ? new NpgsqlCommand($"SELECT * FROM {table} WHERE {field} = '{value}' ORDER BY 1;", _conn)
-                : new NpgsqlCommand($"SELECT * FROM {table} WHERE {field} = {value} ORDER BY 1;", _conn);
+            string query = $"SELECT * FROM {table} WHERE {field} = @value";
+            var command = new NpgsqlCommand(query, _connection);
+            command.Parameters.AddWithValue("value", value);
+            return command;
         }
 
         public void DeleteRecord(string table, object id)
         {
-            _conn.Open();
-            var command = new NpgsqlCommand($"DELETE FROM {table} WHERE id = @id", _conn);
+            string query = $"DELETE FROM {table} WHERE id = @id";
+            var command = new NpgsqlCommand(query, _connection);
             command.Parameters.AddWithValue("id", id);
-            ExecuteCommand(command, out _);
+            command.ExecuteNonQuery();
         }
 
         public void UpdateRecord(string table, string column, string id, string newValue)
         {
-            _conn.Open();
-            var command = !int.TryParse(newValue, out _) || !double.TryParse(newValue, out _) || !DateTime.TryParse(newValue, out _)
-                ? new NpgsqlCommand($"UPDATE {table} SET {column} = '{newValue}' WHERE id = @id", _conn)
-                : new NpgsqlCommand($"UPDATE {table} SET {column} = {newValue} WHERE id = @id", _conn);
-            command.Parameters.AddWithValue("id", int.Parse(id));
-            ExecuteCommand(command, out _);
+            string query = $"UPDATE {table} SET {column} = @newValue WHERE id = @id";
+            var command = new NpgsqlCommand(query, _connection);
+            command.Parameters.AddWithValue("newValue", newValue);
+            command.Parameters.AddWithValue("id", id);
+            command.ExecuteNonQuery();
         }
     }
 }

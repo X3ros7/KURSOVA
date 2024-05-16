@@ -46,7 +46,7 @@ namespace Kursova
             cmd.Connection = conn;
             var executor = new CommandExecutor(conn);
             var dataTable = new DataTable();
-            if (executor.ExecuteCommand(cmd, out dataTable))
+            executor.ExecuteCommand(cmd, out dataTable);
             {
                 MessageBox.Show("Запис про нового клієнта було додано до системи");
                 MainForm.dataGridView1.DataSource = dataTable;

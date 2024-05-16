@@ -5,17 +5,17 @@ namespace Kursova.utils
 {
     public static class FormFactory
     {
-        public static Form CreateForm(ToolStripMenuItem checkedMenuItem, string connString, MainForm mainForm)
+        public static Form CreateForm(string formType, string connString, MainForm mainForm)
         {
-            return checkedMenuItem.Name switch
+            return formType switch
             {
-                "clientTable" => new AddClientForm(connString, mainForm),
-                "vehicleTable" => new AddVehicleForm(connString, mainForm),
-                "testdriverecordTable" => new AddTestDriveForm(connString, mainForm),
-                "accessoryTable" => new AddAccessoryForm(connString, mainForm),
-                "vehiclefeeTable" => new AddVehicleFeeForm(connString, mainForm),
-                "accessoryfeeTable" => new AddAccessoryFeeForm(connString, mainForm),
-                "leasingrecordTable" => new AddLeasingForm(connString, mainForm),
+                "client" => new AddClientForm(connString, mainForm),
+                "vehicle" => new AddVehicleForm(connString, mainForm),
+                "test_drive_record" => new AddTestDriveForm(connString, mainForm),
+                "accessory" => new AddAccessoryForm(connString, mainForm),
+                "accessory_fee" => new AddVehicleFeeForm(connString, mainForm),
+                "vehicle_fee" => new AddAccessoryFeeForm(connString, mainForm),
+                "leasing_record" => new AddLeasingForm(connString, mainForm),
                 _ => throw new Exception("Invalid form argument!")
             }; ;
         }

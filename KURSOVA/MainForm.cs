@@ -1,59 +1,58 @@
+using Kursova.services;
 using Kursova.utils;
 using Npgsql;
-using System.Collections.Generic;
+using System;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Kursova
 {
     public partial class MainForm : Form
     {
-        private string connString;
-        private NpgsqlConnection conn;
+        private readonly string _connString;
+        private readonly NpgsqlConnection _conn;
         private readonly DataTableHandler _dataTableHandler;
         private readonly ComboBoxHandler _comboBoxHandler;
         private readonly CommandExecutor _commandExecutor;
+        private string SelectedTable = "";
 
         #region Table's columns region
-        private string[] clientFields = { "id", "name", "email", "phone_number" };
-        private string[] vehicleFields = { "id", "brand", "name", "body_type", "body_color", "transmission", "fuel_type", "hp", "product_year", "product_country", "price" };
-        private string[] accessoryFields = { "id", "type", "brand", "name", "price", "quantity" };
-        private string[] testDriveRecordFields = { "id", "client_id", "vehicle_id", "testdrive_date", "duration" };
-        private string[] vehicleFeeFields = { "id", "client_id", "vehicle_id", "payment_date", "price" };
-        private string[] accessoryFeeFields = { "id", "client_id", "accessory_id", "payment_date", "quantity" };
-        private string[] leasingRecordFields = { "id", "client_id", "vehicle_id", "record_date", "end_date" };
+        private readonly string[] clientFields = { "id", "name", "email", "phone_number" };
+        private readonly string[] vehicleFields = { "id", "brand", "name", "body_type", "body_color", "transmission", "fuel_type", "hp", "product_year", "product_country", "price" };
+        private readonly string[] accessoryFields = { "id", "type", "brand", "name", "price", "quantity" };
+        private readonly string[] testDriveRecordFields = { "id", "client_id", "vehicle_id", "testdrive_date", "duration" };
+        private readonly string[] vehicleFeeFields = { "id", "client_id", "vehicle_id", "payment_date", "price" };
+        private readonly string[] accessoryFeeFields = { "id", "client_id", "accessory_id", "payment_date", "quantity" };
+        private readonly string[] leasingRecordFields = { "id", "client_id", "vehicle_id", "record_date", "end_date" };
         #endregion
 
         public MainForm(NpgsqlConnection conn, string connString)
         {
             InitializeComponent();
-            this.connString = connString;
-            this.conn = conn;
-            _dataTableHandler = new DataTableHandler(this.conn);
+            _connString = connString;
+            _conn = conn;
+            _commandExecutor = new CommandExecutor(_conn);
+            _dataTableHandler = new DataTableHandler(_conn);
             _comboBoxHandler = new ComboBoxHandler(columnsComboBox, comboBox);
-            _commandExecutor = new CommandExecutor(this.conn);
 
             FormInitialization();
         }
 
         private void FormInitialization()
         {
-            _dataTableHandler.UpdateTableView("client", this);
-            _comboBoxHandler.UpdateComboBox(clientFields);
-            _comboBoxHandler.PopulateColumnsComboBox("client", connString);
+            UpdateUI("client", clientFields);
         }
 
-        private void ToolStripMenuItem_Click(string tableName, string[] fields)
+        private void UpdateUI(string tableName, string[] fields)
         {
             _dataTableHandler.UpdateTableView(tableName, this);
             _comboBoxHandler.UpdateComboBox(fields);
-            _comboBoxHandler.PopulateColumnsComboBox(tableName, connString);
+            _comboBoxHandler.PopulateColumnsComboBox(tableName, _connString);
         }
 
         private void searchBox_Click(object sender, EventArgs e)
         {
-            var field = comboBox.SelectedItem.ToString();
+            var field = comboBox.SelectedItem?.ToString();
             var value = valueTextBox.Text;
             var table = GetSelectedTableName();
 
@@ -65,18 +64,14 @@ namespace Kursova
 
             var command = _commandExecutor.CreateSearchCommand(table, field, value);
             _commandExecutor.ExecuteCommand(command, out DataTable dataTable);
-            this.dataGridView1.DataSource = dataTable;
+            dataGridView1.DataSource = dataTable;
         }
 
         private void addRecordButton_Click(object sender, EventArgs e)
         {
-            var checkedMenuItem = GetCheckedMenuItem();
-            if (checkedMenuItem == null) return;
-
-            var addForm = FormFactory.CreateForm(checkedMenuItem, connString, this);
+            var addForm = FormFactory.CreateForm(SelectedTable, _connString, this);
             addForm?.ShowDialog();
-            _dataTableHandler.UpdateTableView(checkedMenuItem.Text.ToLower(), this);
-            _comboBoxHandler.UpdateComboBox(GetFieldsForTable(checkedMenuItem));
+            UpdateUI(SelectedTable, GetFieldsForTable());
         }
 
         private void deleteRecordButton_Click(object sender, EventArgs e)
@@ -91,7 +86,6 @@ namespace Kursova
                 var table = GetSelectedTableName();
 
                 _commandExecutor.DeleteRecord(table, id);
-                _dataTableHandler.UpdateTableView(table, this);
             }
             else
             {
@@ -113,78 +107,74 @@ namespace Kursova
             }
 
             _commandExecutor.UpdateRecord(table, column, id, newValue);
-            _dataTableHandler.UpdateTableView(table, this);
-        }
-
-        private ToolStripMenuItem GetCheckedMenuItem()
-        {
-            foreach (ToolStripMenuItem item in clientToolStripMenu.DropDownItems)
-            {
-                if (item.Checked) return item;
-            }
-            return null;
         }
 
         private string GetSelectedTableName()
         {
-            var checkedMenuItem = GetCheckedMenuItem();
-            return checkedMenuItem?.Text.ToLower();
+            return SelectedTable.ToLower();
         }
 
-        private string[] GetFieldsForTable(ToolStripMenuItem menuItem)
+        private string[] GetFieldsForTable()
         {
-            return menuItem.Name switch
+            return SelectedTable switch
             {
-                "clientTable" => clientFields,
-                "vehicleTable" => vehicleFields,
-                "testdriverecordTable" => testDriveRecordFields,
-                "accessoryTable" => accessoryFields,
-                "vehiclefeeTable" => vehicleFeeFields,
-                "accessoryfeeTable" => accessoryFeeFields,
-                "leasingrecordTable" => leasingRecordFields,
+                "клієнти" => clientFields,
+                "автомобілі" => vehicleFields,
+                "аксесуари" => accessoryFields,
+                "придбання авто" => vehicleFeeFields,
+                "придбання аксесуару" => accessoryFeeFields,
+                "лізинг автомобіля" => leasingRecordFields,
+                "тест-драйв" => testDriveRecordFields,
                 _ => Array.Empty<string>()
             };
+        }
+
+        private void клієнтиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectedTable = "client";
+            UpdateUI("client", clientFields);
+        }
+
+        private void автомобіліToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectedTable = "vehicle";
+            UpdateUI("vehicle", vehicleFields);
+        }
+
+        private void аксесуариToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectedTable = "accessory";
+            UpdateUI("accessory", accessoryFields);
+        }
+
+        private void придбанняАвтоToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectedTable = "vehicle_fee";
+            UpdateUI("vehicle_fee", vehicleFeeFields);
+        }
+
+        private void придбанняАксесуаруToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectedTable = "accessory_fee";
+            UpdateUI("accessory_fee", accessoryFeeFields);
+        }
+
+        private void лізингАвтомобіляToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectedTable = "leasing_record";
+            UpdateUI("leasing_record", leasingRecordFields);
+        }
+
+        private void тестдрайвToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectedTable = "test_drive_record";
+            UpdateUI("test_drive_record", testDriveRecordFields);
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             base.OnFormClosed(e);
-            conn.Close();
-        }
-
-        private void автомобіліToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem_Click("vehicle", vehicleFields);
-        }
-
-        private void аксесуариToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem_Click("accessory", accessoryFields);
-        }
-
-        private void придбанняАвтоToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem_Click("vehicle_fee", vehicleFeeFields);
-        }
-
-        private void придбанняАксесуаруToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem_Click("accessory_fee", accessoryFeeFields);
-        }
-
-        private void лізингАвтомобіляToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem_Click("leasing_record", leasingRecordFields);
-        }
-
-        private void тестдрайвToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem_Click("test_drive_record", testDriveRecordFields);
-        }
-
-        private void clientToolStripMenu_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem_Click("client", testDriveRecordFields);
+            _conn.Close();
         }
     }
 }
