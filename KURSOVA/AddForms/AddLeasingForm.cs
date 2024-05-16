@@ -1,15 +1,5 @@
 ﻿using Npgsql;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using System.Xml.Linq;
 using Kursova.utils;
 using Kursova.Models;
 using Kursova.crud;
@@ -49,8 +39,7 @@ namespace Kursova
             conn.Open();
             cmd.Connection = conn;
             var executor = new CommandExecutor(conn);
-            var dataTable = new DataTable();
-            if (executor.ExecuteCommand(cmd, out dataTable))
+            if (executor.ExecuteCommand(cmd, out DataTable dataTable))
             {
                 MessageBox.Show("Запис про аксесуар було додано до системи");
                 mainForm.dataGridView1.DataSource = dataTable;

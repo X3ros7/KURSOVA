@@ -30,14 +30,14 @@
         {
             dataGridView1 = new DataGridView();
             menuStrip1 = new MenuStrip();
-            tableToolStripMenuItem = new ToolStripMenuItem();
-            clientTable = new ToolStripMenuItem();
-            vehicleTable = new ToolStripMenuItem();
-            accessoryTable = new ToolStripMenuItem();
-            testdriverrecordTable = new ToolStripMenuItem();
-            vehiclefeeTable = new ToolStripMenuItem();
-            accessoryfeeTable = new ToolStripMenuItem();
-            leasingrecordTable = new ToolStripMenuItem();
+            clientToolStripMenu = new ToolStripMenuItem();
+            автомобіліToolStripMenuItem = new ToolStripMenuItem();
+            аксесуариToolStripMenuItem = new ToolStripMenuItem();
+            записToolStripMenuItem = new ToolStripMenuItem();
+            придбанняАвтоToolStripMenuItem = new ToolStripMenuItem();
+            придбанняАксесуаруToolStripMenuItem = new ToolStripMenuItem();
+            лізингАвтомобіляToolStripMenuItem = new ToolStripMenuItem();
+            тестдрайвToolStripMenuItem = new ToolStripMenuItem();
             label1 = new Label();
             panel1 = new Panel();
             valueTextBox = new TextBox();
@@ -73,70 +73,68 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { tableToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { clientToolStripMenu, автомобіліToolStripMenuItem, аксесуариToolStripMenuItem, записToolStripMenuItem, тестдрайвToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
-            // tableToolStripMenuItem
+            // clientToolStripMenu
             // 
-            tableToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clientTable, vehicleTable, accessoryTable, testdriverrecordTable, vehiclefeeTable, accessoryfeeTable, leasingrecordTable });
-            tableToolStripMenuItem.Name = "tableToolStripMenuItem";
-            tableToolStripMenuItem.Size = new Size(65, 20);
-            tableToolStripMenuItem.Text = "Таблиця";
+            clientToolStripMenu.Name = "clientToolStripMenu";
+            clientToolStripMenu.Size = new Size(61, 20);
+            clientToolStripMenu.Text = "Клієнти";
+            clientToolStripMenu.Click += clientToolStripMenu_Click;
             // 
-            // clientTable
+            // автомобіліToolStripMenuItem
             // 
-            clientTable.Checked = true;
-            clientTable.CheckState = CheckState.Checked;
-            clientTable.Name = "clientTable";
-            clientTable.Size = new Size(164, 22);
-            clientTable.Text = "Client";
-            clientTable.Click += clientToolStripMenuItem_Click;
+            автомобіліToolStripMenuItem.Name = "автомобіліToolStripMenuItem";
+            автомобіліToolStripMenuItem.Size = new Size(81, 20);
+            автомобіліToolStripMenuItem.Text = "Автомобілі";
+            автомобіліToolStripMenuItem.Click += автомобіліToolStripMenuItem_Click;
             // 
-            // vehicleTable
+            // аксесуариToolStripMenuItem
             // 
-            vehicleTable.Name = "vehicleTable";
-            vehicleTable.Size = new Size(164, 22);
-            vehicleTable.Text = "Vehicle";
-            vehicleTable.Click += vehicleToolStripMenuItem_Click;
+            аксесуариToolStripMenuItem.Name = "аксесуариToolStripMenuItem";
+            аксесуариToolStripMenuItem.Size = new Size(77, 20);
+            аксесуариToolStripMenuItem.Text = "Аксесуари";
+            аксесуариToolStripMenuItem.Click += аксесуариToolStripMenuItem_Click;
             // 
-            // accessoryTable
+            // записToolStripMenuItem
             // 
-            accessoryTable.Name = "accessoryTable";
-            accessoryTable.Size = new Size(164, 22);
-            accessoryTable.Text = "Accessory";
-            accessoryTable.Click += accessoryToolStripMenuItem_Click;
+            записToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { придбанняАвтоToolStripMenuItem, придбанняАксесуаруToolStripMenuItem, лізингАвтомобіляToolStripMenuItem });
+            записToolStripMenuItem.Name = "записToolStripMenuItem";
+            записToolStripMenuItem.Size = new Size(73, 20);
+            записToolStripMenuItem.Text = "Договори";
             // 
-            // testdriverrecordTable
+            // придбанняАвтоToolStripMenuItem
             // 
-            testdriverrecordTable.Name = "testdriverrecordTable";
-            testdriverrecordTable.Size = new Size(164, 22);
-            testdriverrecordTable.Text = "Test_drive_record";
-            testdriverrecordTable.Click += testdriverecordToolStripMenuItem_Click;
+            придбанняАвтоToolStripMenuItem.Name = "придбанняАвтоToolStripMenuItem";
+            придбанняАвтоToolStripMenuItem.Size = new Size(194, 22);
+            придбанняАвтоToolStripMenuItem.Text = "Придбання авто";
+            придбанняАвтоToolStripMenuItem.Click += придбанняАвтоToolStripMenuItem_Click;
             // 
-            // vehiclefeeTable
+            // придбанняАксесуаруToolStripMenuItem
             // 
-            vehiclefeeTable.Name = "vehiclefeeTable";
-            vehiclefeeTable.Size = new Size(164, 22);
-            vehiclefeeTable.Text = "Vehicle_fee";
-            vehiclefeeTable.Click += vehiclefeeTable_Click;
+            придбанняАксесуаруToolStripMenuItem.Name = "придбанняАксесуаруToolStripMenuItem";
+            придбанняАксесуаруToolStripMenuItem.Size = new Size(194, 22);
+            придбанняАксесуаруToolStripMenuItem.Text = "Придбання аксесуару";
+            придбанняАксесуаруToolStripMenuItem.Click += придбанняАксесуаруToolStripMenuItem_Click;
             // 
-            // accessoryfeeTable
+            // лізингАвтомобіляToolStripMenuItem
             // 
-            accessoryfeeTable.Name = "accessoryfeeTable";
-            accessoryfeeTable.Size = new Size(164, 22);
-            accessoryfeeTable.Text = "Accessory_fee";
-            accessoryfeeTable.Click += accessoryfeeTable_Click;
+            лізингАвтомобіляToolStripMenuItem.Name = "лізингАвтомобіляToolStripMenuItem";
+            лізингАвтомобіляToolStripMenuItem.Size = new Size(194, 22);
+            лізингАвтомобіляToolStripMenuItem.Text = "Лізинг автомобіля";
+            лізингАвтомобіляToolStripMenuItem.Click += лізингАвтомобіляToolStripMenuItem_Click;
             // 
-            // leasingrecordTable
+            // тестдрайвToolStripMenuItem
             // 
-            leasingrecordTable.Name = "leasingrecordTable";
-            leasingrecordTable.Size = new Size(164, 22);
-            leasingrecordTable.Text = "Leasing_record";
-            leasingrecordTable.Click += leasingRecordToolStripMenuItem_Click;
+            тестдрайвToolStripMenuItem.Name = "тестдрайвToolStripMenuItem";
+            тестдрайвToolStripMenuItem.Size = new Size(79, 20);
+            тестдрайвToolStripMenuItem.Text = "Тест-драйв";
+            тестдрайвToolStripMenuItem.Click += тестдрайвToolStripMenuItem_Click;
             // 
             // label1
             // 
@@ -350,14 +348,7 @@
         private TextBox valueTextBox;
         private Button searchButton;
         private ComboBox comboBox;
-        private ToolStripMenuItem tableToolStripMenuItem;
-        private ToolStripMenuItem clientTable;
-        private ToolStripMenuItem vehicleTable;
-        private ToolStripMenuItem accessoryTable;
-        private ToolStripMenuItem testdriverrecordTable;
-        private ToolStripMenuItem vehiclefeeTable;
-        private ToolStripMenuItem accessoryfeeTable;
-        private ToolStripMenuItem leasingrecordTable;
+        private ToolStripMenuItem clientToolStripMenu;
         private Panel panel2;
         private Button addRecordButton;
         private Label label2;
@@ -371,5 +362,12 @@
         private Label label4;
         private TextBox newValueTextBox;
         private Label label6;
+        private ToolStripMenuItem автомобіліToolStripMenuItem;
+        private ToolStripMenuItem аксесуариToolStripMenuItem;
+        private ToolStripMenuItem записToolStripMenuItem;
+        private ToolStripMenuItem придбанняАвтоToolStripMenuItem;
+        private ToolStripMenuItem придбанняАксесуаруToolStripMenuItem;
+        private ToolStripMenuItem лізингАвтомобіляToolStripMenuItem;
+        private ToolStripMenuItem тестдрайвToolStripMenuItem;
     }
 }

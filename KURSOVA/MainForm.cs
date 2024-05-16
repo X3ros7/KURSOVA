@@ -34,42 +34,28 @@ namespace Kursova
             _comboBoxHandler = new ComboBoxHandler(columnsComboBox, comboBox);
             _commandExecutor = new CommandExecutor(this.conn);
 
-            SqlConnectionReader();
+            FormInitialization();
         }
 
-        private void SqlConnectionReader()
+        private void FormInitialization()
         {
             _dataTableHandler.UpdateTableView("client", this);
             _comboBoxHandler.UpdateComboBox(clientFields);
             _comboBoxHandler.PopulateColumnsComboBox("client", connString);
         }
 
-        private void ToolStripMenuItem_Click(ToolStripMenuItem checkedTable, string tableName, string[] fields)
+        private void ToolStripMenuItem_Click(string tableName, string[] fields)
         {
-            foreach (ToolStripMenuItem checkbox in tableToolStripMenuItem.DropDownItems)
-            {
-                checkbox.Checked = false;
-            }
-            checkedTable.Checked = true;
             _dataTableHandler.UpdateTableView(tableName, this);
             _comboBoxHandler.UpdateComboBox(fields);
             _comboBoxHandler.PopulateColumnsComboBox(tableName, connString);
         }
-
-        private void clientToolStripMenuItem_Click(object sender, EventArgs e) => ToolStripMenuItem_Click(clientTable, "client", clientFields);
-        private void vehicleToolStripMenuItem_Click(object sender, EventArgs e) => ToolStripMenuItem_Click(vehicleTable, "vehicle", vehicleFields);
-        private void testdriverecordToolStripMenuItem_Click(object sender, EventArgs e) => ToolStripMenuItem_Click(testdriverrecordTable, "test_drive_record", testDriveRecordFields);
-        private void accessoryToolStripMenuItem_Click(object sender, EventArgs e) => ToolStripMenuItem_Click(accessoryTable, "accessory", accessoryFields);
-        private void vehiclefeeTable_Click(object sender, EventArgs e) => ToolStripMenuItem_Click(vehiclefeeTable, "vehicle_fee", vehicleFeeFields);
-        private void accessoryfeeTable_Click(object sender, EventArgs e) => ToolStripMenuItem_Click(accessoryfeeTable, "accessory_fee", accessoryFeeFields);
-        private void leasingRecordToolStripMenuItem_Click(object sender, EventArgs e) => ToolStripMenuItem_Click(leasingrecordTable, "leasing_record", leasingRecordFields);
 
         private void searchBox_Click(object sender, EventArgs e)
         {
             var field = comboBox.SelectedItem.ToString();
             var value = valueTextBox.Text;
             var table = GetSelectedTableName();
-            var dataTable = new DataTable();
 
             if (string.IsNullOrEmpty(value))
             {
@@ -78,7 +64,7 @@ namespace Kursova
             }
 
             var command = _commandExecutor.CreateSearchCommand(table, field, value);
-            _commandExecutor.ExecuteCommand(command, out dataTable);
+            _commandExecutor.ExecuteCommand(command, out DataTable dataTable);
             this.dataGridView1.DataSource = dataTable;
         }
 
@@ -120,7 +106,7 @@ namespace Kursova
             var id = idTextBox.Text;
             var newValue = newValueTextBox.Text;
 
-            if (string.IsNullOrEmpty(table) || string.IsNullOrEmpty(column) || string.IsNullOrEmpty(id) || string.IsNullOrEmpty(newValue))
+            if (StringChecker.isNullOrEmpty(table, column, id, newValue))
             {
                 MessageBox.Show("Please select table, column and enter ID and new value.");
                 return;
@@ -132,7 +118,7 @@ namespace Kursova
 
         private ToolStripMenuItem GetCheckedMenuItem()
         {
-            foreach (ToolStripMenuItem item in tableToolStripMenuItem.DropDownItems)
+            foreach (ToolStripMenuItem item in clientToolStripMenu.DropDownItems)
             {
                 if (item.Checked) return item;
             }
@@ -164,6 +150,41 @@ namespace Kursova
         {
             base.OnFormClosed(e);
             conn.Close();
+        }
+
+        private void ‡‚ÚÓÏÓ·≥Î≥ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem_Click("vehicle", vehicleFields);
+        }
+
+        private void ‡ÍÒÂÒÛ‡ËToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem_Click("accessory", accessoryFields);
+        }
+
+        private void ÔË‰·‡ÌÌˇ¿‚ÚÓToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem_Click("vehicle_fee", vehicleFeeFields);
+        }
+
+        private void ÔË‰·‡ÌÌˇ¿ÍÒÂÒÛ‡ÛToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem_Click("accessory_fee", accessoryFeeFields);
+        }
+
+        private void Î≥ÁËÌ„¿‚ÚÓÏÓ·≥ÎˇToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem_Click("leasing_record", leasingRecordFields);
+        }
+
+        private void ÚÂÒÚ‰‡È‚ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem_Click("test_drive_record", testDriveRecordFields);
+        }
+
+        private void clientToolStripMenu_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem_Click("client", testDriveRecordFields);
         }
     }
 }
