@@ -103,10 +103,5 @@ namespace Kursova
                 this.Close();
             }
         }
-
-        private void clientsComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

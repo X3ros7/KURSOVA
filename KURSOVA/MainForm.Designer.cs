@@ -46,7 +46,6 @@
             panel2 = new Panel();
             updateRecordButton = new Button();
             deleteRecordButton = new Button();
-            addRecordButton = new Button();
             label2 = new Label();
             panel3 = new Panel();
             newValueTextBox = new TextBox();
@@ -170,7 +169,7 @@
             panel1.Controls.Add(searchButton);
             panel1.Controls.Add(searchFieldBox);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(562, 27);
+            panel1.Location = new Point(562, 51);
             panel1.Name = "panel1";
             panel1.Size = new Size(226, 212);
             panel1.TabIndex = 3;
@@ -205,7 +204,6 @@
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(updateRecordButton);
             panel2.Controls.Add(deleteRecordButton);
-            panel2.Controls.Add(addRecordButton);
             panel2.Location = new Point(562, 306);
             panel2.Name = "panel2";
             panel2.Size = new Size(226, 221);
@@ -213,7 +211,7 @@
             // 
             // updateRecordButton
             // 
-            updateRecordButton.Location = new Point(56, 147);
+            updateRecordButton.Location = new Point(56, 133);
             updateRecordButton.Name = "updateRecordButton";
             updateRecordButton.Size = new Size(125, 47);
             updateRecordButton.TabIndex = 4;
@@ -223,23 +221,13 @@
             // 
             // deleteRecordButton
             // 
-            deleteRecordButton.Location = new Point(56, 86);
+            deleteRecordButton.Location = new Point(56, 56);
             deleteRecordButton.Name = "deleteRecordButton";
             deleteRecordButton.Size = new Size(125, 43);
             deleteRecordButton.TabIndex = 3;
             deleteRecordButton.Text = "Видалити запис";
             deleteRecordButton.UseVisualStyleBackColor = true;
             deleteRecordButton.Click += deleteRecordButton_Click;
-            // 
-            // addRecordButton
-            // 
-            addRecordButton.Location = new Point(56, 24);
-            addRecordButton.Name = "addRecordButton";
-            addRecordButton.Size = new Size(125, 45);
-            addRecordButton.TabIndex = 0;
-            addRecordButton.Text = "Додати запис";
-            addRecordButton.UseVisualStyleBackColor = true;
-            addRecordButton.Click += addRecordButton_Click;
             // 
             // label2
             // 
@@ -440,7 +428,6 @@
         private ComboBox searchFieldBox;
         private ToolStripMenuItem clientToolStripMenu;
         private Panel panel2;
-        private Button addRecordButton;
         private Label label2;
         private Button updateRecordButton;
         private Button deleteRecordButton;

@@ -14,7 +14,7 @@
                 "vehicle_fee" => new AddVehicleFeeForm(connString, mainForm),
                 "leasing_record" => new AddLeasingForm(connString, mainForm),
                 _ => throw new Exception("Invalid form argument!")
-            }; ;
+            }; 
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Kursova
         private readonly DataTableHandler _dataTableHandler;
         private readonly ComboBoxHandler _comboBoxHandler;
         private readonly CommandExecutor _commandExecutor;
+        private string selectedTable = "client";
 
         #region Table's columns region
         private readonly string[] clientFields = { "id", "name", "email", "phone_number" };
@@ -79,9 +80,10 @@ namespace Kursova
 
                 var selectedRow = dataGridView1.SelectedCells[0].OwningRow;
                 var id = selectedRow.Cells[0].Value;
-                var table = GetSelectedTableName();
+                var table = selectedTable;
 
                 _commandExecutor.DeleteRecord(table, id);
+                UpdateUI(selectedTable, GetFieldsForTable());
             }
             else
             {
@@ -155,6 +157,7 @@ namespace Kursova
         {
             UpdateUI("client", clientFields);
             UncheckMenus();
+            selectedTable = "client";
             clientToolStripMenu.Checked = true;
         }
 
@@ -162,6 +165,7 @@ namespace Kursova
         {
             UpdateUI("vehicle", vehicleFields);
             UncheckMenus();
+            selectedTable = "vehicle";
             vehicleToolStripMenu.Checked = true;
         }
 
@@ -169,6 +173,7 @@ namespace Kursova
         {
             UpdateUI("accessory", accessoryFields);
             UncheckMenus();
+            selectedTable = "accessory";
             accessoryToolStripMenuItem.Checked = true;
         }
 
@@ -176,6 +181,7 @@ namespace Kursova
         {
             UpdateUI("vehicle_fee", vehicleFeeFields);
             UncheckMenus();
+            selectedTable = "vehicle_fee";
             vehicleFeeToolStripMenuItem.Checked = true;
         }
 
@@ -183,6 +189,7 @@ namespace Kursova
         {
             UpdateUI("accessory_fee", accessoryFeeFields);
             UncheckMenus();
+            selectedTable = "accessory_fee";
             accessoryToolStripMenuItem.Checked = true;
         }
 
@@ -190,6 +197,7 @@ namespace Kursova
         {
             UpdateUI("leasing_record", leasingRecordFields);
             UncheckMenus();
+            selectedTable = "leasing_record";
             leasingRecordToolStripMenuItem.Checked = true;
         }
 
@@ -197,6 +205,7 @@ namespace Kursova
         {
             UpdateUI("test_drive_record", testDriveRecordFields);
             UncheckMenus();
+            selectedTable = "test_drive_record";
             òåñòäðàéâToolStripMenuItem.Checked = true;
         }
 

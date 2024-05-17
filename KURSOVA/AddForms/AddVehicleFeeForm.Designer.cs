@@ -89,7 +89,6 @@
             clientsComboBox.Name = "clientsComboBox";
             clientsComboBox.Size = new Size(116, 23);
             clientsComboBox.TabIndex = 10;
-            clientsComboBox.SelectedIndexChanged += clientsComboBox_SelectedIndexChanged;
             // 
             // dateBox
             // 
