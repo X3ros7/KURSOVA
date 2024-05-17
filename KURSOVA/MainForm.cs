@@ -30,7 +30,7 @@ namespace Kursova
             this.conn = conn;
             _commandExecutor = new CommandExecutor(this.conn);
             _dataTableHandler = new DataTableHandler(this);
-            _comboBoxHandler = new ComboBoxHandler(columnsComboBox, searchFieldBox);
+            _comboBoxHandler = new ComboBoxHandler(columnsComboBox);
 
             FormInitialization();
         }
@@ -43,13 +43,11 @@ namespace Kursova
         private void UpdateUI(string tableName, string[] fields)
         {
             _dataTableHandler.UpdateTableView(tableName);
-            _comboBoxHandler.UpdateComboBox(fields);
             _comboBoxHandler.PopulateColumnsComboBox(tableName, connString);
         }
 
         private void searchBox_Click(object sender, EventArgs e)
         {
-            var field = searchFieldBox.SelectedItem?.ToString();
             var value = valueTextBox.Text;
             var table = selectedTable;
 
@@ -59,7 +57,7 @@ namespace Kursova
                 return;
             }
 
-            var command = _commandExecutor.CreateSearchCommand(table, field, value);
+            var command = _commandExecutor.CreateSearchCommand(table, value);
             _commandExecutor.ExecuteCommand(command, out DataTable dataTable);
             dataGridView1.DataSource = dataTable;
         }
@@ -159,6 +157,7 @@ namespace Kursova
             UncheckMenus();
             selectedTable = "client";
             clientToolStripMenu.Checked = true;
+            valueTextBox.Text = "";
         }
 
         private void ‡‚ÚÓÏÓ·≥Î≥ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -167,6 +166,7 @@ namespace Kursova
             UncheckMenus();
             selectedTable = "vehicle";
             vehicleToolStripMenu.Checked = true;
+            valueTextBox.Text = "";
         }
 
         private void ‡ÍÒÂÒÛ‡ËToolStripMenuItem_Click(object sender, EventArgs e)
@@ -175,6 +175,7 @@ namespace Kursova
             UncheckMenus();
             selectedTable = "accessory";
             accessoryToolStripMenuItem.Checked = true;
+            valueTextBox.Text = "";
         }
 
         private void ÔË‰·‡ÌÌˇ¿‚ÚÓToolStripMenuItem_Click(object sender, EventArgs e)
@@ -183,6 +184,7 @@ namespace Kursova
             UncheckMenus();
             selectedTable = "vehicle_fee";
             vehicleFeeToolStripMenuItem.Checked = true;
+            valueTextBox.Text = "";
         }
 
         private void ÔË‰·‡ÌÌˇ¿ÍÒÂÒÛ‡ÛToolStripMenuItem_Click(object sender, EventArgs e)
@@ -191,6 +193,7 @@ namespace Kursova
             UncheckMenus();
             selectedTable = "accessory_fee";
             accessoryToolStripMenuItem.Checked = true;
+            valueTextBox.Text = "";
         }
 
         private void Î≥ÁËÌ„¿‚ÚÓÏÓ·≥ÎˇToolStripMenuItem_Click(object sender, EventArgs e)
@@ -199,6 +202,7 @@ namespace Kursova
             UncheckMenus();
             selectedTable = "leasing_record";
             leasingRecordToolStripMenuItem.Checked = true;
+            valueTextBox.Text = "";
         }
 
         private void ÚÂÒÚ‰‡È‚ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -207,17 +211,13 @@ namespace Kursova
             UncheckMenus();
             selectedTable = "test_drive_record";
             ÚÂÒÚ‰‡È‚ToolStripMenuItem.Checked = true;
+            valueTextBox.Text = "";
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             base.OnFormClosed(e);
             conn.Close();
-        }
-
-        private void ÔÓ¯ÛÍToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void ÍÎ≥∫ÌÚ‡ToolStripMenuItem_Click(object sender, EventArgs e)

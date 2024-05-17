@@ -21,7 +21,7 @@ namespace Kursova.utils
             }
         }
 
-        public NpgsqlCommand CreateSearchCommand(string table, string field, string value)
+        public NpgsqlCommand CreateSearchCommand(string table, string value)
         {
             string query = "";
             switch(table)

@@ -5,18 +5,10 @@ namespace Kursova.utils
     internal class ComboBoxHandler
     {
         private readonly ComboBox _columnsComboBox;
-        private readonly ComboBox _comboBox;
 
-        public ComboBoxHandler(ComboBox columnsComboBox, ComboBox comboBox)
+        public ComboBoxHandler(ComboBox columnsComboBox)
         {
             _columnsComboBox = columnsComboBox;
-            _comboBox = comboBox;
-        }
-
-        public void UpdateComboBox(string[] fields)
-        {
-            _comboBox.Items.Clear();
-            _comboBox.Items.AddRange(fields);
         }
 
         public void PopulateColumnsComboBox(string tableName, string connectionString)

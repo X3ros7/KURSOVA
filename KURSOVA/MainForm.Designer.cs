@@ -42,7 +42,6 @@
             panel1 = new Panel();
             valueTextBox = new TextBox();
             searchButton = new Button();
-            searchFieldBox = new ComboBox();
             panel2 = new Panel();
             updateRecordButton = new Button();
             deleteRecordButton = new Button();
@@ -64,7 +63,7 @@
             придбанняАвтоToolStripMenuItem = new ToolStripMenuItem();
             придбанняАксесуаруToolStripMenuItem = new ToolStripMenuItem();
             лізингАвтоToolStripMenuItem = new ToolStripMenuItem();
-            пошукToolStripMenuItem = new ToolStripMenuItem();
+            label7 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -165,9 +164,9 @@
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(label7);
             panel1.Controls.Add(valueTextBox);
             panel1.Controls.Add(searchButton);
-            panel1.Controls.Add(searchFieldBox);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(562, 51);
             panel1.Name = "panel1";
@@ -190,14 +189,6 @@
             searchButton.Text = "Знайти";
             searchButton.UseVisualStyleBackColor = true;
             searchButton.Click += searchBox_Click;
-            // 
-            // searchFieldBox
-            // 
-            searchFieldBox.FormattingEnabled = true;
-            searchFieldBox.Location = new Point(3, 45);
-            searchFieldBox.Name = "searchFieldBox";
-            searchFieldBox.Size = new Size(218, 23);
-            searchFieldBox.TabIndex = 3;
             // 
             // panel2
             // 
@@ -318,7 +309,7 @@
             // 
             // menuStrip2
             // 
-            menuStrip2.Items.AddRange(new ToolStripItem[] { додатиToolStripMenuItem, пошукToolStripMenuItem });
+            menuStrip2.Items.AddRange(new ToolStripItem[] { додатиToolStripMenuItem });
             menuStrip2.Location = new Point(0, 0);
             menuStrip2.Name = "menuStrip2";
             menuStrip2.Size = new Size(800, 24);
@@ -381,12 +372,15 @@
             лізингАвтоToolStripMenuItem.Text = "лізинг авто";
             лізингАвтоToolStripMenuItem.Click += лізингАвтоToolStripMenuItem_Click;
             // 
-            // пошукToolStripMenuItem
+            // label7
             // 
-            пошукToolStripMenuItem.Name = "пошукToolStripMenuItem";
-            пошукToolStripMenuItem.Size = new Size(58, 20);
-            пошукToolStripMenuItem.Text = "Пошук";
-            пошукToolStripMenuItem.Click += пошукToolStripMenuItem_Click;
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label7.Location = new Point(3, 54);
+            label7.Name = "label7";
+            label7.Size = new Size(211, 17);
+            label7.TabIndex = 6;
+            label7.Text = "Введіть інформацію для пошуку";
             // 
             // MainForm
             // 
@@ -425,7 +419,6 @@
         private Panel panel1;
         private TextBox valueTextBox;
         private Button searchButton;
-        private ComboBox searchFieldBox;
         private ToolStripMenuItem clientToolStripMenu;
         private Panel panel2;
         private Label label2;
@@ -447,7 +440,6 @@
         private ToolStripMenuItem leasingRecordToolStripMenuItem;
         private ToolStripMenuItem тестдрайвToolStripMenuItem;
         private MenuStrip menuStrip2;
-        private ToolStripMenuItem пошукToolStripMenuItem;
         private ToolStripMenuItem додатиToolStripMenuItem;
         private ToolStripMenuItem клієнтаToolStripMenuItem;
         private ToolStripMenuItem автомобільToolStripMenuItem;
@@ -456,5 +448,6 @@
         private ToolStripMenuItem придбанняАвтоToolStripMenuItem;
         private ToolStripMenuItem придбанняАксесуаруToolStripMenuItem;
         private ToolStripMenuItem лізингАвтоToolStripMenuItem;
+        private Label label7;
     }
 }

@@ -16,7 +16,7 @@ namespace Kursova.services
 
         public void SearchRecords(string table, string field, string value, MainForm form)
         {
-            var command = _commandExecutor.CreateSearchCommand(table, field, value);
+            var command = _commandExecutor.CreateSearchCommand(table, value);
             _commandExecutor.ExecuteCommand(command, out DataTable dataTable);
             form.dataGridView1.DataSource = dataTable;
         }
