@@ -186,7 +186,7 @@ namespace Kursova
         {
             UpdateUI("accessory_fee", accessoryFeeFields);
             UncheckMenus();
-            accessoryToolStripMenuItem.Checked= true;
+            accessoryToolStripMenuItem.Checked = true;
         }
 
         private void ë³çèíãÀâòîìîá³ëÿToolStripMenuItem_Click(object sender, EventArgs e)
@@ -212,6 +212,13 @@ namespace Kursova
         private void ïîøóêToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void êë³ºíòàToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var createForm = FormFactory.CreateForm("client", connString, this);
+            createForm.ShowDialog();
+            UpdateUI("client", clientFields);
         }
     }
 }

@@ -58,6 +58,14 @@
             label3 = new Label();
             menuStrip2 = new MenuStrip();
             пошукToolStripMenuItem = new ToolStripMenuItem();
+            додатиToolStripMenuItem = new ToolStripMenuItem();
+            клієнтаToolStripMenuItem = new ToolStripMenuItem();
+            автомобільToolStripMenuItem = new ToolStripMenuItem();
+            аксесуарToolStripMenuItem = new ToolStripMenuItem();
+            записНаТестдрайвToolStripMenuItem = new ToolStripMenuItem();
+            придбанняАвтоToolStripMenuItem = new ToolStripMenuItem();
+            придбанняАксесуаруToolStripMenuItem = new ToolStripMenuItem();
+            лізингАвтоToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -322,7 +330,7 @@
             // 
             // menuStrip2
             // 
-            menuStrip2.Items.AddRange(new ToolStripItem[] { пошукToolStripMenuItem });
+            menuStrip2.Items.AddRange(new ToolStripItem[] { додатиToolStripMenuItem, пошукToolStripMenuItem });
             menuStrip2.Location = new Point(0, 0);
             menuStrip2.Name = "menuStrip2";
             menuStrip2.Size = new Size(800, 24);
@@ -335,6 +343,56 @@
             пошукToolStripMenuItem.Size = new Size(58, 20);
             пошукToolStripMenuItem.Text = "Пошук";
             пошукToolStripMenuItem.Click += пошукToolStripMenuItem_Click;
+            // 
+            // додатиToolStripMenuItem
+            // 
+            додатиToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { клієнтаToolStripMenuItem, автомобільToolStripMenuItem, аксесуарToolStripMenuItem, записНаТестдрайвToolStripMenuItem, придбанняАвтоToolStripMenuItem, придбанняАксесуаруToolStripMenuItem, лізингАвтоToolStripMenuItem });
+            додатиToolStripMenuItem.Name = "додатиToolStripMenuItem";
+            додатиToolStripMenuItem.Size = new Size(58, 20);
+            додатиToolStripMenuItem.Text = "Додати";
+            // 
+            // клієнтаToolStripMenuItem
+            // 
+            клієнтаToolStripMenuItem.Name = "клієнтаToolStripMenuItem";
+            клієнтаToolStripMenuItem.Size = new Size(192, 22);
+            клієнтаToolStripMenuItem.Text = "клієнта";
+            клієнтаToolStripMenuItem.Click += клієнтаToolStripMenuItem_Click;
+            // 
+            // автомобільToolStripMenuItem
+            // 
+            автомобільToolStripMenuItem.Name = "автомобільToolStripMenuItem";
+            автомобільToolStripMenuItem.Size = new Size(192, 22);
+            автомобільToolStripMenuItem.Text = "автомобіль";
+            // 
+            // аксесуарToolStripMenuItem
+            // 
+            аксесуарToolStripMenuItem.Name = "аксесуарToolStripMenuItem";
+            аксесуарToolStripMenuItem.Size = new Size(192, 22);
+            аксесуарToolStripMenuItem.Text = "аксесуар ";
+            // 
+            // записНаТестдрайвToolStripMenuItem
+            // 
+            записНаТестдрайвToolStripMenuItem.Name = "записНаТестдрайвToolStripMenuItem";
+            записНаТестдрайвToolStripMenuItem.Size = new Size(192, 22);
+            записНаТестдрайвToolStripMenuItem.Text = "запис на тест-драйв";
+            // 
+            // придбанняАвтоToolStripMenuItem
+            // 
+            придбанняАвтоToolStripMenuItem.Name = "придбанняАвтоToolStripMenuItem";
+            придбанняАвтоToolStripMenuItem.Size = new Size(192, 22);
+            придбанняАвтоToolStripMenuItem.Text = "придбання авто";
+            // 
+            // придбанняАксесуаруToolStripMenuItem
+            // 
+            придбанняАксесуаруToolStripMenuItem.Name = "придбанняАксесуаруToolStripMenuItem";
+            придбанняАксесуаруToolStripMenuItem.Size = new Size(192, 22);
+            придбанняАксесуаруToolStripMenuItem.Text = "придбання аксесуару";
+            // 
+            // лізингАвтоToolStripMenuItem
+            // 
+            лізингАвтоToolStripMenuItem.Name = "лізингАвтоToolStripMenuItem";
+            лізингАвтоToolStripMenuItem.Size = new Size(192, 22);
+            лізингАвтоToolStripMenuItem.Text = "лізинг авто";
             // 
             // MainForm
             // 
@@ -397,5 +455,13 @@
         private ToolStripMenuItem тестдрайвToolStripMenuItem;
         private MenuStrip menuStrip2;
         private ToolStripMenuItem пошукToolStripMenuItem;
+        private ToolStripMenuItem додатиToolStripMenuItem;
+        private ToolStripMenuItem клієнтаToolStripMenuItem;
+        private ToolStripMenuItem автомобільToolStripMenuItem;
+        private ToolStripMenuItem аксесуарToolStripMenuItem;
+        private ToolStripMenuItem записНаТестдрайвToolStripMenuItem;
+        private ToolStripMenuItem придбанняАвтоToolStripMenuItem;
+        private ToolStripMenuItem придбанняАксесуаруToolStripMenuItem;
+        private ToolStripMenuItem лізингАвтоToolStripMenuItem;
     }
 }
