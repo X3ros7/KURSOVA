@@ -38,6 +38,8 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
+            clientsComboBox = new ComboBox();
+            vehiclesComboBox = new ComboBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,6 +56,8 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveBorder;
+            panel1.Controls.Add(vehiclesComboBox);
+            panel1.Controls.Add(clientsComboBox);
             panel1.Controls.Add(endDateBox);
             panel1.Controls.Add(dateBox);
             panel1.Controls.Add(vehicleIdBox);
@@ -135,6 +139,22 @@
             label1.TabIndex = 0;
             label1.Text = "ID клієнта";
             // 
+            // clientsComboBox
+            // 
+            clientsComboBox.FormattingEnabled = true;
+            clientsComboBox.Location = new Point(157, 23);
+            clientsComboBox.Name = "clientsComboBox";
+            clientsComboBox.Size = new Size(121, 23);
+            clientsComboBox.TabIndex = 8;
+            // 
+            // vehiclesComboBox
+            // 
+            vehiclesComboBox.FormattingEnabled = true;
+            vehiclesComboBox.Location = new Point(157, 70);
+            vehiclesComboBox.Name = "vehiclesComboBox";
+            vehiclesComboBox.Size = new Size(121, 23);
+            vehiclesComboBox.TabIndex = 9;
+            // 
             // AddLeasingForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -161,5 +181,7 @@
         private Label label3;
         private Label label2;
         private Label label1;
+        private ComboBox clientsComboBox;
+        private ComboBox vehiclesComboBox;
     }
 }

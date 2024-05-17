@@ -30,10 +30,10 @@
         {
             addButton = new Button();
             panel1 = new Panel();
+            vehiclesComboBox = new ComboBox();
             priceBox = new TextBox();
+            clientsComboBox = new ComboBox();
             dateBox = new TextBox();
-            vehicleIdBox = new TextBox();
-            clientIdBox = new TextBox();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -54,10 +54,10 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveBorder;
+            panel1.Controls.Add(vehiclesComboBox);
             panel1.Controls.Add(priceBox);
+            panel1.Controls.Add(clientsComboBox);
             panel1.Controls.Add(dateBox);
-            panel1.Controls.Add(vehicleIdBox);
-            panel1.Controls.Add(clientIdBox);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
@@ -67,6 +67,14 @@
             panel1.Size = new Size(303, 227);
             panel1.TabIndex = 2;
             // 
+            // vehiclesComboBox
+            // 
+            vehiclesComboBox.FormattingEnabled = true;
+            vehiclesComboBox.Location = new Point(162, 70);
+            vehiclesComboBox.Name = "vehiclesComboBox";
+            vehiclesComboBox.Size = new Size(116, 23);
+            vehiclesComboBox.TabIndex = 11;
+            // 
             // priceBox
             // 
             priceBox.Location = new Point(178, 171);
@@ -74,26 +82,21 @@
             priceBox.Size = new Size(100, 23);
             priceBox.TabIndex = 7;
             // 
+            // clientsComboBox
+            // 
+            clientsComboBox.FormattingEnabled = true;
+            clientsComboBox.Location = new Point(162, 26);
+            clientsComboBox.Name = "clientsComboBox";
+            clientsComboBox.Size = new Size(116, 23);
+            clientsComboBox.TabIndex = 10;
+            clientsComboBox.SelectedIndexChanged += clientsComboBox_SelectedIndexChanged;
+            // 
             // dateBox
             // 
             dateBox.Location = new Point(178, 122);
             dateBox.Name = "dateBox";
             dateBox.Size = new Size(100, 23);
             dateBox.TabIndex = 6;
-            // 
-            // vehicleIdBox
-            // 
-            vehicleIdBox.Location = new Point(178, 70);
-            vehicleIdBox.Name = "vehicleIdBox";
-            vehicleIdBox.Size = new Size(100, 23);
-            vehicleIdBox.TabIndex = 5;
-            // 
-            // clientIdBox
-            // 
-            clientIdBox.Location = new Point(178, 23);
-            clientIdBox.Name = "clientIdBox";
-            clientIdBox.Size = new Size(100, 23);
-            clientIdBox.TabIndex = 4;
             // 
             // label4
             // 
@@ -155,11 +158,11 @@
         private Panel panel1;
         private TextBox priceBox;
         private TextBox dateBox;
-        private TextBox vehicleIdBox;
-        private TextBox clientIdBox;
         private Label label4;
         private Label label3;
         private Label label2;
         private Label label1;
+        private ComboBox vehiclesComboBox;
+        private ComboBox clientsComboBox;
     }
 }

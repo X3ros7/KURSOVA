@@ -242,5 +242,15 @@ namespace Kursova
         {
             OnAddButtonClick("vehicle_fee", vehicleFeeFields);
         }
+
+        private void ïğèäáàííÿÀêñåñóàğóToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            OnAddButtonClick("accessory_fee", accessoryFeeFields);
+        }
+
+        private void ë³çèíãÀâòîToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OnAddButtonClick("leasing_record", leasingRecordFields);
+        }
     }
 }

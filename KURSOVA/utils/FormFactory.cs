@@ -10,8 +10,8 @@
                 "vehicle" => new AddVehicleForm(connString, mainForm),
                 "test_drive_record" => new AddTestDriveForm(connString, mainForm),
                 "accessory" => new AddAccessoryForm(connString, mainForm),
-                "accessory_fee" => new AddVehicleFeeForm(connString, mainForm),
-                "vehicle_fee" => new AddAccessoryFeeForm(connString, mainForm),
+                "accessory_fee" => new AddAccessoryFeeForm(connString, mainForm),
+                "vehicle_fee" => new AddVehicleFeeForm(connString, mainForm),
                 "leasing_record" => new AddLeasingForm(connString, mainForm),
                 _ => throw new Exception("Invalid form argument!")
             }; ;

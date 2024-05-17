@@ -384,12 +384,14 @@
             придбанняАксесуаруToolStripMenuItem.Name = "придбанняАксесуаруToolStripMenuItem";
             придбанняАксесуаруToolStripMenuItem.Size = new Size(192, 22);
             придбанняАксесуаруToolStripMenuItem.Text = "придбання аксесуару";
+            придбанняАксесуаруToolStripMenuItem.Click += придбанняАксесуаруToolStripMenuItem_Click_1;
             // 
             // лізингАвтоToolStripMenuItem
             // 
             лізингАвтоToolStripMenuItem.Name = "лізингАвтоToolStripMenuItem";
             лізингАвтоToolStripMenuItem.Size = new Size(192, 22);
             лізингАвтоToolStripMenuItem.Text = "лізинг авто";
+            лізингАвтоToolStripMenuItem.Click += лізингАвтоToolStripMenuItem_Click;
             // 
             // пошукToolStripMenuItem
             // 
