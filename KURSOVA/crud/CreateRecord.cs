@@ -34,7 +34,7 @@ namespace Kursova.crud
                     commandString = _insertLeasingRecord + $"({leasingRecord.ClientId}, {leasingRecord.VehicleId}, '{leasingRecord.RecordDate}', '{leasingRecord.EndDate}')";
                     break;
                 case TestDriveRecord testDriveRecord:
-                    commandString = _insertTestDriveRecord + $"({testDriveRecord.ClientId}, {testDriveRecord.VehicleId}, '{testDriveRecord.TestDriveDate}', {testDriveRecord.Duration})";
+                    commandString = _insertTestDriveRecord + $"({testDriveRecord.ClientId}, {testDriveRecord.VehicleId}, '{testDriveRecord.TestDriveDate}', '{testDriveRecord.Duration}')";
                     break;
                 case VehicleFee vehicleFee:
                     commandString = _insertVehicleFee + $"({vehicleFee.ClientId}, {vehicleFee.VehicleId}, '{vehicleFee.PaymentDate}', {vehicleFee.Price})";

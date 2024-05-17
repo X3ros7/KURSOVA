@@ -220,5 +220,26 @@ namespace Kursova
             createForm.ShowDialog();
             UpdateUI("client", clientFields);
         }
+
+        private void àâòîìîá³ëüToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var createForm = FormFactory.CreateForm("vehicle", connString, this);
+            createForm.ShowDialog();
+            UpdateUI("vehicle", vehicleFields);
+        }
+
+        private void àêñåñóàğToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var createForm = FormFactory.CreateForm("accessory", connString, this);
+            createForm.ShowDialog();
+            UpdateUI("accessory", accessoryFields);
+        }
+
+        private void çàïèñÍàÒåñòäğàéâToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var createForm = FormFactory.CreateForm("test_drive_record", connString, this);
+            createForm.ShowDialog();
+            UpdateUI("test_drive_record", testDriveRecordFields);
+        }
     }
 }
