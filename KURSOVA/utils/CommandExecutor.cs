@@ -23,9 +23,20 @@ namespace Kursova.utils
 
         public NpgsqlCommand CreateSearchCommand(string table, string field, string value)
         {
-            string query = $"SELECT * FROM {table} WHERE {field} = @value";
+            string query = "";
+            switch(table)
+            {
+                case "test_drive_record":
+                    query = $"SELECT \r\n\ttdr.id,\r\n\tc.name,\r\n\tv.brand,\r\n\tv.name,\r\n\ttdr.testdrive_date,\r\n\ttdr.duration\r\nFROM \r\n\ttest_drive_record tdr\r\nJOIN\r\n\tclient c ON tdr.client_id = c.id\r\nJOIN \r\n\tvehicle v ON tdr.vehicle_id = v.id\r\nWHERE\r\n\tCONCAT(tdr.*)LIKE '%{value}%' OR CONCAT(c.*) LIKE '%{value}%' OR CONCAT(v.*) LIKE '%{value}%';";
+                    break;
+                case "vehicle_fee":
+                    query = $"SELECT \r\n    vf.id,\r\n    c.name AS client_name,\r\n    v.brand,\r\n    v.name AS vehicle_name,\r\n    vf.payment_date,\r\n    vf.price\r\nFROM \r\n    vehicle_fee vf\r\nJOIN\r\n    client c ON vf.client_id = c.id\r\nJOIN \r\n    vehicle v ON vf.vehicle_id = v.id\r\nWHERE\r\n    CONCAT(vf.*) LIKE '%{value}%' OR CONCAT(c.*) LIKE '%{value}%' OR CONCAT(v.*) LIKE '%{value}%';\r\n";
+                    break;
+                default:
+                    query = $"SELECT * FROM {table} WHERE CONCAT({table}.*) LIKE '%{value}%'";
+                    break;
+            }
             var command = new NpgsqlCommand(query, _connection);
-            command.Parameters.AddWithValue("value", value);
             return command;
         }
 

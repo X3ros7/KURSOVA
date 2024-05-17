@@ -51,7 +51,7 @@ namespace Kursova
         {
             var field = searchFieldBox.SelectedItem?.ToString();
             var value = valueTextBox.Text;
-            var table = GetSelectedTableName();
+            var table = selectedTable;
 
             if (string.IsNullOrEmpty(value))
             {
