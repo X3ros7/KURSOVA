@@ -48,9 +48,14 @@ namespace Kursova.utils
             command.ExecuteNonQuery();
         }
 
-        public void UpdateRecord(string table, string column, string id, string newValue)
+        public void UpdateRecord(string table, object column, object id, string newValue)
         {
-            string query = $"UPDATE {table} SET {column} = @newValue WHERE id = @id";
+            string query = "";
+            if (!int.TryParse(newValue, out _) || !double.TryParse(newValue, out _) || !DateTime.TryParse(newValue, out _))
+            {
+                query = $"UPDATE {table} SET {column} = '{newValue}' WHERE id = @id";
+            }
+            else query = $"UPDATE {table} SET {column} = @newValue WHERE id = @id";
             var command = new NpgsqlCommand(query, _connection);
             command.Parameters.AddWithValue("newValue", newValue);
             command.Parameters.AddWithValue("id", id);

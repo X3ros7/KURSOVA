@@ -40,12 +40,10 @@
             тестдрайвToolStripMenuItem = new ToolStripMenuItem();
             label1 = new Label();
             panel1 = new Panel();
+            label7 = new Label();
             valueTextBox = new TextBox();
             searchButton = new Button();
-            panel2 = new Panel();
             updateRecordButton = new Button();
-            deleteRecordButton = new Button();
-            label2 = new Label();
             panel3 = new Panel();
             newValueTextBox = new TextBox();
             label6 = new Label();
@@ -63,11 +61,10 @@
             придбанняАвтоToolStripMenuItem = new ToolStripMenuItem();
             придбанняАксесуаруToolStripMenuItem = new ToolStripMenuItem();
             лізингАвтоToolStripMenuItem = new ToolStripMenuItem();
-            label7 = new Label();
+            видалитиToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
-            panel2.SuspendLayout();
             panel3.SuspendLayout();
             menuStrip2.SuspendLayout();
             SuspendLayout();
@@ -79,6 +76,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(534, 306);
             dataGridView1.TabIndex = 0;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // menuStrip1
             // 
@@ -170,8 +168,18 @@
             panel1.Controls.Add(label1);
             panel1.Location = new Point(562, 51);
             panel1.Name = "panel1";
-            panel1.Size = new Size(226, 212);
+            panel1.Size = new Size(226, 451);
             panel1.TabIndex = 3;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label7.Location = new Point(3, 54);
+            label7.Name = "label7";
+            label7.Size = new Size(211, 17);
+            label7.TabIndex = 6;
+            label7.Text = "Введіть інформацію для пошуку";
             // 
             // valueTextBox
             // 
@@ -182,7 +190,7 @@
             // 
             // searchButton
             // 
-            searchButton.Location = new Point(3, 160);
+            searchButton.Location = new Point(3, 143);
             searchButton.Name = "searchButton";
             searchButton.Size = new Size(218, 23);
             searchButton.TabIndex = 4;
@@ -190,49 +198,20 @@
             searchButton.UseVisualStyleBackColor = true;
             searchButton.Click += searchBox_Click;
             // 
-            // panel2
-            // 
-            panel2.BorderStyle = BorderStyle.FixedSingle;
-            panel2.Controls.Add(updateRecordButton);
-            panel2.Controls.Add(deleteRecordButton);
-            panel2.Location = new Point(562, 306);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(226, 221);
-            panel2.TabIndex = 4;
-            // 
             // updateRecordButton
             // 
-            updateRecordButton.Location = new Point(56, 133);
+            updateRecordButton.Location = new Point(380, 91);
             updateRecordButton.Name = "updateRecordButton";
             updateRecordButton.Size = new Size(125, 47);
             updateRecordButton.TabIndex = 4;
-            updateRecordButton.Text = "Оновити запис";
+            updateRecordButton.Text = "Оновити";
             updateRecordButton.UseVisualStyleBackColor = true;
             updateRecordButton.Click += updateRecordButton_Click;
-            // 
-            // deleteRecordButton
-            // 
-            deleteRecordButton.Location = new Point(56, 56);
-            deleteRecordButton.Name = "deleteRecordButton";
-            deleteRecordButton.Size = new Size(125, 43);
-            deleteRecordButton.TabIndex = 3;
-            deleteRecordButton.Text = "Видалити запис";
-            deleteRecordButton.UseVisualStyleBackColor = true;
-            deleteRecordButton.Click += deleteRecordButton_Click;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label2.Location = new Point(592, 283);
-            label2.Name = "label2";
-            label2.Size = new Size(161, 20);
-            label2.TabIndex = 5;
-            label2.Text = "Керування записами";
             // 
             // panel3
             // 
             panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(updateRecordButton);
             panel3.Controls.Add(newValueTextBox);
             panel3.Controls.Add(label6);
             panel3.Controls.Add(label5);
@@ -284,6 +263,7 @@
             // 
             // idTextBox
             // 
+            idTextBox.Enabled = false;
             idTextBox.Location = new Point(136, 41);
             idTextBox.Name = "idTextBox";
             idTextBox.Size = new Size(218, 23);
@@ -303,13 +283,13 @@
             label3.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
             label3.Location = new Point(3, 9);
             label3.Name = "label3";
-            label3.Size = new Size(141, 20);
+            label3.Size = new Size(171, 20);
             label3.TabIndex = 6;
-            label3.Text = "Оновлення запису";
+            label3.Text = "Оновлення інформації";
             // 
             // menuStrip2
             // 
-            menuStrip2.Items.AddRange(new ToolStripItem[] { додатиToolStripMenuItem });
+            menuStrip2.Items.AddRange(new ToolStripItem[] { додатиToolStripMenuItem, видалитиToolStripMenuItem });
             menuStrip2.Location = new Point(0, 0);
             menuStrip2.Name = "menuStrip2";
             menuStrip2.Size = new Size(800, 24);
@@ -372,15 +352,12 @@
             лізингАвтоToolStripMenuItem.Text = "лізинг авто";
             лізингАвтоToolStripMenuItem.Click += лізингАвтоToolStripMenuItem_Click;
             // 
-            // label7
+            // видалитиToolStripMenuItem
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label7.Location = new Point(3, 54);
-            label7.Name = "label7";
-            label7.Size = new Size(211, 17);
-            label7.TabIndex = 6;
-            label7.Text = "Введіть інформацію для пошуку";
+            видалитиToolStripMenuItem.Name = "видалитиToolStripMenuItem";
+            видалитиToolStripMenuItem.Size = new Size(71, 20);
+            видалитиToolStripMenuItem.Text = "Видалити";
+            видалитиToolStripMenuItem.Click += видалитиToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -388,8 +365,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 539);
             Controls.Add(panel3);
-            Controls.Add(label2);
-            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(dataGridView1);
             Controls.Add(menuStrip1);
@@ -402,7 +377,6 @@
             menuStrip1.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             menuStrip2.ResumeLayout(false);
@@ -420,10 +394,7 @@
         private TextBox valueTextBox;
         private Button searchButton;
         private ToolStripMenuItem clientToolStripMenu;
-        private Panel panel2;
-        private Label label2;
         private Button updateRecordButton;
-        private Button deleteRecordButton;
         private Panel panel3;
         private Label label3;
         private ComboBox columnsComboBox;
@@ -449,5 +420,6 @@
         private ToolStripMenuItem придбанняАксесуаруToolStripMenuItem;
         private ToolStripMenuItem лізингАвтоToolStripMenuItem;
         private Label label7;
+        private ToolStripMenuItem видалитиToolStripMenuItem;
     }
 }

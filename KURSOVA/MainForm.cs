@@ -91,7 +91,7 @@ namespace Kursova
 
         private void updateRecordButton_Click(object sender, EventArgs e)
         {
-            var table = GetSelectedTableName();
+            var table = selectedTable;
             var column = columnsComboBox.SelectedItem?.ToString();
             var id = idTextBox.Text;
             var newValue = newValueTextBox.Text;
@@ -102,7 +102,8 @@ namespace Kursova
                 return;
             }
 
-            _commandExecutor.UpdateRecord(table, column, id, newValue);
+            _commandExecutor.UpdateRecord(table, column, int.Parse(id), newValue);
+            UpdateUI(table, GetFieldsForTable());
         }
 
         private ToolStripMenuItem GetCheckedMenuItem()
@@ -260,6 +261,36 @@ namespace Kursova
         private void ë³çèíãÀâòîToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OnAddButtonClick("leasing_record", leasingRecordFields);
+        }
+
+        private void âèäàëèòèToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedCells.Count > 0)
+            {
+                var confirmation = MessageBox.Show("Are you sure you want to delete this record?", "Delete record?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (confirmation == DialogResult.No) return;
+
+                var selectedRow = dataGridView1.SelectedCells[0].OwningRow;
+                var id = selectedRow.Cells[0].Value;
+                var table = selectedTable;
+
+                _commandExecutor.DeleteRecord(table, id);
+                UpdateUI(selectedTable, GetFieldsForTable());
+            }
+            else
+            {
+                MessageBox.Show("No cell is selected.");
+            }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
+                object idValue = selectedRow.Cells[0].Value;
+                idTextBox.Text = idValue?.ToString();
+            }
         }
     }
 }

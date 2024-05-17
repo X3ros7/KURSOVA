@@ -41,9 +41,9 @@ namespace Kursova
             var executor = new CommandExecutor(conn);
             var dataTable = new DataTable();
             executor.ExecuteCommand(cmd, out dataTable);
-                MessageBox.Show("Запис про аксесуар було додано до системи");
-                mainForm.dataGridView1.DataSource = dataTable;
-                this.Close();
+            MessageBox.Show("Запис про придбання аксесуару був доданий до системи");
+            mainForm.dataGridView1.DataSource = dataTable;
+            this.Close();
         }
     }
 }

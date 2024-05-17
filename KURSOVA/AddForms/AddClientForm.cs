@@ -48,7 +48,7 @@ namespace Kursova
             var dataTable = new DataTable();
             executor.ExecuteCommand(cmd, out dataTable);
             {
-                MessageBox.Show("Запис про нового клієнта було додано до системи");
+                MessageBox.Show("Клієнт був доданий до системи");
                 MainForm.dataGridView1.DataSource = dataTable;
                 this.Close();
             }

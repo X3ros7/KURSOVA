@@ -47,7 +47,7 @@ namespace Kursova
             var dataTable = new DataTable();
             executor.ExecuteCommand(cmd, out dataTable);
             {
-                MessageBox.Show("Запис про авто був доданий до системи");
+                MessageBox.Show("Авто було додао до системи");
                 mainForm.dataGridView1.DataSource = dataTable;
                 this.Close();
             }
