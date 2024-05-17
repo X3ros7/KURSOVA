@@ -377,6 +377,7 @@
             придбанняАвтоToolStripMenuItem.Name = "придбанняАвтоToolStripMenuItem";
             придбанняАвтоToolStripMenuItem.Size = new Size(192, 22);
             придбанняАвтоToolStripMenuItem.Text = "придбання авто";
+            придбанняАвтоToolStripMenuItem.Click += придбанняАвтоToolStripMenuItem_Click_1;
             // 
             // придбанняАксесуаруToolStripMenuItem
             // 

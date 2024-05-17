@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            clientsComboBox = new ComboBox();
             durationBox = new TextBox();
             dateBox = new TextBox();
             vehicleIdBox = new TextBox();
@@ -38,12 +39,15 @@
             label2 = new Label();
             label1 = new Label();
             addButton = new Button();
+            vehiclesComboBox = new ComboBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveBorder;
+            panel1.Controls.Add(vehiclesComboBox);
+            panel1.Controls.Add(clientsComboBox);
             panel1.Controls.Add(durationBox);
             panel1.Controls.Add(dateBox);
             panel1.Controls.Add(vehicleIdBox);
@@ -56,6 +60,14 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(303, 227);
             panel1.TabIndex = 0;
+            // 
+            // clientsComboBox
+            // 
+            clientsComboBox.FormattingEnabled = true;
+            clientsComboBox.Location = new Point(162, 23);
+            clientsComboBox.Name = "clientsComboBox";
+            clientsComboBox.Size = new Size(116, 23);
+            clientsComboBox.TabIndex = 8;
             // 
             // durationBox
             // 
@@ -135,6 +147,14 @@
             addButton.UseVisualStyleBackColor = true;
             addButton.Click += addButton_Click;
             // 
+            // vehiclesComboBox
+            // 
+            vehiclesComboBox.FormattingEnabled = true;
+            vehiclesComboBox.Location = new Point(162, 70);
+            vehiclesComboBox.Name = "vehiclesComboBox";
+            vehiclesComboBox.Size = new Size(116, 23);
+            vehiclesComboBox.TabIndex = 9;
+            // 
             // AddTestDriveForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -161,5 +181,7 @@
         private TextBox dateBox;
         private TextBox vehicleIdBox;
         private TextBox clientIdBox;
+        private ComboBox clientsComboBox;
+        private ComboBox vehiclesComboBox;
     }
 }

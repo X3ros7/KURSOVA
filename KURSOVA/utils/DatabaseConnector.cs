@@ -1,5 +1,4 @@
 ﻿using Npgsql;
-using System.Threading.Tasks;
 
 namespace Kursova.utils
 {

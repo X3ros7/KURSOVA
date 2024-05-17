@@ -1,9 +1,6 @@
-using Kursova.services;
 using Kursova.utils;
 using Npgsql;
-using System;
 using System.Data;
-using System.Windows.Forms;
 
 namespace Kursova
 {
@@ -216,30 +213,34 @@ namespace Kursova
 
         private void ÍÎ≥∫ÌÚ‡ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var createForm = FormFactory.CreateForm("client", connString, this);
-            createForm.ShowDialog();
-            UpdateUI("client", clientFields);
+            OnAddButtonClick("client", clientFields);
         }
 
         private void ‡‚ÚÓÏÓ·≥Î¸ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var createForm = FormFactory.CreateForm("vehicle", connString, this);
+            OnAddButtonClick("vehicle", vehicleFields);
+        }
+
+        private void OnAddButtonClick(string tableName, string[] fields)
+        {
+            var createForm = FormFactory.CreateForm(tableName, connString, this);
             createForm.ShowDialog();
-            UpdateUI("vehicle", vehicleFields);
+            UpdateUI(tableName, fields);
         }
 
         private void ‡ÍÒÂÒÛ‡ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var createForm = FormFactory.CreateForm("accessory", connString, this);
-            createForm.ShowDialog();
-            UpdateUI("accessory", accessoryFields);
+            OnAddButtonClick("accessory", accessoryFields);
         }
 
         private void Á‡ÔËÒÕ‡“ÂÒÚ‰‡È‚ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var createForm = FormFactory.CreateForm("test_drive_record", connString, this);
-            createForm.ShowDialog();
-            UpdateUI("test_drive_record", testDriveRecordFields);
+            OnAddButtonClick("test_drive_record", testDriveRecordFields);
+        }
+
+        private void ÔË‰·‡ÌÌˇ¿‚ÚÓToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            OnAddButtonClick("vehicle_fee", vehicleFeeFields);
         }
     }
 }

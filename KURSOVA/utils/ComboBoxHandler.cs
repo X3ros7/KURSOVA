@@ -1,5 +1,4 @@
 ﻿using Npgsql;
-using System.Windows.Forms;
 
 namespace Kursova.utils
 {
