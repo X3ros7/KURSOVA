@@ -24,13 +24,13 @@ namespace Kursova.services
         public void DeleteRecord(string table, object id, MainForm form)
         {
             _commandExecutor.DeleteRecord(table, id);
-            _dataTableHandler.UpdateTableView(table, form);
+            _dataTableHandler.UpdateTableView(table);
         }
 
         public void UpdateRecord(string table, string column, string id, string newValue, MainForm form)
         {
             _commandExecutor.UpdateRecord(table, column, id, newValue);
-            _dataTableHandler.UpdateTableView(table, form);
+            _dataTableHandler.UpdateTableView(table);
         }
     }
 }

@@ -42,7 +42,7 @@
             panel1 = new Panel();
             valueTextBox = new TextBox();
             searchButton = new Button();
-            comboBox = new ComboBox();
+            searchFieldBox = new ComboBox();
             panel2 = new Panel();
             updateRecordButton = new Button();
             deleteRecordButton = new Button();
@@ -160,7 +160,7 @@
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(valueTextBox);
             panel1.Controls.Add(searchButton);
-            panel1.Controls.Add(comboBox);
+            panel1.Controls.Add(searchFieldBox);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(562, 27);
             panel1.Name = "panel1";
@@ -184,13 +184,13 @@
             searchButton.UseVisualStyleBackColor = true;
             searchButton.Click += searchBox_Click;
             // 
-            // comboBox
+            // searchFieldBox
             // 
-            comboBox.FormattingEnabled = true;
-            comboBox.Location = new Point(3, 45);
-            comboBox.Name = "comboBox";
-            comboBox.Size = new Size(218, 23);
-            comboBox.TabIndex = 3;
+            searchFieldBox.FormattingEnabled = true;
+            searchFieldBox.Location = new Point(3, 45);
+            searchFieldBox.Name = "searchFieldBox";
+            searchFieldBox.Size = new Size(218, 23);
+            searchFieldBox.TabIndex = 3;
             // 
             // panel2
             // 
@@ -373,7 +373,7 @@
         private Panel panel1;
         private TextBox valueTextBox;
         private Button searchButton;
-        private ComboBox comboBox;
+        private ComboBox searchFieldBox;
         private ToolStripMenuItem clientToolStripMenu;
         private Panel panel2;
         private Button addRecordButton;

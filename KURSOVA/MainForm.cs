@@ -9,8 +9,8 @@ namespace Kursova
 {
     public partial class MainForm : Form
     {
-        private readonly string _connString;
-        private readonly NpgsqlConnection _conn;
+        public readonly string connString;
+        public readonly NpgsqlConnection conn;
         private readonly DataTableHandler _dataTableHandler;
         private readonly ComboBoxHandler _comboBoxHandler;
         private readonly CommandExecutor _commandExecutor;
@@ -28,11 +28,11 @@ namespace Kursova
         public MainForm(NpgsqlConnection conn, string connString)
         {
             InitializeComponent();
-            _connString = connString;
-            _conn = conn;
-            _commandExecutor = new CommandExecutor(_conn);
-            _dataTableHandler = new DataTableHandler(_conn);
-            _comboBoxHandler = new ComboBoxHandler(columnsComboBox, comboBox);
+            this.connString = connString;
+            this.conn = conn;
+            _commandExecutor = new CommandExecutor(this.conn);
+            _dataTableHandler = new DataTableHandler(this);
+            _comboBoxHandler = new ComboBoxHandler(columnsComboBox, searchFieldBox);
 
             FormInitialization();
         }
@@ -44,20 +44,20 @@ namespace Kursova
 
         private void UpdateUI(string tableName, string[] fields)
         {
-            _dataTableHandler.UpdateTableView(tableName, this);
+            _dataTableHandler.UpdateTableView(tableName);
             _comboBoxHandler.UpdateComboBox(fields);
-            _comboBoxHandler.PopulateColumnsComboBox(tableName, _connString);
+            _comboBoxHandler.PopulateColumnsComboBox(tableName, connString);
         }
 
         private void searchBox_Click(object sender, EventArgs e)
         {
-            var field = comboBox.SelectedItem?.ToString();
+            var field = searchFieldBox.SelectedItem?.ToString();
             var value = valueTextBox.Text;
             var table = GetSelectedTableName();
 
             if (string.IsNullOrEmpty(value))
             {
-                _dataTableHandler.UpdateTableView(table, this);
+                _dataTableHandler.UpdateTableView(table);
                 return;
             }
 
@@ -68,7 +68,7 @@ namespace Kursova
 
         private void addRecordButton_Click(object sender, EventArgs e)
         {
-            var addForm = FormFactory.CreateForm(GetSelectedTableName(), _connString, this);
+            var addForm = FormFactory.CreateForm(GetSelectedTableName(), connString, this);
             addForm?.ShowDialog();
             UpdateUI(GetSelectedTableName(), GetFieldsForTable());
         }
@@ -125,8 +125,8 @@ namespace Kursova
                 "клієнти" => "client",
                 "автомобілі" => "vehicle",
                 "аксесуари" => "accessory",
-                "тест-драйв" => "detailed_test_drive_record",
-                "договір" => "detailed_vehicle_fee",
+                "тест-драйв" => "test_drive_record",
+                "договір" => "vehicle_fee",
                 _ => null
             };
         }
@@ -177,28 +177,28 @@ namespace Kursova
 
         private void придбанняАвтоToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UpdateUI("detailed_vehicle_fee", vehicleFeeFields);
+            UpdateUI("vehicle_fee", vehicleFeeFields);
             UncheckMenus();
             vehicleFeeToolStripMenuItem.Checked = true;
         }
 
         private void придбанняАксесуаруToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UpdateUI("detailed_accessory_fee", accessoryFeeFields);
+            UpdateUI("accessory_fee", accessoryFeeFields);
             UncheckMenus();
             accessoryToolStripMenuItem.Checked= true;
         }
 
         private void лізингАвтомобіляToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UpdateUI("detailed_leasing_record", leasingRecordFields);
+            UpdateUI("leasing_record", leasingRecordFields);
             UncheckMenus();
             leasingRecordToolStripMenuItem.Checked = true;
         }
 
         private void тестдрайвToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UpdateUI("detailed_test_drive_record", testDriveRecordFields);
+            UpdateUI("test_drive_record", testDriveRecordFields);
             UncheckMenus();
             тестдрайвToolStripMenuItem.Checked = true;
         }
@@ -206,7 +206,7 @@ namespace Kursova
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             base.OnFormClosed(e);
-            _conn.Close();
+            conn.Close();
         }
 
         private void пошукToolStripMenuItem_Click(object sender, EventArgs e)
