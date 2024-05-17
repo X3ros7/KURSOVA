@@ -168,7 +168,7 @@
             panel1.Controls.Add(label1);
             panel1.Location = new Point(562, 51);
             panel1.Name = "panel1";
-            panel1.Size = new Size(226, 451);
+            panel1.Size = new Size(226, 476);
             panel1.TabIndex = 3;
             // 
             // label7
@@ -200,7 +200,7 @@
             // 
             // updateRecordButton
             // 
-            updateRecordButton.Location = new Point(380, 91);
+            updateRecordButton.Location = new Point(384, 63);
             updateRecordButton.Name = "updateRecordButton";
             updateRecordButton.Size = new Size(125, 47);
             updateRecordButton.TabIndex = 4;
