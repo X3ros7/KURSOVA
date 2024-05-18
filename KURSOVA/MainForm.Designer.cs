@@ -72,14 +72,15 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 51);
+            dataGridView1.Location = new Point(12, 60);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(534, 306);
+            dataGridView1.Size = new Size(534, 297);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // menuStrip1
             // 
+            menuStrip1.ImeMode = ImeMode.NoControl;
             menuStrip1.Items.AddRange(new ToolStripItem[] { clientToolStripMenu, vehicleToolStripMenu, accessoryToolStripMenuItem, recordsToolStripMenuItem, тестдрайвToolStripMenuItem });
             menuStrip1.Location = new Point(0, 24);
             menuStrip1.Name = "menuStrip1";
@@ -166,9 +167,9 @@
             panel1.Controls.Add(valueTextBox);
             panel1.Controls.Add(searchButton);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(562, 51);
+            panel1.Location = new Point(562, 60);
             panel1.Name = "panel1";
-            panel1.Size = new Size(226, 476);
+            panel1.Size = new Size(226, 467);
             panel1.TabIndex = 3;
             // 
             // label7
@@ -183,14 +184,14 @@
             // 
             // valueTextBox
             // 
-            valueTextBox.Location = new Point(3, 99);
+            valueTextBox.Location = new Point(3, 88);
             valueTextBox.Name = "valueTextBox";
             valueTextBox.Size = new Size(218, 23);
             valueTextBox.TabIndex = 5;
             // 
             // searchButton
             // 
-            searchButton.Location = new Point(3, 143);
+            searchButton.Location = new Point(3, 148);
             searchButton.Name = "searchButton";
             searchButton.Size = new Size(218, 23);
             searchButton.TabIndex = 4;

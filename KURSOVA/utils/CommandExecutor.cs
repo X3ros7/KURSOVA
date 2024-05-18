@@ -20,7 +20,7 @@ namespace Kursova.utils
                 adapter.Fill(dataTable);
             }
         }
-
+    
         public NpgsqlCommand CreateSearchCommand(string table, string value)
         {
             string query = "";

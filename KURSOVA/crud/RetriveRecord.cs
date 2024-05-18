@@ -32,6 +32,12 @@ namespace Kursova.crud
             return new NpgsqlCommand(commandString);
         }
 
+        public static NpgsqlCommand GenerateCommand(object model) 
+        {
+            throw new NotImplementedException();
+        }
+            
+
         /*public static NpgsqlCommand GenerateCommand(Type modelType, object column, object value)
         {
             string commandString = "";
